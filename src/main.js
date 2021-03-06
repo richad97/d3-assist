@@ -97,6 +97,13 @@ let barTitleSliderValue = barTitleSlider.value;
 let barXAxisTitleSliderValue = barXAxisTitleSlider.value;
 let barYAxisTitleSliderValue = barYAxisTitleSlider.value;
 
+let barTooltipCheckboxValue;
+let barXAxisGridCheckboxValue;
+let barYAxisGridCheckboxValue;
+let barHoverCheckboxValue;
+let barXAxisLineCheckboxValue;
+let barYAxisLineCheckboxValue;
+
 //barsCP.addEventListener("change", () => {
 //console.log($("#bars_cp").spectrum("get").toHexString());
 //console.log("yes");
@@ -105,12 +112,12 @@ let barYAxisTitleSliderValue = barYAxisTitleSlider.value;
 //});
 
 function resetCheckboxes() {
-  barTooltipCheckbox.checked = false;
-  barXAxisGridCheckbox.checked = true;
-  barYAxisGridCheckbox.checked = true;
-  barXAxisLineCheckbox.checked = true;
-  barYAxisLineCheckbox.checked = true;
-  barHoverCheckbox.checked = true;
+  //barTooltipCheckbox.checked = false;
+  //barXAxisGridCheckbox.checked = true;
+  //barYAxisGridCheckbox.checked = true;
+  //barXAxisLineCheckbox.checked = true;
+  //barYAxisLineCheckbox.checked = true;
+  //barHoverCheckbox.checked = true;
 }
 
 barTitleInput.addEventListener("keyup", () => {
@@ -165,8 +172,10 @@ barTooltipCheckbox.addEventListener("change", function () {
       .on("mouseout", function (d) {
         tooltip.style("display", "none");
       });
+    barTooltipCheckboxValue = "checked";
   } else {
     document.querySelector("body > div.bar_tooltip").remove();
+    barTooltipCheckboxValue = "unchecked";
   }
 });
 
@@ -179,7 +188,13 @@ barHorizontalCheckbox.addEventListener("change", function () {
       barYAxisTitleInputValue,
       barTitleSliderValue,
       barXAxisTitleSliderValue,
-      barYAxisTitleSliderValue
+      barYAxisTitleSliderValue,
+      barXAxisGridCheckboxValue,
+      barYAxisGridCheckboxValue,
+      barHoverCheckboxValue,
+      barXAxisLineCheckboxValue,
+      barYAxisLineCheckboxValue,
+      barTooltipCheckboxValue
     );
     barVerticalCheckbox.checked = false;
     resetCheckboxes();
@@ -191,7 +206,13 @@ barHorizontalCheckbox.addEventListener("change", function () {
       barYAxisTitleInputValue,
       barTitleSliderValue,
       barXAxisTitleSliderValue,
-      barYAxisTitleSliderValue
+      barYAxisTitleSliderValue,
+      barXAxisGridCheckboxValue,
+      barYAxisGridCheckboxValue,
+      barHoverCheckboxValue,
+      barXAxisLineCheckboxValue,
+      barYAxisLineCheckboxValue,
+      barTooltipCheckboxValue
     );
     barVerticalCheckbox.checked = true;
     resetCheckboxes();
@@ -207,7 +228,13 @@ barVerticalCheckbox.addEventListener("change", function () {
       barYAxisTitleInputValue,
       barTitleSliderValue,
       barXAxisTitleSliderValue,
-      barYAxisTitleSliderValue
+      barYAxisTitleSliderValue,
+      barXAxisGridCheckboxValue,
+      barYAxisGridCheckboxValue,
+      barHoverCheckboxValue,
+      barXAxisLineCheckboxValue,
+      barYAxisLineCheckboxValue,
+      barTooltipCheckboxValue
     );
     barHorizontalCheckbox.checked = false;
     resetCheckboxes();
@@ -219,7 +246,13 @@ barVerticalCheckbox.addEventListener("change", function () {
       barYAxisTitleInputValue,
       barTitleSliderValue,
       barXAxisTitleSliderValue,
-      barYAxisTitleSliderValue
+      barYAxisTitleSliderValue,
+      barXAxisGridCheckboxValue,
+      barYAxisGridCheckboxValue,
+      barHoverCheckboxValue,
+      barXAxisLineCheckboxValue,
+      barYAxisLineCheckboxValue,
+      barTooltipCheckboxValue
     );
     barHorizontalCheckbox.checked = true;
     resetCheckboxes();
@@ -229,39 +262,59 @@ barVerticalCheckbox.addEventListener("change", function () {
 barXAxisGridCheckbox.addEventListener("change", function () {
   if (this.checked) {
     d3.select("#x_grid").attr("display", "");
+
+    barXAxisGridCheckboxValue = "checked";
   } else {
     d3.select("#x_grid").attr("display", "none");
+
+    barXAxisGridCheckboxValue = "unchecked";
   }
 });
 
 barYAxisGridCheckbox.addEventListener("change", function () {
   if (this.checked) {
     d3.select("#y_grid").attr("display", "");
+
+    barYAxisGridCheckboxValue = "checked";
   } else {
     d3.select("#y_grid").attr("display", "none");
+
+    barYAxisGridCheckboxValue = "unchecked";
+  }
+});
+
+barHoverCheckbox.addEventListener("change", function () {
+  if (this.checked) {
+    d3.selectAll("rect").classed("hovered", true);
+
+    barHoverCheckboxValue = "checked";
+  } else {
+    d3.selectAll("rect").classed("hovered", false);
+
+    barHoverCheckboxValue = "unchecked";
   }
 });
 
 barXAxisLineCheckbox.addEventListener("change", function () {
   if (this.checked) {
     d3.select("#x_axis > path").attr("display", "");
+
+    barXAxisLineCheckboxValue = "checked";
   } else {
     d3.select("#x_axis > path").attr("display", "none");
+
+    barXAxisLineCheckboxValue = "unchecked";
   }
 });
 
 barYAxisLineCheckbox.addEventListener("change", function () {
   if (this.checked) {
     d3.select("#y_axis > path").attr("display", "");
+
+    barYAxisLineCheckboxValue = "checked";
   } else {
     d3.select("#y_axis > path").attr("display", "none");
-  }
-});
 
-barHoverCheckbox.addEventListener("change", function () {
-  if (this.checked) {
-    document.querySelector(".bars:hover").removeAttribute("opacity");
-  } else {
-    document.querySelector(".bars:hover").removeAttribute("opacity");
+    barYAxisLineCheckboxValue = "unchecked";
   }
 });

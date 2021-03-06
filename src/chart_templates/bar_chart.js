@@ -5,7 +5,13 @@ export function barChart(
   pYTitle,
   pTitleSlider,
   pXTitleSlider,
-  pYTitleSlider
+  pYTitleSlider,
+  pXGridCheckbox,
+  pYGridCheckbox,
+  pHoverCheckbox,
+  pXLineCheckbox,
+  pYLineCheckbox,
+  pTooltipCheckbox
 ) {
   var chart = document.getElementById("bar_chart");
 
@@ -328,5 +334,64 @@ export function barChart(
 
   if (pYTitleSlider != undefined) {
     d3.select("#bar_yaxis_title").attr("x", pYTitleSlider * 20);
+  }
+
+  if (pXGridCheckbox != undefined) {
+    if (pXGridCheckbox == "checked") {
+      d3.select("#x_grid").attr("display", "");
+    } else if (pXGridCheckbox == "unchecked") {
+      d3.select("#x_grid").attr("display", "none");
+    }
+  }
+  if (pYGridCheckbox != undefined) {
+    if (pYGridCheckbox == "checked") {
+      d3.select("#y_grid").attr("display", "");
+    } else if (pYGridCheckbox == "unchecked") {
+      d3.select("#y_grid").attr("display", "none");
+    }
+  }
+  if (pHoverCheckbox != undefined) {
+    if (pHoverCheckbox == "checked") {
+      d3.selectAll("rect").classed("hovered", true);
+    } else if (pHoverCheckbox == "unchecked") {
+      d3.selectAll("rect").classed("hovered", false);
+    }
+  }
+  if (pXLineCheckbox != undefined) {
+    if (pXLineCheckbox == "checked") {
+      d3.select("#x_axis > path").attr("display", "");
+    } else if (pXLineCheckbox == "unchecked") {
+      d3.select("#x_axis > path").attr("display", "none");
+    }
+  }
+  if (pYLineCheckbox != undefined) {
+    if (pYLineCheckbox == "checked") {
+      d3.select("#y_axis > path").attr("display", "");
+    } else if (pYLineCheckbox == "unchecked") {
+      d3.select("#y_axis > path").attr("display", "none");
+    }
+  }
+  if (pTooltipCheckbox != undefined) {
+    if (pTooltipCheckbox == "checked") {
+      let tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "bar_tooltip");
+      d3.select(".bar_tooltip").style("background-color", "white");
+      d3.select(".bar_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
+      let bars = d3.selectAll(".bars");
+      bars
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+    } else if (pTooltipCheckbox == "unchecked") {
+      d3.select(".bar_tooltip").remove();
+    }
   }
 }

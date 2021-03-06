@@ -69,7 +69,11 @@ a:hover {
   color: white;
 }
 
-rect:hover {
+//rect:hover {
+// opacity: 0.7;
+//}
+
+.hovered:hover {
   opacity: 0.7;
 }
 
