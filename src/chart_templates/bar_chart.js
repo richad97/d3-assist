@@ -20,7 +20,8 @@ export function barChart(
   pYTitleCP,
   pGridCP,
   pXLineCP,
-  pYLineCP
+  pYLineCP,
+  pBorderCP
 ) {
   var chart = document.getElementById("bar_chart");
 
@@ -52,7 +53,7 @@ export function barChart(
     .append("svg")
     .attr("id", "bar_chart")
     .attr("width", "100%")
-    .attr("height", "530px");
+    .attr("height", "528px");
   // .attr("width", width + margin.left + margin.right)
   // .attr("height", height + margin.top + margin.bottom);
 
@@ -144,14 +145,14 @@ export function barChart(
         .call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
       title
-        .attr("x", width / 2)
+        .attr("x", 40)
         .attr("y", -40)
         .attr("font-size", "1.1em")
         .attr("text-anchor", "middle");
 
       xAxisTitle
         .attr("y", height + margin.top - 30)
-        .attr("x", width / 2)
+        .attr("x", 40)
         .attr("font-size", "0.9em")
         .attr("text-anchor", "middle");
 
@@ -447,6 +448,12 @@ export function barChart(
   if (pYLineCP != undefined) {
     if (pYLineCP != "") {
       d3.select("#y_axis > path").style("stroke", pYLineCP);
+    }
+  }
+  if (pBorderCP != undefined) {
+    if (pBorderCP != "") {
+      d3.selectAll("rect").attr("stroke", pBorderCP);
+      console.log(pBorderCP);
     }
   }
 }

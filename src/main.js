@@ -6,11 +6,6 @@ import { responsiveLineChart } from "./chart_templates/responsive_line_chart.js"
 import { responsiveVBarChart } from "./chart_templates/responsive_vertical_bar_chart.js";
 
 barChart("horizontal");
-//fixedLineChart();
-//fixedPieChart();
-//responsiveHBarChart();
-//responsiveLineChart();
-//responsiveVBarChart();
 
 const barTitleInput = document.querySelector("#bar_title_input");
 const barXAxisTitleInput = document.querySelector("#bar_xaxis_title_input");
@@ -56,95 +51,7 @@ let barYAxisTitleCPValue;
 let barGridCPValue;
 let barXAxisLineCPValue;
 let barYAxisLineCPValue;
-
-$("#bar_background_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("svg").style("background-color", color.toRgbString());
-
-    barBackgroudCPValue = color.toRgbString();
-  },
-});
-$("#bars_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.selectAll(".bars").style("fill", color.toRgbString());
-
-    barBarsCPValue = color.toRgbString();
-  },
-});
-$("#bar_tick_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.selectAll(".tick > text").style("fill", color.toRgbString());
-
-    barTickCPValue = color.toRgbString();
-  },
-});
-$("#bar_title_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("#bar_title").style("fill", color.toRgbString());
-
-    barTitleCPValue = color.toRgbString();
-  },
-});
-$("#bar_xaxis_title_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("#bar_xaxis_title").style("fill", color.toRgbString());
-
-    barXAxisTitleCPValue = color.toRgbString();
-  },
-});
-$("#bar_yaxis_title_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("#bar_yaxis_title").style("fill", color.toRgbString());
-
-    barYAxisTitleCPValue = color.toRgbString();
-  },
-});
-$("#bar_grid_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.selectAll(".grid").style("color", color.toRgbString());
-
-    barGridCPValue = color.toRgbString();
-  },
-});
-$("#bar_xaxis_line_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("#x_axis > path").style("stroke", color.toRgbString());
-
-    barXAxisLineCPValue = color.toRgbString();
-  },
-});
-$("#bar_yaxis_line_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("#y_axis > path").style("stroke", color.toRgbString());
-
-    barYAxisLineCPValue = color.toRgbString();
-  },
-});
-
-//barsCP.addEventListener("change", () => {
-//console.log($("#bars_cp").spectrum("get").toHexString());
-//console.log("yes");
-//d3.selectAll(".bars").style("fill", barsCP.value);
-//d3.select(".bar_tooltip").text(barTooltipCP.value);
-//});
-
-function resetCheckboxes() {
-  //barTooltipCheckbox.checked = false;
-  //barXAxisGridCheckbox.checked = true;
-  //barYAxisGridCheckbox.checked = true;
-  //barXAxisLineCheckbox.checked = true;
-  //barYAxisLineCheckbox.checked = true;
-  //barHoverCheckbox.checked = true;
-}
+let barBorderCPValue;
 
 barTitleInput.addEventListener("keyup", () => {
   d3.select("#bar_title").text(barTitleInput.value);
@@ -229,10 +136,11 @@ barHorizontalCheckbox.addEventListener("change", function () {
       barYAxisTitleCPValue,
       barGridCPValue,
       barXAxisLineCPValue,
-      barYAxisLineCPValue
+      barYAxisLineCPValue,
+      barBorderCPValue
     );
+
     barVerticalCheckbox.checked = false;
-    resetCheckboxes();
   } else if (this.checked === false) {
     barChart(
       "vertical",
@@ -256,10 +164,11 @@ barHorizontalCheckbox.addEventListener("change", function () {
       barYAxisTitleCPValue,
       barGridCPValue,
       barXAxisLineCPValue,
-      barYAxisLineCPValue
+      barYAxisLineCPValue,
+      barBorderCPValue
     );
+
     barVerticalCheckbox.checked = true;
-    resetCheckboxes();
   }
 });
 
@@ -287,10 +196,11 @@ barVerticalCheckbox.addEventListener("change", function () {
       barYAxisTitleCPValue,
       barGridCPValue,
       barXAxisLineCPValue,
-      barYAxisLineCPValue
+      barYAxisLineCPValue,
+      barBorderCPValue
     );
+
     barHorizontalCheckbox.checked = false;
-    resetCheckboxes();
   } else if (this.checked === false) {
     barChart(
       "horizontal",
@@ -314,10 +224,11 @@ barVerticalCheckbox.addEventListener("change", function () {
       barYAxisTitleCPValue,
       barGridCPValue,
       barXAxisLineCPValue,
-      barYAxisLineCPValue
+      barYAxisLineCPValue,
+      barBorderCPValue
     );
+
     barHorizontalCheckbox.checked = true;
-    resetCheckboxes();
   }
 });
 
@@ -379,4 +290,100 @@ barYAxisLineCheckbox.addEventListener("change", function () {
 
     barYAxisLineCheckboxValue = "unchecked";
   }
+});
+
+$("#bar_background_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("svg").style("background-color", color.toRgbString());
+
+    barBackgroudCPValue = color.toRgbString();
+  },
+});
+$("#bars_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.selectAll(".bars").style("fill", color.toRgbString());
+
+    barBarsCPValue = color.toRgbString();
+  },
+});
+$("#bar_tick_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.selectAll(".tick > text").style("fill", color.toRgbString());
+
+    barTickCPValue = color.toRgbString();
+  },
+});
+$("#bar_title_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("#bar_title").style("fill", color.toRgbString());
+
+    barTitleCPValue = color.toRgbString();
+  },
+});
+$("#bar_xaxis_title_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("#bar_xaxis_title").style("fill", color.toRgbString());
+
+    barXAxisTitleCPValue = color.toRgbString();
+  },
+});
+$("#bar_yaxis_title_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("#bar_yaxis_title").style("fill", color.toRgbString());
+
+    barYAxisTitleCPValue = color.toRgbString();
+  },
+});
+$("#bar_grid_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.selectAll(".grid").style("color", color.toRgbString());
+
+    barGridCPValue = color.toRgbString();
+  },
+});
+$("#bar_xaxis_line_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("#x_axis > path").style("stroke", color.toRgbString());
+
+    barXAxisLineCPValue = color.toRgbString();
+  },
+});
+$("#bar_yaxis_line_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("#y_axis > path").style("stroke", color.toRgbString());
+
+    barYAxisLineCPValue = color.toRgbString();
+  },
+});
+$("#bar_border_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.selectAll(".bars").style("stroke", color.toRgbString());
+
+    barBorderCPValue = color.toRgbString();
+  },
+});
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+let formSubmitButton = document.querySelector("#form_submit_button");
+let overlayCloseButton = document.querySelector("#overlay_close_button");
+
+formSubmitButton.addEventListener("click", function () {
+  $("#overlay").fadeIn();
+});
+
+overlayCloseButton.addEventListener("click", function () {
+  $("#overlay").fadeOut();
 });

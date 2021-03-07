@@ -1,5 +1,80 @@
 .col-4 {
   text-align: center;
+  padding-top: 1px;
+}
+
+#overlay {
+  position: fixed;
+  /* Sit on top of the page content */
+  display: none;
+  /* Hidden by default */
+  width: 100%;
+  /* Full width (cover the whole page) */
+  height: 100%;
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Black background with opacity */
+  z-index: 2;
+  /* Specify a stack order in case you're using a different order for other elements */
+}
+
+#overlay_main_container {
+  background-color: gainsboro;
+  margin-top: 3em;
+  height: 35em;
+  border-radius: 5px;
+}
+
+#overlay_code_container {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: whitesmoke;
+  height: 23em;
+  width: 95%;
+  margin-left: 2.5%;
+  overflow-y: scroll;
+}
+
+#overlay_close_button {
+  position: absolute;
+  color: gray;
+  font-size: 1.8em;
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+#overlay_header {
+  font-weight: lighter;
+  font-size: 1.9em;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+#overlay_subheader {
+  font-weight: lighter;
+  font-size: 1.1em;
+  margin-bottom: 0.4em;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+#overlay_button_container {
+  margin-top: 1em;
+  height: 4em;
+}
+
+.overlay_buttons {
+  width: 100%;
+  height: 4em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: lighter;
+  font-size: 1.1em;
+  border-radius: 3px;
+  -webkit-box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.05);
+          box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.05);
 }
 
 #main_container {
@@ -19,15 +94,23 @@ body {
   -webkit-box-shadow: 18px 5px 20px rgba(0, 0, 0, 0.2);
           box-shadow: 18px 5px 20px rgba(0, 0, 0, 0.2);
   height: 33em;
+  padding: 3px;
+}
+
+form {
+  height: 90%;
+  overflow-x: hidden;
 }
 
 #form_submit_button {
   height: 2.1em;
   position: relative;
-  top: 1.2em;
   width: 90%;
   left: 5%;
   border-radius: 5px;
+  background-color: #ebebeb;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #919191;
 }
 
 h6 {
@@ -114,5 +197,9 @@ a:hover {
 #x_grid path,
 #y_grid path {
   stroke: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 /*# sourceMappingURL=main.css.map */
