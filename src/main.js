@@ -12,63 +12,6 @@ barChart("horizontal");
 //responsiveLineChart();
 //responsiveVBarChart();
 
-$("#bar_title_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("#bar_title").style("fill", color.toRgbString());
-  },
-});
-$("#bar_xaxis_title_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("#bar_xaxis_title").style("fill", color.toRgbString());
-  },
-});
-$("#bar_yaxis_title_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("#bar_yaxis_title").style("fill", color.toRgbString());
-  },
-});
-$("#bar_background_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("svg").style("background-color", color.toRgbString());
-  },
-});
-$("#bar_xaxis_line_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("#x_axis > path").style("stroke", color.toRgbString());
-  },
-});
-$("#bar_yaxis_line_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.select("#y_axis > path").style("stroke", color.toRgbString());
-  },
-});
-
-$("#bars_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.selectAll(".bars").style("fill", color.toRgbString());
-  },
-});
-
-$("#bar_tick_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.selectAll(".tick > text").style("fill", color.toRgbString());
-  },
-});
-$("#bar_grid_cp").spectrum({
-  type: "color",
-  move: function (color) {
-    d3.selectAll(".grid").style("color", color.toRgbString());
-  },
-});
-
 const barTitleInput = document.querySelector("#bar_title_input");
 const barXAxisTitleInput = document.querySelector("#bar_xaxis_title_input");
 const barYAxisTitleInput = document.querySelector("#bar_yaxis_title_input");
@@ -103,6 +46,89 @@ let barYAxisGridCheckboxValue;
 let barHoverCheckboxValue;
 let barXAxisLineCheckboxValue;
 let barYAxisLineCheckboxValue;
+
+let barBackgroudCPValue;
+let barBarsCPValue;
+let barTickCPValue;
+let barTitleCPValue;
+let barXAxisTitleCPValue;
+let barYAxisTitleCPValue;
+let barGridCPValue;
+let barXAxisLineCPValue;
+let barYAxisLineCPValue;
+
+$("#bar_background_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("svg").style("background-color", color.toRgbString());
+
+    barBackgroudCPValue = color.toRgbString();
+  },
+});
+$("#bars_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.selectAll(".bars").style("fill", color.toRgbString());
+
+    barBarsCPValue = color.toRgbString();
+  },
+});
+$("#bar_tick_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.selectAll(".tick > text").style("fill", color.toRgbString());
+
+    barTickCPValue = color.toRgbString();
+  },
+});
+$("#bar_title_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("#bar_title").style("fill", color.toRgbString());
+
+    barTitleCPValue = color.toRgbString();
+  },
+});
+$("#bar_xaxis_title_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("#bar_xaxis_title").style("fill", color.toRgbString());
+
+    barXAxisTitleCPValue = color.toRgbString();
+  },
+});
+$("#bar_yaxis_title_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("#bar_yaxis_title").style("fill", color.toRgbString());
+
+    barYAxisTitleCPValue = color.toRgbString();
+  },
+});
+$("#bar_grid_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.selectAll(".grid").style("color", color.toRgbString());
+
+    barGridCPValue = color.toRgbString();
+  },
+});
+$("#bar_xaxis_line_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("#x_axis > path").style("stroke", color.toRgbString());
+
+    barXAxisLineCPValue = color.toRgbString();
+  },
+});
+$("#bar_yaxis_line_cp").spectrum({
+  type: "color",
+  move: function (color) {
+    d3.select("#y_axis > path").style("stroke", color.toRgbString());
+
+    barYAxisLineCPValue = color.toRgbString();
+  },
+});
 
 //barsCP.addEventListener("change", () => {
 //console.log($("#bars_cp").spectrum("get").toHexString());
@@ -194,7 +220,16 @@ barHorizontalCheckbox.addEventListener("change", function () {
       barHoverCheckboxValue,
       barXAxisLineCheckboxValue,
       barYAxisLineCheckboxValue,
-      barTooltipCheckboxValue
+      barTooltipCheckboxValue,
+      barBackgroudCPValue,
+      barBarsCPValue,
+      barTickCPValue,
+      barTitleCPValue,
+      barXAxisTitleCPValue,
+      barYAxisTitleCPValue,
+      barGridCPValue,
+      barXAxisLineCPValue,
+      barYAxisLineCPValue
     );
     barVerticalCheckbox.checked = false;
     resetCheckboxes();
@@ -212,7 +247,16 @@ barHorizontalCheckbox.addEventListener("change", function () {
       barHoverCheckboxValue,
       barXAxisLineCheckboxValue,
       barYAxisLineCheckboxValue,
-      barTooltipCheckboxValue
+      barTooltipCheckboxValue,
+      barBackgroudCPValue,
+      barBarsCPValue,
+      barTickCPValue,
+      barTitleCPValue,
+      barXAxisTitleCPValue,
+      barYAxisTitleCPValue,
+      barGridCPValue,
+      barXAxisLineCPValue,
+      barYAxisLineCPValue
     );
     barVerticalCheckbox.checked = true;
     resetCheckboxes();
@@ -234,7 +278,16 @@ barVerticalCheckbox.addEventListener("change", function () {
       barHoverCheckboxValue,
       barXAxisLineCheckboxValue,
       barYAxisLineCheckboxValue,
-      barTooltipCheckboxValue
+      barTooltipCheckboxValue,
+      barBackgroudCPValue,
+      barBarsCPValue,
+      barTickCPValue,
+      barTitleCPValue,
+      barXAxisTitleCPValue,
+      barYAxisTitleCPValue,
+      barGridCPValue,
+      barXAxisLineCPValue,
+      barYAxisLineCPValue
     );
     barHorizontalCheckbox.checked = false;
     resetCheckboxes();
@@ -252,7 +305,16 @@ barVerticalCheckbox.addEventListener("change", function () {
       barHoverCheckboxValue,
       barXAxisLineCheckboxValue,
       barYAxisLineCheckboxValue,
-      barTooltipCheckboxValue
+      barTooltipCheckboxValue,
+      barBackgroudCPValue,
+      barBarsCPValue,
+      barTickCPValue,
+      barTitleCPValue,
+      barXAxisTitleCPValue,
+      barYAxisTitleCPValue,
+      barGridCPValue,
+      barXAxisLineCPValue,
+      barYAxisLineCPValue
     );
     barHorizontalCheckbox.checked = true;
     resetCheckboxes();

@@ -11,7 +11,16 @@ export function barChart(
   pHoverCheckbox,
   pXLineCheckbox,
   pYLineCheckbox,
-  pTooltipCheckbox
+  pTooltipCheckbox,
+  pBackgroundCP,
+  pBarsCP,
+  pTickCP,
+  pTitleCP,
+  pXTitleCP,
+  pYTitleCP,
+  pGridCP,
+  pXLineCP,
+  pYLineCP
 ) {
   var chart = document.getElementById("bar_chart");
 
@@ -43,7 +52,7 @@ export function barChart(
     .append("svg")
     .attr("id", "bar_chart")
     .attr("width", "100%")
-    .attr("height", "528px");
+    .attr("height", "530px");
   // .attr("width", width + margin.left + margin.right)
   // .attr("height", height + margin.top + margin.bottom);
 
@@ -392,6 +401,52 @@ export function barChart(
         });
     } else if (pTooltipCheckbox == "unchecked") {
       d3.select(".bar_tooltip").remove();
+    }
+  }
+
+  if (pBackgroundCP != undefined) {
+    if (pBackgroundCP != "") {
+      d3.select("svg").style("background-color", pBackgroundCP);
+    }
+  }
+  if (pBarsCP != undefined) {
+    if (pBarsCP != "") {
+      d3.selectAll(".bars").style("fill", pBarsCP);
+    }
+  }
+  if (pTickCP != undefined) {
+    if (pTickCP != "") {
+      d3.selectAll(".tick > text").style("fill", pTickCP);
+    }
+  }
+  if (pTitleCP != undefined) {
+    if (pTitleCP != "") {
+      d3.select("#bar_title").style("fill", pTitleCP);
+    }
+  }
+  if (pXTitleCP != undefined) {
+    if (pXTitleCP != "") {
+      d3.select("#bar_xaxis_title").style("fill", pXTitleCP);
+    }
+  }
+  if (pYTitleCP != undefined) {
+    if (pYTitleCP != "") {
+      d3.select("#bar_yaxis_title").style("fill", pYTitleCP);
+    }
+  }
+  if (pGridCP != undefined) {
+    if (pGridCP != "") {
+      d3.selectAll(".grid").style("color", pGridCP);
+    }
+  }
+  if (pXLineCP != undefined) {
+    if (pXLineCP != "") {
+      d3.select("#x_axis > path").style("stroke", pXLineCP);
+    }
+  }
+  if (pYLineCP != undefined) {
+    if (pYLineCP != "") {
+      d3.select("#y_axis > path").style("stroke", pYLineCP);
     }
   }
 }
