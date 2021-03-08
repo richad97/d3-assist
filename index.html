@@ -32,7 +32,117 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <div id="overlay_code_container"></div>
+          <div id="overlay_code_container">
+            <div id="fixed_bar_template_container">
+              <pre>
+          <code id="bar_horizontal_template">HORIZONTAL
+            function makeData (x,num) {
+                let arr = [];
+                let objNum = num + 1;
+                for(let i=1; i&lt;objNum; i++) {
+                    let obj = {
+                        [x]   :   Math.floor(Math.random() * 11 + 1),
+                    };
+                    arr.push(obj);
+                }
+                return arr;
+            };
+            
+            const data = makeData("x", 5);
+            
+            const margin = {top: 20, right: 20, bottom: 30, left: 40},
+                width = 600 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+            
+            const svg = d3.select("body")
+                .append("svg")
+                .attr("id","bar_chart")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom);
+                
+            const g = svg.append("g")
+                .attr("transform", 
+                    "translate(" + margin.left + "," + margin.top + ")");
+            
+            const xScale = d3.scaleLinear()
+                .domain([0,d3.max(data, function(d) {return d.x;})])
+                .range([0, width]);
+            
+            const yScale = d3.scaleBand()
+                .domain(d3.range(0, data.length))
+                .range([height, 0])
+                .padding(0.4);
+            
+            const xAxis = g.append("g").attr("transform", `translate(0, ${height})`)
+                .call(d3.axisBottom(xScale));
+            
+            const yAxis = g.append("g").call(d3.axisLeft(yScale));
+            
+            const bars = g.selectAll("rect").data(data);
+            
+            bars.exit().remove();
+            
+            bars.enter().append("rect")
+                .attr("height", yScale.bandwidth())
+                .attr("width", function(d,i) {return xScale(d.x)})
+                .attr("y", function(d,i) { return yScale(i)})
+                .attr("fill", "red");
+              </code><code id="bar_vertical_template">VERTICAL
+            function makeData (x,num) {
+                let arr = [];
+                let objNum = num + 1;
+                for(let i=1; i&lt;objNum; i++) {
+                    let obj = {
+                        [x]   :   Math.floor(Math.random() * 11 + 1),
+                    };
+                    arr.push(obj);
+                }
+                return arr;
+            };
+            
+            const data = makeData("x", 5);
+            
+            const margin = {top: 20, right: 20, bottom: 30, left: 40},
+                width = 600 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+            
+            const svg = d3.select("body")
+                .append("svg")
+                .attr("id","bar_chart")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom);
+                
+            const g = svg.append("g")
+                .attr("transform", 
+                    "translate(" + margin.left + "," + margin.top + ")");
+            
+            const xScale = d3.scaleLinear()
+                .domain([0,d3.max(data, function(d) {return d.x;})])
+                .range([0, width]);
+            
+            const yScale = d3.scaleBand()
+                .domain(d3.range(0, data.length))
+                .range([height, 0])
+                .padding(0.4);
+            
+            const xAxis = g.append("g").attr("transform", `translate(0, ${height})`)
+                .call(d3.axisBottom(xScale));
+            
+            const yAxis = g.append("g").call(d3.axisLeft(yScale));
+            
+            const bars = g.selectAll("rect").data(data);
+            
+            bars.exit().remove();
+            
+            bars.enter().append("rect")
+                .attr("height", yScale.bandwidth())
+                .attr("width", function(d,i) {return xScale(d.x)})
+                .attr("y", function(d,i) { return yScale(i)})
+                .attr("fill", "red");
+            
+              </code></pre>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row" id="overlay_button_container">
@@ -55,7 +165,7 @@
         width="30"
         height="30"
         alt="d3logo"
-        class=""
+        class="col-4 text-center"
       />
     </div>
     <div class="col-2 text-center"><a href="#">LINE CHART</a></div>
@@ -65,11 +175,11 @@
   <body>
     <div class="container" id="main_container">
       <div class="row">
-        <div class="col-sm col-6" id="form_container">
+        <div class="col-6" id="form_container">
           <form action="#">
             <div class="row">
               <h6>Titles</h6>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_title_input">
                   Title
                   <input
@@ -79,7 +189,7 @@
                   />
                 </label>
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_xaxis_title_input">
                   x-Axis
                   <input
@@ -89,7 +199,7 @@
                   />
                 </label>
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_yaxis_title_input">
                   y-Axis
                   <input
@@ -102,7 +212,7 @@
             </div>
             <div class="row">
               <h6>Sliders</h6>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_title_slider"
                   >Title
                   <input
@@ -115,7 +225,7 @@
                   />
                 </label>
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_xaxis_title_slider"
                   >x-Axis
                   <input
@@ -128,7 +238,7 @@
                   />
                 </label>
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_yaxis_title_slider"
                   >y-Axis
                   <input
@@ -144,7 +254,7 @@
             </div>
             <div class="row">
               <h6>Checkboxes</h6>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_tooltip_checkbox"
                   >Tooltip
                   <input
@@ -154,7 +264,7 @@
                   />
                 </label>
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_horizontal_checkbox"
                   >Horizontal
                   <input
@@ -165,7 +275,7 @@
                   />
                 </label>
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_vertical_checkbox"
                   >Vertical
                   <input
@@ -177,7 +287,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_grid_checkbox"
                   >Grid
                   <input
@@ -189,7 +299,7 @@
                   />
                 </label>
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_xaxis_grid_checkbox"
                   >x-Axis Grid
                   <input
@@ -200,7 +310,7 @@
                   />
                 </label>
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_yaxis_grid_checkbox"
                   >y-Axis Grid
                   <input
@@ -213,7 +323,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_hover_checkbox"
                   >Hover
                   <input
@@ -223,7 +333,7 @@
                   />
                 </label>
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_xaxis_line_checkbox"
                   >x-Axis Line
                   <input
@@ -234,7 +344,7 @@
                   />
                 </label>
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <label for="bar_yaxis_line_checkbox"
                   >y-Axis Line
                   <input
@@ -248,7 +358,7 @@
             <div class="row">
               <h6>Colors</h6>
 
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <div class="row">
                   <label for="bar_background_cp">Background</label>
                 </div>
@@ -258,7 +368,7 @@
                   value="rgba(245,245,245,1)"
                 />
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <div class="row">
                   <label for="bars_cp">Bars</label>
                 </div>
@@ -268,7 +378,7 @@
                   value="rgba(249, 203, 156, 0.46)"
                 />
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <div class="row">
                   <label for="bar_border_cp">Bar Border</label>
                 </div>
@@ -280,7 +390,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <div class="row">
                   <label for="bar_title_cp">Title </label>
                 </div>
@@ -291,7 +401,7 @@
                 />
               </div>
 
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <div class="row">
                   <label for="bar_xaxis_title_cp">x-Axis Title</label>
                 </div>
@@ -301,7 +411,7 @@
                   value="rgb(103, 103, 103)"
                 />
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <div class="row">
                   <label for="bar_yaxis_title_cp">y-Axis Title</label>
                 </div>
@@ -313,7 +423,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <div class="row">
                   <label for="bar_grid_cp">Grid</label>
                 </div>
@@ -324,7 +434,7 @@
                 />
               </div>
 
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <div class="row">
                   <label for="bar_xaxis_line_cp">x-Axis Line</label>
                 </div>
@@ -334,7 +444,7 @@
                   value="rgb(211, 211, 211)"
                 />
               </div>
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <div class="row">
                   <label for="bar_yaxis_line_cp">y-Axis Line</label>
                 </div>
@@ -346,7 +456,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-4">
+              <div class="col-4 col-c">
                 <div class="row">
                   <label for="bar_tick_cp">Ticks</label>
                 </div>
@@ -363,10 +473,8 @@
           </div>
         </div>
 
-        <div class="col-sm col-6">
-          <div id="line_chart_div"></div>
+        <div class="col-6" id="graph_container">
           <div id="bar_chart_div"></div>
-          <div id="pie_chart_div"></div>
         </div>
       </div>
     </div>

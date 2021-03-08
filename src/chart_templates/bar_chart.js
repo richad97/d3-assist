@@ -206,6 +206,9 @@ export function barChart(
 
     window.addEventListener("resize", draw);
     loadData();
+
+    document.querySelector("#x_grid > g:nth-child(2) > line").remove();
+    document.querySelector("#y_grid > g:nth-child(2) > line").remove();
   } else if (pDir == "vertical") {
     const xScale = d3.scaleBand().padding(0.3);
 
@@ -314,6 +317,9 @@ export function barChart(
 
     window.addEventListener("resize", draw);
     loadData();
+
+    document.querySelector("#x_grid > g:nth-child(2) > line").remove();
+    document.querySelector("#y_grid > g:nth-child(2) > line").remove();
   }
 
   if (pTitle != undefined) {

@@ -40,7 +40,7 @@ let barHoverCheckboxValue = "unchecked";
 let barXAxisLineCheckboxValue = "checked";
 let barYAxisLineCheckboxValue = "unchecked";
 
-let barBackgroudCPValue = "rgba(245,245,245,1)";
+let barBackgroudCPValue = "rgba(255,255,255,1)";
 let barBarsCPValue = "rgba(249, 203, 156, 0.46)";
 let barTickCPValue = "rgb(130, 130, 130)";
 let barTitleCPValue = "rgb(103, 103, 103)";
@@ -76,8 +76,8 @@ barChart(
   barYAxisLineCPValue,
   barBorderCPValue
 );
-
-console.log();
+d3.select("#bar_vertical_template").classed("hide_code_template", true);
+d3.select("#bar_horizontal_template").classed("hide_code_template", false);
 
 barTitleInput.addEventListener("keyup", () => {
   d3.select("#bar_title").text(barTitleInput.value);
@@ -167,6 +167,8 @@ barHorizontalCheckbox.addEventListener("change", function () {
     );
 
     barVerticalCheckbox.checked = false;
+    d3.select("#bar_vertical_template").classed("hide_code_template", true);
+    d3.select("#bar_horizontal_template").classed("hide_code_template", false);
   } else if (this.checked === false) {
     barChart(
       "vertical",
@@ -195,6 +197,8 @@ barHorizontalCheckbox.addEventListener("change", function () {
     );
 
     barVerticalCheckbox.checked = true;
+    d3.select("#bar_vertical_template").classed("hide_code_template", false);
+    d3.select("#bar_horizontal_template").classed("hide_code_template", true);
   }
 });
 
@@ -227,6 +231,8 @@ barVerticalCheckbox.addEventListener("change", function () {
     );
 
     barHorizontalCheckbox.checked = false;
+    d3.select("#bar_vertical_template").classed("hide_code_template", false);
+    d3.select("#bar_horizontal_template").classed("hide_code_template", true);
   } else if (this.checked === false) {
     barChart(
       "horizontal",
@@ -255,6 +261,8 @@ barVerticalCheckbox.addEventListener("change", function () {
     );
 
     barHorizontalCheckbox.checked = true;
+    d3.select("#bar_vertical_template").classed("hide_code_template", true);
+    d3.select("#bar_horizontal_template").classed("hide_code_template", false);
   }
 });
 
@@ -448,4 +456,11 @@ formSubmitButton.addEventListener("click", function () {
 
 overlayCloseButton.addEventListener("click", function () {
   $("#overlay").fadeOut();
+});
+
+$(document).keyup(function (e) {
+  if (e.key === "Escape") {
+    // escape key maps to keycode `27`
+    $("#overlay").fadeOut();
+  }
 });
