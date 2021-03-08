@@ -248,14 +248,14 @@ export function barChart(
         .call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
       title
-        .attr("x", width / 2)
+        .attr("x", 40)
         .attr("y", -40)
         .attr("text-anchor", "middle")
         .attr("font-size", "1.1em");
 
       xAxisTitle
         .attr("y", height + margin.top - 30)
-        .attr("x", width / 2)
+        .attr("x", 40)
         .attr("font-size", "0.9em")
         .attr("text-anchor", "middle");
 
@@ -453,7 +453,6 @@ export function barChart(
   if (pBorderCP != undefined) {
     if (pBorderCP != "") {
       d3.selectAll("rect").attr("stroke", pBorderCP);
-      console.log(pBorderCP);
     }
   }
 }

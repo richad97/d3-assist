@@ -5,8 +5,6 @@ import { responsiveHBarChart } from "./chart_templates/responsive_horizontal_bar
 import { responsiveLineChart } from "./chart_templates/responsive_line_chart.js";
 import { responsiveVBarChart } from "./chart_templates/responsive_vertical_bar_chart.js";
 
-barChart("horizontal");
-
 const barTitleInput = document.querySelector("#bar_title_input");
 const barXAxisTitleInput = document.querySelector("#bar_xaxis_title_input");
 const barYAxisTitleInput = document.querySelector("#bar_yaxis_title_input");
@@ -27,31 +25,59 @@ const barXAxisLineCheckbox = document.querySelector("#bar_xaxis_line_checkbox");
 const barYAxisLineCheckbox = document.querySelector("#bar_yaxis_line_checkbox");
 const barHoverCheckbox = document.querySelector("#bar_hover_checkbox");
 
-let barTitleInputValue = barTitleInput.value;
-let barXAxisTitleInputValue = barXAxisTitleInput.value;
-let barYAxisTitleInputValue = barYAxisTitleInput.value;
+let barTitleInputValue = "Weather";
+let barXAxisTitleInputValue = "Weeks";
+let barYAxisTitleInputValue = "Temperature";
 
-let barTitleSliderValue = barTitleSlider.value;
-let barXAxisTitleSliderValue = barXAxisTitleSlider.value;
-let barYAxisTitleSliderValue = barYAxisTitleSlider.value;
+let barTitleSliderValue = 2;
+let barXAxisTitleSliderValue = 2;
+let barYAxisTitleSliderValue = -15;
 
-let barTooltipCheckboxValue;
-let barXAxisGridCheckboxValue;
-let barYAxisGridCheckboxValue;
-let barHoverCheckboxValue;
-let barXAxisLineCheckboxValue;
-let barYAxisLineCheckboxValue;
+let barTooltipCheckboxValue = "unchecked";
+let barXAxisGridCheckboxValue = "checked";
+let barYAxisGridCheckboxValue = "checked";
+let barHoverCheckboxValue = "unchecked";
+let barXAxisLineCheckboxValue = "checked";
+let barYAxisLineCheckboxValue = "unchecked";
 
-let barBackgroudCPValue;
-let barBarsCPValue;
-let barTickCPValue;
-let barTitleCPValue;
-let barXAxisTitleCPValue;
-let barYAxisTitleCPValue;
-let barGridCPValue;
-let barXAxisLineCPValue;
-let barYAxisLineCPValue;
-let barBorderCPValue;
+let barBackgroudCPValue = "rgba(245,245,245,1)";
+let barBarsCPValue = "rgba(249, 203, 156, 0.46)";
+let barTickCPValue = "rgb(130, 130, 130)";
+let barTitleCPValue = "rgb(103, 103, 103)";
+let barXAxisTitleCPValue = "rgb(103, 103, 103)";
+let barYAxisTitleCPValue = "rgb(103, 103, 103)";
+let barGridCPValue = "rgba(0, 0, 0, 0.108)";
+let barXAxisLineCPValue = "rgb(211, 211, 211)";
+let barYAxisLineCPValue = "rgb(211, 211, 211)";
+let barBorderCPValue = "rgba(42, 42, 42, 0.187)";
+
+barChart(
+  "horizontal",
+  barTitleInputValue,
+  barXAxisTitleInputValue,
+  barYAxisTitleInputValue,
+  barTitleSliderValue,
+  barXAxisTitleSliderValue,
+  barYAxisTitleSliderValue,
+  barXAxisGridCheckboxValue,
+  barYAxisGridCheckboxValue,
+  barHoverCheckboxValue,
+  barXAxisLineCheckboxValue,
+  barYAxisLineCheckboxValue,
+  barTooltipCheckboxValue,
+  barBackgroudCPValue,
+  barBarsCPValue,
+  barTickCPValue,
+  barTitleCPValue,
+  barXAxisTitleCPValue,
+  barYAxisTitleCPValue,
+  barGridCPValue,
+  barXAxisLineCPValue,
+  barYAxisLineCPValue,
+  barBorderCPValue
+);
+
+console.log();
 
 barTitleInput.addEventListener("keyup", () => {
   d3.select("#bar_title").text(barTitleInput.value);
@@ -294,6 +320,10 @@ barYAxisLineCheckbox.addEventListener("change", function () {
 
 $("#bar_background_cp").spectrum({
   type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
   move: function (color) {
     d3.select("svg").style("background-color", color.toRgbString());
 
@@ -302,6 +332,10 @@ $("#bar_background_cp").spectrum({
 });
 $("#bars_cp").spectrum({
   type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
   move: function (color) {
     d3.selectAll(".bars").style("fill", color.toRgbString());
 
@@ -310,6 +344,10 @@ $("#bars_cp").spectrum({
 });
 $("#bar_tick_cp").spectrum({
   type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
   move: function (color) {
     d3.selectAll(".tick > text").style("fill", color.toRgbString());
 
@@ -318,6 +356,10 @@ $("#bar_tick_cp").spectrum({
 });
 $("#bar_title_cp").spectrum({
   type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
   move: function (color) {
     d3.select("#bar_title").style("fill", color.toRgbString());
 
@@ -326,6 +368,10 @@ $("#bar_title_cp").spectrum({
 });
 $("#bar_xaxis_title_cp").spectrum({
   type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
   move: function (color) {
     d3.select("#bar_xaxis_title").style("fill", color.toRgbString());
 
@@ -334,6 +380,10 @@ $("#bar_xaxis_title_cp").spectrum({
 });
 $("#bar_yaxis_title_cp").spectrum({
   type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
   move: function (color) {
     d3.select("#bar_yaxis_title").style("fill", color.toRgbString());
 
@@ -342,6 +392,10 @@ $("#bar_yaxis_title_cp").spectrum({
 });
 $("#bar_grid_cp").spectrum({
   type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
   move: function (color) {
     d3.selectAll(".grid").style("color", color.toRgbString());
 
@@ -350,6 +404,10 @@ $("#bar_grid_cp").spectrum({
 });
 $("#bar_xaxis_line_cp").spectrum({
   type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
   move: function (color) {
     d3.select("#x_axis > path").style("stroke", color.toRgbString());
 
@@ -358,6 +416,10 @@ $("#bar_xaxis_line_cp").spectrum({
 });
 $("#bar_yaxis_line_cp").spectrum({
   type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
   move: function (color) {
     d3.select("#y_axis > path").style("stroke", color.toRgbString());
 
@@ -366,16 +428,16 @@ $("#bar_yaxis_line_cp").spectrum({
 });
 $("#bar_border_cp").spectrum({
   type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
   move: function (color) {
     d3.selectAll(".bars").style("stroke", color.toRgbString());
 
     barBorderCPValue = color.toRgbString();
   },
 });
-
-function off() {
-  document.getElementById("overlay").style.display = "none";
-}
 
 let formSubmitButton = document.querySelector("#form_submit_button");
 let overlayCloseButton = document.querySelector("#overlay_close_button");

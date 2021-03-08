@@ -109,16 +109,17 @@ form {
   left: 5%;
   border-radius: 5px;
   background-color: #ebebeb;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   color: #919191;
 }
 
 h6 {
-  font-size: 0.9em;
+  font-size: 1em;
   margin: 5px;
-  font-weight: normal;
+  font-weight: lighter;
   position: relative;
   top: 6px;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 label {
