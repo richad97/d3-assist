@@ -23,7 +23,7 @@ export function barChart(
   pYLineCP,
   pBorderCP
 ) {
-  var chart = document.getElementById("bar_chart");
+  let chart = document.getElementById("bar_chart");
 
   if (chart) {
     chart.remove();
@@ -45,8 +45,6 @@ export function barChart(
   const data = createData("x", "y", 10);
 
   const margin = { top: 80, right: 50, bottom: 100, left: 70 };
-  // width = 600 - margin.left - margin.right,
-  // height = 528 - margin.top - margin.bottom;
 
   const svg = d3
     .select("#bar_chart_div")
@@ -54,33 +52,10 @@ export function barChart(
     .attr("id", "bar_chart")
     .attr("width", "100%")
     .attr("height", "528px");
-  // .attr("width", width + margin.left + margin.right)
-  // .attr("height", height + margin.top + margin.bottom);
 
   const g = svg
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  // const title = g
-  //   .append("text")
-  //   .attr("id", "bar_title")
-  //   .text("title")
-  //   .attr("x", 0)
-  //   .attr("y", -20);
-
-  // const xAxisTitle = g
-  //   .append("text")
-  //   .attr("id", "bar_xaxis_title")
-  //   .text("x axis")
-  //   .attr("x", 0)
-  //   .attr("y", 450);
-
-  // const yAxisTitle = g
-  //   .append("text")
-  //   .attr("id", "bar_yaxis_title")
-  //   .text("y axis")
-  //   .attr("x", -60)
-  //   .attr("y", 15);
 
   const title = g.append("text").attr("id", "bar_title").text("Weather");
 

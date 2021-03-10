@@ -30,21 +30,11 @@
 
 #overlay {
   position: fixed;
-  /* Sit on top of the page content */
   display: none;
-  /* Hidden by default */
   width: 100%;
-  /* Full width (cover the whole page) */
   height: 100%;
-  /* Full height (cover the whole page) */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
-  /* Black background with opacity */
   z-index: 2;
-  /* Specify a stack order in case you're using a different order for other elements */
 }
 
 #overlay_main_container {
@@ -100,6 +90,22 @@
   border-radius: 3px;
   -webkit-box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.05);
           box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+nav {
+  height: 8vh;
+  background-color: #212529;
+}
+
+a {
+  text-decoration: none;
+  color: whitesmoke;
+  font-size: 1em;
+  font-weight: lighter;
+}
+
+a:hover {
+  color: gainsboro;
 }
 
 #main_container {
@@ -185,32 +191,16 @@ input {
   margin-bottom: 5px;
 }
 
-.grid {
-  color: #d6d6d6;
-}
-
-nav {
-  height: 8vh;
-  background-color: #212529;
-}
-
-a {
-  text-decoration: none;
-  color: whitesmoke;
-  font-size: 1em;
-  font-weight: lighter;
-}
-
-a:hover {
-  color: gainsboro;
-}
-
 .hovered:hover {
   opacity: 0.7;
 }
 
 .sp-replacer {
   padding: 0;
+}
+
+.grid {
+  color: #d6d6d6;
 }
 
 .bar_tooltip {
@@ -236,22 +226,18 @@ a:hover {
   stroke: none;
 }
 
-/* width */
 ::-webkit-scrollbar {
   width: 2.5px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.015);
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.15);
 }

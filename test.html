@@ -33,7 +33,7 @@
       .attr("id", "bar_chart")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-      .style("background-color", "rgba(255,255,255,1)");
+      .style("background-color", "rgb(190, 138, 138)");
 
     const g = svg
       .append("g")
@@ -69,7 +69,7 @@
       .attr("y", 0 - margin.top / 2)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
-      .attr("fill", "rgb(103, 103, 103)")
+      .attr("fill", "rgb(255, 255, 255)")
       .text("Weather");
 
     const xTitle = g
@@ -78,7 +78,7 @@
       .attr("y", height + margin.top - 30)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
-      .attr("fill", "rgb(103, 103, 103)")
+      .attr("fill", "rgb(238, 238, 238)")
       .text("Weeks");
 
     const yTitle = g
@@ -88,7 +88,7 @@
       .style("transform", "rotate(270deg)")
       .attr("font-size", "0.9em")
       .attr("text-anchor", "middle")
-      .attr("fill", "rgb(103, 103, 103)")
+      .attr("fill", "rgb(238, 238, 238)")
       .text("Temperature");
 
     const bars = g.selectAll("rect").data(data);
@@ -105,8 +105,8 @@
       .attr("y", function (d, i) {
         return yScale(i);
       })
-      .attr("stroke", "rgba(42, 42, 42, 0.187)")
-      .attr("fill", "rgba(249, 203, 156, 0.46)");
+      .attr("stroke", "rgba(255, 255, 255, 0.333)")
+      .attr("fill", "rgba(238, 238, 238, 0.46)");
 
     function make_x_gridlines() {
       return d3.axisBottom(xScale).ticks();
@@ -133,10 +133,13 @@
 
     d3.select("#x_axis > path").attr("display", "none");
 
-    d3.selectAll(".grid > g > line").attr("stroke", "rgba(0, 0, 0, 0.108)");
-    d3.selectAll(".tick > text").style("fill", "rgb(130, 130, 130)");
+    d3.selectAll(".grid > g > line").attr(
+      "stroke",
+      "rgba(255, 255, 255, 0.108)"
+    );
+    d3.selectAll(".tick > text").style("fill", "rgb(255, 255, 255)");
     d3.select("#x_axis > path").style("stroke", "rgb(211, 211, 211)");
-    d3.select("#y_axis > path").style("stroke", "rgb(211, 211, 211)");
+    d3.select("#y_axis > path").style("stroke", "rgb(255, 255, 255)");
     d3.selectAll("#x_axis >.tick>line").style("display", "none");
     d3.selectAll("#y_axis >.tick>line").style("display", "none");
     d3.select("#x_grid > g:nth-child(2) > line").attr(
@@ -149,7 +152,6 @@
     );
     d3.select("#x_grid > path").attr("stroke", "rgba(0,0,0,0)");
     d3.select("#y_grid > path").attr("stroke", "rgba(0,0,0,0)");
-
     2 - 9;
   </script>
 </html>
