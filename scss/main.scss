@@ -1,25 +1,37 @@
 //colors
-$background: #84bbf3;
-$formBackground: rgb(255, 255, 255);
+$background: rgba(132, 187, 243, 1);
+$formBackground: rgb(247, 247, 247);
 $formRowTitles: rgba(0, 0, 0, 0.5);
 $formLabelBackground: rgb(255, 255, 255);
 $labelBorders: 1px solid rgba(0, 0, 0, 0.02);
 $labelFontColor: rgba(0, 0, 0, 0.5);
 
+.span-c {
+  color: red;
+}
+
+.span-c2 {
+  color: rgb(98, 211, 98);
+}
+
 .col-c {
   text-align: center;
-  padding-top: 1px;
   background-color: $formLabelBackground;
   border: $labelBorders;
   transition: background-color 0.25s ease-in-out;
+  padding: 0;
 }
 
 .col-c:hover {
-  background-color: rgba(0, 0, 0, 0.015);
-  border-color: rgba(0, 0, 0, 0.07);
+  background-color: rgb(249, 249, 249);
+  border-color: rgb(240, 240, 240);
 }
 
 .hide_code_template {
+  display: none;
+}
+
+.hide {
   display: none;
 }
 
@@ -39,7 +51,7 @@ $labelFontColor: rgba(0, 0, 0, 0.5);
 
 #overlay_main_container {
   background-color: rgb(235, 235, 235);
-  margin-top: 3em;
+  margin-top: 7em;
   height: 35em;
   border-radius: 5px;
 }
@@ -94,30 +106,39 @@ $labelFontColor: rgba(0, 0, 0, 0.5);
 #main_container {
   margin-top: 4em;
   height: 35em;
+  padding-right: 1.8%;
 }
 
 body {
-  height: 88vh;
-  background-color: $background;
+  height: 100vh;
+  //background-color: $background;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(255, 255, 255),
+    rgba(132, 197, 243, 0.8)
+  );
 }
 
-#form_container {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background-color: $formBackground;
-  box-shadow: 18px 5px 20px rgba(0, 0, 0, 0.2);
-  height: 33em;
-}
-
+#form_container,
 #bar_chart,
 #line_chart,
 #pie_chart {
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: 4px;
+  background-color: $formBackground;
+  box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+  height: 33em;
+  padding: 0;
 }
+
 form {
   height: 90%;
   overflow-x: hidden;
+  .row {
+    margin: 0 5px 0 0;
+    width: 100%;
+    padding: 0 5px 0 5px;
+  }
 }
 
 #form_submit_button {
@@ -128,8 +149,8 @@ form {
   width: 90%;
   left: 5%;
   border-radius: 2px;
-  background-color: rgb(244, 244, 244);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.07);
   color: rgb(145, 145, 145);
 }
 
@@ -140,11 +161,11 @@ form {
 
 h6 {
   font-size: 1em;
-  margin: 9px;
   font-weight: lighter;
   position: relative;
   top: 6px;
   color: $formRowTitles;
+  margin: 0 0 10px 0;
 }
 
 label {
@@ -156,10 +177,15 @@ label {
 input {
   border: 1px solid rgba(150, 150, 150, 0.3);
   border-radius: 0px;
-  height: 1.4em;
   width: 90%;
   font-size: 0.8em;
   color: rgb(50, 50, 50);
+}
+
+.text_inputs {
+  height: 2em;
+  border-radius: 2px;
+  margin-bottom: 5px;
 }
 
 .grid {
@@ -167,7 +193,7 @@ input {
 }
 
 nav {
-  height: 11vh;
+  height: 8vh;
   background-color: #212529;
 }
 
@@ -220,7 +246,7 @@ a:hover {
 #y_grid {
   g:nth-child(1) {
     line {
-      stroke: none;
+      //stroke: none;
     }
   }
   path {
@@ -229,8 +255,76 @@ a:hover {
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  //display: none;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 2.5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
 pre {
   padding-left: 20%;
+  font-size: 0.8em;
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 9px; /* Specified height */
+  background: rgb(245, 245, 245); /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+  border-radius: 10px;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 15px; /* Set a specific slider handle width */
+  height: 15px; /* Slider handle height */
+  background: #767676; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 10px;
+  border: 1px solid rgba(220, 220, 220, 0.5);
+}
+
+.slider::-moz-range-thumb {
+  width: 15px; /* Set a specific slider handle width */
+  height: 15px; /* Slider handle height */
+  background: #4caf50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 10px;
+  border: 1px solid rgba(220, 220, 220, 0.5);
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 1; /* Firefox */
 }

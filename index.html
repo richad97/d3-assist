@@ -16,9 +16,20 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"
     />
+    <link rel="stylesheet" href="./scss/main.css" />
+    <script>
+      function copyDivToClipboard() {
+        var range = document.createRange();
+        range.selectNode(document.getElementById("bar_horizontal_template"));
+        window.getSelection().removeAllRanges(); // clear current selection
+        window.getSelection().addRange(range); // to select text
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges(); // to deselect
+        window.alert("Code has been copied to your clipboard.");
+      }
+    </script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script type="module" src="./src/main.js"></script>
-    <link rel="stylesheet" href="./scss/main.css" />
   </head>
   <div id="overlay">
     <div class="container" id="overlay_main_container">
@@ -35,8 +46,7 @@
           <div id="overlay_code_container">
             <div id="fixed_bar_template_container">
               <pre>
-          <code id="bar_horizontal_template">HORIZONTAL
-            function makeData (x,num) {
+          <code id="bar_horizontal_template">function makeData (x,num) {
                 let arr = [];
                 let objNum = num + 1;
                 for(let i=1; i&lt;objNum; i++) {
@@ -50,7 +60,7 @@
             
             const data = makeData("x", 5);
             
-            const margin = {top: 20, right: 20, bottom: 30, left: 40},
+            const margin = { top: 80, right: 50, bottom: 100, left: 70 },
                 width = 600 - margin.left - margin.right,
                 height = 500 - margin.top - margin.bottom;
             
@@ -58,7 +68,8 @@
                 .append("svg")
                 .attr("id","bar_chart")
                 .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom);
+                .attr("height", height + margin.top + margin.bottom)
+                .style("background-color", "<span class="span-c" id="bar_background_cp_span"></span>");
                 
             const g = svg.append("g")
                 .attr("transform", 
@@ -73,11 +84,39 @@
                 .range([height, 0])
                 .padding(0.4);
             
-            const xAxis = g.append("g").attr("transform", `translate(0, ${height})`)
+            const xAxis = g.append("g").attr("id","x_axis").attr("transform", `translate(0, ${height})`)
                 .call(d3.axisBottom(xScale));
             
-            const yAxis = g.append("g").call(d3.axisLeft(yScale));
+            const yAxis = g.append("g").attr("id","y_axis").call(d3.axisLeft(yScale));
             
+            const title = g
+              .append("text")
+              .attr("x", width / 2)
+              .attr("y", 0 - margin.top / 2)
+              .attr("text-anchor", "middle")
+              .style("font-size", "16px")
+              .attr("fill", "<span class="span-c" id="bar_title_cp_span"></span>")
+              .text("<span class="span-c" id="bar_title_span"></span>");
+        
+            const xTitle = g
+              .append("text")
+              .attr("x", (width / 2) - <span class="span-c" id="bar_title_slider_span"></span>)
+              .attr("y", height + margin.top - 30)
+              .attr("text-anchor", "middle")
+              .style("font-size", "16px")
+              .attr("fill", "<span class="span-c" id="bar_x_title_cp_span"></span>")
+              .text("<span class="span-c" id="bar_x_title_span"></span>");
+        
+            const yTitle = g
+              .append("text")
+              .attr("y", -40)
+              .attr("x", 5 * -28)
+              .style("transform", "rotate(270deg)")
+              .attr("font-size", "0.9em")
+              .attr("text-anchor", "middle")
+              .attr("fill", "<span class="span-c" id="bar_y_title_cp_span"></span>")
+              .text("<span class="span-c" id="bar_y_title_span"></span>");
+
             const bars = g.selectAll("rect").data(data);
             
             bars.exit().remove();
@@ -86,7 +125,56 @@
                 .attr("height", yScale.bandwidth())
                 .attr("width", function(d,i) {return xScale(d.x)})
                 .attr("y", function(d,i) { return yScale(i)})
-                .attr("fill", "red");
+                .attr("stroke", "<span class="span-c" id="bar_border_cp_span"></span>")
+                .attr("fill", "<span class="span-c" id="bar_cp_span"></span>")<span class="span-c span-c2 hide" id="bar_hover_span"> 
+                .on("mouseover", function (d, i) {
+                  d3.select(this).attr("opacity", "0.7");
+                })
+                .on("mouseout", function (d, i) {
+                  d3.select(this).attr("opacity", "1");
+                });</span>
+            <span class="span-c span-c2" id="bar_x_grid_span">
+            function make_x_gridlines() {
+                return d3.axisBottom(xScale).ticks();
+            }
+
+            const xGrid = g.append("g").attr("class", "grid");
+
+            xGrid
+              .attr("id", "x_grid")
+              .attr("class", "grid")
+              .attr("transform", "translate(0," + height + ")")
+              .call(make_x_gridlines().tickSize(-height).tickFormat(""));
+            </span><span class="span-c span-c2" id="bar_y_grid_span">
+            function make_y_gridlines() {
+                return d3.axisLeft(yScale).ticks();
+            }
+
+            const yGrid = g.append("g").attr("class", "grid");
+    
+            yGrid
+              .attr("id", "y_grid")
+              .attr("class", "grid")
+              .call(make_y_gridlines().tickSize(-width).tickFormat(""));  
+            </span>
+            <span class="span-c span-c2" id="bar_x_line_span">
+            d3.select("#x_axis > path").attr("display", "none");
+            </span>
+            <span class="span-c span-c2 hide" id="bar_y_line_span">
+            d3.select("#y_axis > path").attr("display", "none");
+            </span>
+            d3.selectAll(".grid > g > line").attr("stroke", "<span class="span-c" id="bar_grid_cp_span"></span>");
+            d3.selectAll(".tick > text").style("fill", "<span class="span-c" id="bar_tick_cp_span"></span>");
+            d3.select("#x_axis > path").style("stroke", "<span class="span-c" id="bar_x_line_cp_span"></span>");
+            d3.select("#y_axis > path").style("stroke", "<span class="span-c" id="bar_y_line_cp_span"></span>");
+            d3.selectAll("#x_axis >.tick>line").style("display", "none");
+            d3.selectAll("#y_axis >.tick>line").style("display", "none");
+            d3.select("#x_grid > g:nth-child(2) > line").attr("stroke", "rgba(0,0,0,0)");
+            d3.select("#y_grid > g:nth-child(1) > line").attr("stroke", "rgba(0,0,0,0)");
+            d3.select("#x_grid > path").attr("stroke", "rgba(0,0,0,0)");
+            d3.select("#y_grid > path").attr("stroke", "rgba(0,0,0,0)");  
+            <span class="span-c" id="bar_x_title_slider_span"></span>
+            <span class="span-c" id="bar_y_title_slider_span"></span>
               </code><code id="bar_vertical_template">VERTICAL
             function makeData (x,num) {
                 let arr = [];
@@ -147,7 +235,9 @@
       </div>
       <div class="row" id="overlay_button_container">
         <div class="col-6">
-          <button class="overlay_buttons">Copy To Clipboard</button>
+          <button id="overlay_button_copy" class="overlay_buttons">
+            Copy To Clipboard
+          </button>
         </div>
         <div class="col-6">
           <button class="overlay_buttons">Preview On New Tab</button>
@@ -156,7 +246,7 @@
     </div>
   </div>
 
-  <nav class="navbar fixed-bottom">
+  <nav class="navbar">
     <div class="col-2 text-center"><a href="#">BAR CHART</a></div>
     <div class="col-2 text-center"><a href="#">PIE CHART</a></div>
     <div class="col-4 text-center">
@@ -165,7 +255,7 @@
         width="30"
         height="30"
         alt="d3logo"
-        class="col-4 text-center"
+        class="text-center"
       />
     </div>
     <div class="col-2 text-center"><a href="#">LINE CHART</a></div>
@@ -186,6 +276,9 @@
                     type="text"
                     name="bar_title_input"
                     id="bar_title_input"
+                    class="text_inputs"
+                    value="Weather"
+                    placeholder="Enter text..."
                   />
                 </label>
               </div>
@@ -196,6 +289,9 @@
                     type="text"
                     name="bar_xaxis_title_input"
                     id="bar_xaxis_title_input"
+                    class="text_inputs"
+                    value="Weeks"
+                    placeholder="Enter text..."
                   />
                 </label>
               </div>
@@ -206,6 +302,9 @@
                     type="text"
                     name="bar_yaxis_title_input"
                     id="bar_yaxis_title_input"
+                    class="text_inputs"
+                    value="Temperature"
+                    placeholder="Enter text..."
                   />
                 </label>
               </div>
@@ -222,6 +321,7 @@
                     value="2"
                     name="bar_title_slider"
                     id="bar_title_slider"
+                    class="slider"
                   />
                 </label>
               </div>
@@ -235,6 +335,7 @@
                     value="2"
                     name="bar_xaxis_title_slider"
                     id="bar_xaxis_title_slider"
+                    class="slider"
                   />
                 </label>
               </div>
@@ -245,9 +346,10 @@
                     type="range"
                     min="-15"
                     max="0"
-                    value="-15"
+                    value="-9"
                     name="bar_yaxis_title_slider"
                     id="bar_yaxis_title_slider"
+                    class="slider"
                   />
                 </label>
               </div>
@@ -261,8 +363,7 @@
                     type="checkbox"
                     name="bar_tooltip_checkbox"
                     id="bar_tooltip_checkbox"
-                  />
-                </label>
+                /></label>
               </div>
               <div class="col-4 col-c">
                 <label for="bar_horizontal_checkbox"
@@ -340,7 +441,6 @@
                     type="checkbox"
                     name="bar_xaxis_line_checkbox"
                     id="bar_xaxis_line_checkbox"
-                    checked
                   />
                 </label>
               </div>
@@ -351,6 +451,7 @@
                     type="checkbox"
                     name="bar_yaxis_line_checkbox"
                     id="bar_yaxis_line_checkbox"
+                    checked
                   />
                 </label>
               </div>
@@ -392,7 +493,7 @@
             <div class="row">
               <div class="col-4 col-c">
                 <div class="row">
-                  <label for="bar_title_cp">Title </label>
+                  <label for="bar_title_cp">Title</label>
                 </div>
                 <input
                   name="bar_title_cp"

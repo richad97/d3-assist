@@ -108,11 +108,11 @@ export function barChart(
     const yScale = d3.scaleBand().padding(0.3);
 
     function make_x_gridlines() {
-      return d3.axisBottom(xScale).ticks(5);
+      return d3.axisBottom(xScale).ticks();
     }
 
     function make_y_gridlines() {
-      return d3.axisLeft(yScale).ticks(5);
+      return d3.axisLeft(yScale).ticks();
     }
 
     function draw() {
@@ -125,9 +125,9 @@ export function barChart(
 
       xAxis
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(xScale).ticks(5));
+        .call(d3.axisBottom(xScale).ticks());
 
-      yAxis.call(d3.axisLeft(yScale).ticks(5));
+      yAxis.call(d3.axisLeft(yScale).ticks());
 
       const xAxisLine = d3.select("#bar_chart > g > g.xAxis > path");
       const yAxisLine = d3.select("#bar_chart > g > g.yAxis > path");
@@ -145,14 +145,14 @@ export function barChart(
         .call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
       title
-        .attr("x", 40)
+        .attr("x", width / 2 + 13)
         .attr("y", -40)
         .attr("font-size", "1.1em")
         .attr("text-anchor", "middle");
 
       xAxisTitle
+        .attr("x", width / 2 + 13)
         .attr("y", height + margin.top - 30)
-        .attr("x", 40)
         .attr("font-size", "0.9em")
         .attr("text-anchor", "middle");
 
@@ -208,17 +208,16 @@ export function barChart(
     loadData();
 
     document.querySelector("#x_grid > g:nth-child(2) > line").remove();
-    document.querySelector("#y_grid > g:nth-child(2) > line").remove();
   } else if (pDir == "vertical") {
     const xScale = d3.scaleBand().padding(0.3);
 
     const yScale = d3.scaleLinear();
 
     function make_x_gridlines() {
-      return d3.axisBottom(xScale).ticks(5);
+      return d3.axisBottom(xScale).ticks();
     }
     function make_y_gridlines() {
-      return d3.axisLeft(yScale).ticks(5);
+      return d3.axisLeft(yScale).ticks();
     }
 
     function draw() {
@@ -231,9 +230,9 @@ export function barChart(
 
       xAxis
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(xScale).ticks(5));
+        .call(d3.axisBottom(xScale).ticks());
 
-      yAxis.call(d3.axisLeft(yScale).ticks(5));
+      yAxis.call(d3.axisLeft(yScale).ticks());
 
       const xAxisLine = d3.select("#bar_chart > g > g.xAxis > path");
       const yAxisLine = d3.select("#bar_chart > g > g.yAxis > path");
@@ -318,7 +317,8 @@ export function barChart(
     window.addEventListener("resize", draw);
     loadData();
 
-    document.querySelector("#x_grid > g:nth-child(2) > line").remove();
+    //document.querySelector("#x_grid > g:nth-child(2) > line").remove();
+    document.querySelector("#y_grid > g:nth-child(2) > line").remove();
     document.querySelector("#y_grid > g:nth-child(2) > line").remove();
   }
 
@@ -341,11 +341,11 @@ export function barChart(
   }
 
   if (pTitleSlider != undefined) {
-    d3.select("#bar_title").attr("x", pTitleSlider * 20);
+    d3.select("#bar_title").attr("x", 2 + pTitleSlider);
   }
 
   if (pXTitleSlider != undefined) {
-    d3.select("#bar_xaxis_title").attr("x", pXTitleSlider * 20);
+    d3.select("#bar_xaxis_title").attr("x", 2 + pXTitleSlider);
   }
 
   if (pYTitleSlider != undefined) {
