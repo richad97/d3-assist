@@ -58,11 +58,11 @@
                 return arr;
             };
             
-            const data = makeData("x", 5);
+            const data = makeData("x", 10);
             
             const margin = { top: 80, right: 50, bottom: 100, left: 70 },
-                width = 600 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
+                width = 630 - margin.left - margin.right,
+                height = 528 - margin.top - margin.bottom;
             
             const svg = d3.select("body")
                 .append("svg")
@@ -74,7 +74,7 @@
             const g = svg.append("g")
                 .attr("transform", 
                     "translate(" + margin.left + "," + margin.top + ")");
-            
+            <span id="bar_horizontal_scale_span">
             const xScale = d3.scaleLinear()
                 .domain([0,d3.max(data, function(d) {return d.x;})])
                 .range([0, width]);
@@ -83,7 +83,24 @@
                 .domain(d3.range(0, data.length))
                 .range([height, 0])
                 .padding(0.4);
-            
+            </span>
+            <span id="bar_vertical_scale_span">
+            const xScale = d3
+              .scaleBand()
+              .domain(d3.range(0, data.length))
+              .range([0, width])
+              .padding(0.4);
+          
+            const yScale = d3
+              .scaleLinear()
+              .domain([
+                0,
+                d3.max(data, function (d) {
+                  return d.x;
+                }),
+              ])
+              .range([height, 0]);
+              </span>
             const xAxis = g.append("g").attr("id","x_axis").attr("transform", `translate(0, ${height})`)
                 .call(d3.axisBottom(xScale));
             
@@ -91,7 +108,7 @@
             
             const title = g
               .append("text")
-              .attr("x", width / 2)
+              .attr("x", <span class="span-c" id="bar_title_slider_span"></span> * 20)
               .attr("y", 0 - margin.top / 2)
               .attr("text-anchor", "middle")
               .style("font-size", "16px")
@@ -100,7 +117,7 @@
         
             const xTitle = g
               .append("text")
-              .attr("x", (width / 2) - <span class="span-c" id="bar_title_slider_span"></span>)
+              .attr("x", <span class="span-c" id="bar_x_title_slider_span"></span> * 20)
               .attr("y", height + margin.top - 30)
               .attr("text-anchor", "middle")
               .style("font-size", "16px")
@@ -110,30 +127,14 @@
             const yTitle = g
               .append("text")
               .attr("y", -40)
-              .attr("x", 5 * -28)
+              .attr("x", <span class="span-c" id="bar_y_title_slider_span"></span> * 20)
               .style("transform", "rotate(270deg)")
               .attr("font-size", "0.9em")
               .attr("text-anchor", "middle")
               .attr("fill", "<span class="span-c" id="bar_y_title_cp_span"></span>")
               .text("<span class="span-c" id="bar_y_title_span"></span>");
 
-            const bars = g.selectAll("rect").data(data);
-            
-            bars.exit().remove();
-            
-            bars.enter().append("rect")
-                .attr("height", yScale.bandwidth())
-                .attr("width", function(d,i) {return xScale(d.x)})
-                .attr("y", function(d,i) { return yScale(i)})
-                .attr("stroke", "<span class="span-c" id="bar_border_cp_span"></span>")
-                .attr("fill", "<span class="span-c" id="bar_cp_span"></span>")<span class="span-c span-c2 hide" id="bar_hover_span"> 
-                .on("mouseover", function (d, i) {
-                  d3.select(this).attr("opacity", "0.7");
-                })
-                .on("mouseout", function (d, i) {
-                  d3.select(this).attr("opacity", "1");
-                });</span>
-            <span class="span-c span-c2" id="bar_x_grid_span">
+          <span class="span-c span-c2" id="bar_x_grid_span">
             function make_x_gridlines() {
                 return d3.axisBottom(xScale).ticks();
             }
@@ -157,6 +158,37 @@
               .attr("class", "grid")
               .call(make_y_gridlines().tickSize(-width).tickFormat(""));  
             </span>
+
+            const bars = g.selectAll("rect").data(data);
+            
+            bars.exit().remove();
+            <span id="bar_horizontal_bar_logic_span">
+            bars.enter().append("rect")
+                .attr("height", yScale.bandwidth())
+                .attr("width", function(d,i) {return xScale(d.x)})
+                .attr("y", function(d,i) { return yScale(i)})</span>
+          <span id="bar_vertical_bar_logic_span">
+            bars
+            .enter()
+            .append("rect")
+            .attr("height", function (d, i) {
+              return height - yScale(d.x);
+            })
+            .attr("x", function (d, i) {
+              return xScale(i);
+            })
+            .attr("width", xScale.bandwidth())
+            .attr("y", function (d) {
+              return yScale(d.x);
+            })</span>
+                .attr("stroke", "<span class="span-c" id="bar_border_cp_span"></span>")
+                .attr("fill", "<span class="span-c" id="bar_cp_span"></span>")<span class="span-c span-c2 hide" id="bar_hover_span"> 
+                .on("mouseover", function (d, i) {
+                  d3.select(this).attr("opacity", "0.7");
+                })
+                .on("mouseout", function (d, i) {
+                  d3.select(this).attr("opacity", "1");
+                });</span>
             <span class="span-c span-c2" id="bar_x_line_span">
             d3.select("#x_axis > path").attr("display", "none");
             </span>
@@ -169,65 +201,10 @@
             d3.select("#y_axis > path").style("stroke", "<span class="span-c" id="bar_y_line_cp_span"></span>");
             d3.selectAll("#x_axis >.tick>line").style("display", "none");
             d3.selectAll("#y_axis >.tick>line").style("display", "none");
-            d3.select("#x_grid > g:nth-child(2) > line").attr("stroke", "rgba(0,0,0,0)");
-            d3.select("#y_grid > g:nth-child(1) > line").attr("stroke", "rgba(0,0,0,0)");
+            d3.select("#x_grid > g:nth-child(<span class="span-c" id="bar_gnth_child_span_x"></span>) > line").attr("stroke", "rgba(0,0,0,0)");
+            d3.select("#y_grid > g:nth-child(<span class="span-c" id="bar_gnth_child_span_y"></span>) > line").attr("stroke", "rgba(0,0,0,0)");
             d3.select("#x_grid > path").attr("stroke", "rgba(0,0,0,0)");
             d3.select("#y_grid > path").attr("stroke", "rgba(0,0,0,0)");  
-            <span class="span-c" id="bar_x_title_slider_span"></span>
-            <span class="span-c" id="bar_y_title_slider_span"></span>
-              </code><code id="bar_vertical_template">VERTICAL
-            function makeData (x,num) {
-                let arr = [];
-                let objNum = num + 1;
-                for(let i=1; i&lt;objNum; i++) {
-                    let obj = {
-                        [x]   :   Math.floor(Math.random() * 11 + 1),
-                    };
-                    arr.push(obj);
-                }
-                return arr;
-            };
-            
-            const data = makeData("x", 5);
-            
-            const margin = {top: 20, right: 20, bottom: 30, left: 40},
-                width = 600 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
-            
-            const svg = d3.select("body")
-                .append("svg")
-                .attr("id","bar_chart")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom);
-                
-            const g = svg.append("g")
-                .attr("transform", 
-                    "translate(" + margin.left + "," + margin.top + ")");
-            
-            const xScale = d3.scaleLinear()
-                .domain([0,d3.max(data, function(d) {return d.x;})])
-                .range([0, width]);
-            
-            const yScale = d3.scaleBand()
-                .domain(d3.range(0, data.length))
-                .range([height, 0])
-                .padding(0.4);
-            
-            const xAxis = g.append("g").attr("transform", `translate(0, ${height})`)
-                .call(d3.axisBottom(xScale));
-            
-            const yAxis = g.append("g").call(d3.axisLeft(yScale));
-            
-            const bars = g.selectAll("rect").data(data);
-            
-            bars.exit().remove();
-            
-            bars.enter().append("rect")
-                .attr("height", yScale.bandwidth())
-                .attr("width", function(d,i) {return xScale(d.x)})
-                .attr("y", function(d,i) { return yScale(i)})
-                .attr("fill", "red");
-            
               </code></pre>
             </div>
           </div>
@@ -265,7 +242,7 @@
   <body>
     <div class="container" id="main_container">
       <div class="row">
-        <div class="col-6" id="form_container">
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12" id="form_container">
           <form action="#">
             <div class="row">
               <h6>Titles</h6>
@@ -316,9 +293,9 @@
                   >Title
                   <input
                     type="range"
-                    min="2"
-                    max="24"
-                    value="2"
+                    min="0"
+                    max="25"
+                    value="13"
                     name="bar_title_slider"
                     id="bar_title_slider"
                     class="slider"
@@ -330,9 +307,9 @@
                   >x-Axis
                   <input
                     type="range"
-                    min="2"
-                    max="24"
-                    value="2"
+                    min="0"
+                    max="25"
+                    value="13"
                     name="bar_xaxis_title_slider"
                     id="bar_xaxis_title_slider"
                     class="slider"
@@ -344,8 +321,8 @@
                   >y-Axis
                   <input
                     type="range"
-                    min="-15"
-                    max="0"
+                    min="-17"
+                    max="-1"
                     value="-9"
                     name="bar_yaxis_title_slider"
                     id="bar_yaxis_title_slider"
@@ -574,7 +551,7 @@
           </div>
         </div>
 
-        <div class="col-6" id="graph_container">
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12" id="graph_container">
           <div id="bar_chart_div"></div>
         </div>
       </div>

@@ -21,11 +21,11 @@
       return arr;
     }
 
-    const data = makeData("x", 5);
+    const data = makeData("x", 10);
 
     const margin = { top: 80, right: 50, bottom: 100, left: 70 },
-      width = 600 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+      width = 630 - margin.left - margin.right,
+      height = 528 - margin.top - margin.bottom;
 
     const svg = d3
       .select("body")
@@ -33,7 +33,7 @@
       .attr("id", "bar_chart")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-      .style("background-color", "rgb(190, 138, 138)");
+      .style("background-color", "rgba(255,255,255,1)");
 
     const g = svg
       .append("g")
@@ -65,48 +65,31 @@
 
     const title = g
       .append("text")
-      .attr("x", width / 2)
+      .attr("x", 13 * 20)
       .attr("y", 0 - margin.top / 2)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
-      .attr("fill", "rgb(255, 255, 255)")
+      .attr("fill", "rgb(103, 103, 103)")
       .text("Weather");
 
     const xTitle = g
       .append("text")
-      .attr("x", width / 2 - 2)
+      .attr("x", 13 * 20)
       .attr("y", height + margin.top - 30)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
-      .attr("fill", "rgb(238, 238, 238)")
+      .attr("fill", "rgb(103, 103, 103)")
       .text("Weeks");
 
     const yTitle = g
       .append("text")
       .attr("y", -40)
-      .attr("x", 5 * -28)
+      .attr("x", -9 * 20)
       .style("transform", "rotate(270deg)")
       .attr("font-size", "0.9em")
       .attr("text-anchor", "middle")
-      .attr("fill", "rgb(238, 238, 238)")
+      .attr("fill", "rgb(103, 103, 103)")
       .text("Temperature");
-
-    const bars = g.selectAll("rect").data(data);
-
-    bars.exit().remove();
-
-    bars
-      .enter()
-      .append("rect")
-      .attr("height", yScale.bandwidth())
-      .attr("width", function (d, i) {
-        return xScale(d.x);
-      })
-      .attr("y", function (d, i) {
-        return yScale(i);
-      })
-      .attr("stroke", "rgba(255, 255, 255, 0.333)")
-      .attr("fill", "rgba(238, 238, 238, 0.46)");
 
     function make_x_gridlines() {
       return d3.axisBottom(xScale).ticks();
@@ -131,15 +114,30 @@
       .attr("class", "grid")
       .call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
+    const bars = g.selectAll("rect").data(data);
+
+    bars.exit().remove();
+
+    bars
+      .enter()
+      .append("rect")
+      .attr("height", yScale.bandwidth())
+      .attr("width", function (d, i) {
+        return xScale(d.x);
+      })
+      .attr("y", function (d, i) {
+        return yScale(i);
+      })
+
+      .attr("stroke", "rgba(42, 42, 42, 0.187)")
+      .attr("fill", "rgba(249, 203, 156, 0.46)");
+
     d3.select("#x_axis > path").attr("display", "none");
 
-    d3.selectAll(".grid > g > line").attr(
-      "stroke",
-      "rgba(255, 255, 255, 0.108)"
-    );
-    d3.selectAll(".tick > text").style("fill", "rgb(255, 255, 255)");
+    d3.selectAll(".grid > g > line").attr("stroke", "rgba(0, 0, 0, 0.108)");
+    d3.selectAll(".tick > text").style("fill", "rgb(130, 130, 130)");
     d3.select("#x_axis > path").style("stroke", "rgb(211, 211, 211)");
-    d3.select("#y_axis > path").style("stroke", "rgb(255, 255, 255)");
+    d3.select("#y_axis > path").style("stroke", "rgb(211, 211, 211)");
     d3.selectAll("#x_axis >.tick>line").style("display", "none");
     d3.selectAll("#y_axis >.tick>line").style("display", "none");
     d3.select("#x_grid > g:nth-child(2) > line").attr(
@@ -152,6 +150,5 @@
     );
     d3.select("#x_grid > path").attr("stroke", "rgba(0,0,0,0)");
     d3.select("#y_grid > path").attr("stroke", "rgba(0,0,0,0)");
-    2 - 9;
   </script>
 </html>

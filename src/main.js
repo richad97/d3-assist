@@ -11,21 +11,20 @@ import { responsiveVBarChart } from "./chart_templates/responsive_vertical_bar_c
 const barTitleInput = document.querySelector("#bar_title_input");
 const barXAxisTitleInput = document.querySelector("#bar_xaxis_title_input");
 const barYAxisTitleInput = document.querySelector("#bar_yaxis_title_input");
-
 const barTitleSlider = document.querySelector("#bar_title_slider");
+
 const barXAxisTitleSlider = document.querySelector("#bar_xaxis_title_slider");
 const barYAxisTitleSlider = document.querySelector("#bar_yaxis_title_slider");
-
 const barTooltipCheckbox = document.querySelector("#bar_tooltip_checkbox");
 const barHorizontalCheckbox = document.querySelector(
   "#bar_horizontal_checkbox"
 );
 const barVerticalCheckbox = document.querySelector("#bar_vertical_checkbox");
-
 const barXAxisGridCheckbox = document.querySelector("#bar_xaxis_grid_checkbox");
 const barYAxisGridCheckbox = document.querySelector("#bar_yaxis_grid_checkbox");
 const barXAxisLineCheckbox = document.querySelector("#bar_xaxis_line_checkbox");
 const barYAxisLineCheckbox = document.querySelector("#bar_yaxis_line_checkbox");
+
 const barHoverCheckbox = document.querySelector("#bar_hover_checkbox");
 
 //  Declaring input values to use them in functions
@@ -91,8 +90,17 @@ barChart(
 
 //  Sets default code in container before listeners
 //  Hides code in container on init
-d3.select("#bar_vertical_template").classed("hide_code_template", true);
-d3.select("#bar_horizontal_template").classed("hide_code_template", false);
+
+// #bar_gnth_child_span_x is 2 and #bar_gnth_child_span_y is 1 on horizontal.
+////  On vertical then numbers switch
+
+d3.select("#bar_horizontal_scale_span").classed("hide", false);
+d3.select("#bar_horizontal_bar_logic_span").classed("hide", false);
+document.getElementById("bar_gnth_child_span_x").innerHTML = "2";
+document.getElementById("bar_gnth_child_span_y").innerHTML = "1";
+
+d3.select("#bar_vertical_scale_span").classed("hide", true);
+d3.select("#bar_vertical_bar_logic_span").classed("hide", true);
 
 //  Loads default code from above into popup container
 document.getElementById("bar_title_span").innerHTML = barTitleInputValue;
@@ -120,6 +128,7 @@ document.getElementById("bar_x_line_cp_span").innerHTML = barXAxisLineCPValue;
 document.getElementById("bar_y_line_cp_span").innerHTML = barYAxisLineCPValue;
 document.getElementById("bar_tick_cp_span").innerHTML = barTickCPValue;
 
+////  Event Listeners
 //  Text Inputs
 //  Common way for most my listeners, even color picker
 barTitleInput.addEventListener("keyup", () => {
@@ -198,7 +207,7 @@ barTooltipCheckbox.addEventListener("change", function () {
         tooltip.style("display", "none");
       });
     barTooltipCheckboxValue = "checked";
-  } else {
+  } else if (this.checked === false) {
     document.querySelector("body > div.bar_tooltip").remove();
     barTooltipCheckboxValue = "unchecked";
   }
@@ -206,6 +215,9 @@ barTooltipCheckbox.addEventListener("change", function () {
 
 barHorizontalCheckbox.addEventListener("change", function () {
   if (this.checked) {
+    barTooltipCheckboxValue = "unchecked";
+    barTooltipCheckbox.checked = false;
+
     barChart(
       "horizontal",
       barTitleInputValue,
@@ -232,10 +244,18 @@ barHorizontalCheckbox.addEventListener("change", function () {
       barBorderCPValue
     );
 
+    d3.select("#bar_horizontal_scale_span").classed("hide", false);
+    d3.select("#bar_horizontal_bar_logic_span").classed("hide", false);
+    document.getElementById("bar_gnth_child_span_x").innerHTML = "2";
+    document.getElementById("bar_gnth_child_span_y").innerHTML = "1";
+
     barVerticalCheckbox.checked = false;
-    d3.select("#bar_vertical_template").classed("hide_code_template", true);
-    d3.select("#bar_horizontal_template").classed("hide_code_template", false);
+    d3.select("#bar_vertical_scale_span").classed("hide", true);
+    d3.select("#bar_vertical_bar_logic_span").classed("hide", true);
   } else if (this.checked === false) {
+    barTooltipCheckboxValue = "unchecked";
+    barTooltipCheckbox.checked = false;
+
     barChart(
       "vertical",
       barTitleInputValue,
@@ -262,14 +282,22 @@ barHorizontalCheckbox.addEventListener("change", function () {
       barBorderCPValue
     );
 
+    d3.select("#bar_horizontal_scale_span").classed("hide", true);
+    d3.select("#bar_horizontal_bar_logic_span").classed("hide", true);
+
     barVerticalCheckbox.checked = true;
-    d3.select("#bar_vertical_template").classed("hide_code_template", false);
-    d3.select("#bar_horizontal_template").classed("hide_code_template", true);
+    d3.select("#bar_vertical_scale_span").classed("hide", false);
+    d3.select("#bar_vertical_bar_logic_span").classed("hide", false);
+    document.getElementById("bar_gnth_child_span_x").innerHTML = "1";
+    document.getElementById("bar_gnth_child_span_y").innerHTML = "2";
   }
 });
 
 barVerticalCheckbox.addEventListener("change", function () {
   if (this.checked) {
+    barTooltipCheckboxValue = "unchecked";
+    barTooltipCheckbox.checked = false;
+
     barChart(
       "vertical",
       barTitleInputValue,
@@ -297,9 +325,17 @@ barVerticalCheckbox.addEventListener("change", function () {
     );
 
     barHorizontalCheckbox.checked = false;
-    d3.select("#bar_vertical_template").classed("hide_code_template", false);
-    d3.select("#bar_horizontal_template").classed("hide_code_template", true);
+    d3.select("#bar_horizontal_scale_span").classed("hide", true);
+    d3.select("#bar_horizontal_bar_logic_span").classed("hide", true);
+
+    d3.select("#bar_vertical_scale_span").classed("hide", false);
+    d3.select("#bar_vertical_bar_logic_span").classed("hide", false);
+    document.getElementById("bar_gnth_child_span_x").innerHTML = "1";
+    document.getElementById("bar_gnth_child_span_y").innerHTML = "2";
   } else if (this.checked === false) {
+    barTooltipCheckboxValue = "unchecked";
+    barTooltipCheckbox.checked = false;
+
     barChart(
       "horizontal",
       barTitleInputValue,
@@ -327,8 +363,13 @@ barVerticalCheckbox.addEventListener("change", function () {
     );
 
     barHorizontalCheckbox.checked = true;
-    d3.select("#bar_vertical_template").classed("hide_code_template", true);
-    d3.select("#bar_horizontal_template").classed("hide_code_template", false);
+    d3.select("#bar_horizontal_scale_span").classed("hide", false);
+    d3.select("#bar_horizontal_bar_logic_span").classed("hide", false);
+    document.getElementById("bar_gnth_child_span_x").innerHTML = "2";
+    document.getElementById("bar_gnth_child_span_y").innerHTML = "1";
+
+    d3.select("#bar_vertical_scale_span").classed("hide", true);
+    d3.select("#bar_vertical_bar_logic_span").classed("hide", true);
   }
 });
 
@@ -337,7 +378,7 @@ barXAxisGridCheckbox.addEventListener("change", function () {
     d3.select("#x_grid").attr("display", "");
     barXAxisGridCheckboxValue = "checked";
     d3.select("#bar_x_grid_span").classed("hide", false);
-  } else {
+  } else if (this.checked === false) {
     d3.select("#x_grid").attr("display", "none");
     barXAxisGridCheckboxValue = "unchecked";
     d3.select("#bar_x_grid_span").classed("hide", true);
@@ -349,7 +390,7 @@ barYAxisGridCheckbox.addEventListener("change", function () {
     d3.select("#y_grid").attr("display", "");
     barYAxisGridCheckboxValue = "checked";
     d3.select("#bar_y_grid_span").classed("hide", false);
-  } else {
+  } else if (this.checked === false) {
     d3.select("#y_grid").attr("display", "none");
     barYAxisGridCheckboxValue = "unchecked";
     d3.select("#bar_y_grid_span").classed("hide", true);
@@ -361,7 +402,7 @@ barHoverCheckbox.addEventListener("change", function () {
     d3.selectAll("rect").classed("hovered", true);
     barHoverCheckboxValue = "checked";
     d3.select("#bar_hover_span").classed("hide", false);
-  } else {
+  } else if (this.checked === false) {
     d3.selectAll("rect").classed("hovered", false);
     barHoverCheckboxValue = "unchecked";
     d3.select("#bar_hover_span").classed("hide", true);
@@ -373,7 +414,7 @@ barXAxisLineCheckbox.addEventListener("change", function () {
     d3.select("#x_axis > path").attr("display", "");
     barXAxisLineCheckboxValue = "checked";
     d3.select("#bar_x_line_span").classed("hide", true);
-  } else {
+  } else if (this.checked === false) {
     d3.select("#x_axis > path").attr("display", "none");
     barXAxisLineCheckboxValue = "unchecked";
     d3.select("#bar_x_line_span").classed("hide", false);
@@ -385,7 +426,7 @@ barYAxisLineCheckbox.addEventListener("change", function () {
     d3.select("#y_axis > path").attr("display", "");
     barYAxisLineCheckboxValue = "checked";
     d3.select("#bar_y_line_span").classed("hide", true);
-  } else {
+  } else if (this.checked === false) {
     d3.select("#y_axis > path").attr("display", "none");
     barYAxisLineCheckboxValue = "unchecked";
     d3.select("#bar_y_line_span").classed("hide", false);

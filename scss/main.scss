@@ -12,7 +12,7 @@ $labelFontColor: rgba(0, 0, 0, 0.5);
 }
 
 .span-c2 {
-  color: rgb(98, 211, 98);
+  color: black;
 }
 
 .col-c {
@@ -103,14 +103,18 @@ $labelFontColor: rgba(0, 0, 0, 0.5);
 // Navs
 nav {
   height: 8vh;
-  background-color: #212529;
+  background-color: #322f40e6;
+}
+.navbar {
+  padding-left: 5em;
+  padding-right: 5em;
 }
 
 a {
   text-decoration: none;
   color: whitesmoke;
   font-size: 1em;
-  font-weight: lighter;
+  font-weight: normal;
 }
 
 a:hover {
@@ -130,7 +134,7 @@ body {
   background-image: linear-gradient(
     to bottom right,
     rgb(255, 255, 255),
-    rgba(132, 197, 243, 0.8)
+    #948eb3e6
   );
 }
 
