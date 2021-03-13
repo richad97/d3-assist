@@ -44,14 +44,14 @@ export function barChart(
 
   const data = createData("x", "y", 10);
 
-  const margin = { top: 80, right: 50, bottom: 100, left: 70 };
+  const margin = { top: 80, right: 50, bottom: 80, left: 70 };
 
   const svg = d3
     .select("#bar_chart_div")
     .append("svg")
     .attr("id", "bar_chart")
     .attr("width", "100%")
-    .attr("height", "528px");
+    .attr("height", "100%");
 
   const g = svg
     .append("g")

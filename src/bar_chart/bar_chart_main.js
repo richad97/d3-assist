@@ -1,9 +1,5 @@
-import { barChart } from "./chart_templates/bar_chart.js";
-import { fixedLineChart } from "./chart_templates/fixed_line_chart.js";
-import { fixedPieChart } from "./chart_templates/fixed_pie_chart.js";
-import { responsiveHBarChart } from "./chart_templates/responsive_horizontal_bar_chart.js";
-import { responsiveLineChart } from "./chart_templates/responsive_line_chart.js";
-import { responsiveVBarChart } from "./chart_templates/responsive_vertical_bar_chart.js";
+import { barChart } from "./bar_chart_graph.js";
+import "../overlay_nav.js";
 
 // Declarations
 ////  Declare inputs for titles, sliders, and checkboxes
@@ -58,6 +54,24 @@ let barXAxisLineCPValue = "rgb(211, 211, 211)";
 let barYAxisLineCPValue = "rgb(211, 211, 211)";
 let barBorderCPValue = "rgba(42, 42, 42, 0.187)";
 
+//  --  NOT FULL CONNECTED  --
+const barResponsiveCheckbox = document.querySelector(
+  "#bar_responsive_checkbox"
+);
+let barResponsiveCheckboxValue = "unchecked";
+/*
+const barHeightDimensionInput = document.querySelector(
+  "#bar_height_dimension_input"
+);
+
+let barHeightDimensionInputValue = barHeightDimensionInput.value;
+
+const barWidthDimensionInput = document.querySelector(
+  "#bar_width_dimension_input"
+);
+
+let barWidthDimensionInputValue = barWidthDimensionInput.value;
+*/
 //  Init
 ////  Passing default values from above to function
 ////  When adding functionality make sure you change the params in bar_chart.js
@@ -132,7 +146,7 @@ document.getElementById("bar_tick_cp_span").innerHTML = barTickCPValue;
 //  Text Inputs
 //  Common way for most my listeners, even color picker
 barTitleInput.addEventListener("keyup", () => {
-  //  Changing UI graph dynamically for users to see
+  //  Changing graph title dynamically for users to see
   d3.select("#bar_title").text(barTitleInput.value);
 
   //  Changing input value that is pushed into function on vertical/horiz change
@@ -207,9 +221,11 @@ barTooltipCheckbox.addEventListener("change", function () {
         tooltip.style("display", "none");
       });
     barTooltipCheckboxValue = "checked";
+    d3.select("#bar_tooltip_logic_span").classed("hide", false);
   } else if (this.checked === false) {
     document.querySelector("body > div.bar_tooltip").remove();
     barTooltipCheckboxValue = "unchecked";
+    d3.select("#bar_tooltip_logic_span").classed("hide", true);
   }
 });
 
@@ -217,6 +233,7 @@ barHorizontalCheckbox.addEventListener("change", function () {
   if (this.checked) {
     barTooltipCheckboxValue = "unchecked";
     barTooltipCheckbox.checked = false;
+    d3.select("#bar_tooltip_logic_span").classed("hide", true);
 
     barChart(
       "horizontal",
@@ -255,6 +272,7 @@ barHorizontalCheckbox.addEventListener("change", function () {
   } else if (this.checked === false) {
     barTooltipCheckboxValue = "unchecked";
     barTooltipCheckbox.checked = false;
+    d3.select("#bar_tooltip_logic_span").classed("hide", true);
 
     barChart(
       "vertical",
@@ -297,6 +315,7 @@ barVerticalCheckbox.addEventListener("change", function () {
   if (this.checked) {
     barTooltipCheckboxValue = "unchecked";
     barTooltipCheckbox.checked = false;
+    d3.select("#bar_tooltip_logic_span").classed("hide", true);
 
     barChart(
       "vertical",
@@ -335,6 +354,7 @@ barVerticalCheckbox.addEventListener("change", function () {
   } else if (this.checked === false) {
     barTooltipCheckboxValue = "unchecked";
     barTooltipCheckbox.checked = false;
+    d3.select("#bar_tooltip_logic_span").classed("hide", true);
 
     barChart(
       "horizontal",
@@ -430,6 +450,16 @@ barYAxisLineCheckbox.addEventListener("change", function () {
     d3.select("#y_axis > path").attr("display", "none");
     barYAxisLineCheckboxValue = "unchecked";
     d3.select("#bar_y_line_span").classed("hide", false);
+  }
+});
+
+barResponsiveCheckbox.addEventListener("change", function () {
+  if (this.checked) {
+    barHeightDimensionInput.disabled = true;
+    barWidthDimensionInput.disabled = true;
+  } else if (this.checked === false) {
+    barHeightDimensionInput.disabled = false;
+    barWidthDimensionInput.disabled = false;
   }
 });
 
@@ -584,30 +614,3 @@ $("#bar_border_cp").spectrum({
     document.getElementById("bar_border_cp_span").innerHTML = barBorderCPValue;
   },
 });
-
-//  Form and overlay function
-let formSubmitButton = document.querySelector("#form_submit_button");
-let overlayCloseButton = document.querySelector("#overlay_close_button");
-
-formSubmitButton.addEventListener("click", function () {
-  $("#overlay").fadeIn();
-});
-
-overlayCloseButton.addEventListener("click", function () {
-  $("#overlay").fadeOut();
-});
-
-//  Closes overlay when escape key is pressed
-$(document).keyup(function (e) {
-  if (e.key === "Escape") {
-    // escape key maps to keycode `27`
-    $("#overlay").fadeOut();
-  }
-});
-
-//  Copies code from popup container
-document
-  .getElementById("overlay_button_copy")
-  .addEventListener("click", function () {
-    copyDivToClipboard();
-  });

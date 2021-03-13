@@ -98,8 +98,8 @@ nav {
 }
 
 .navbar {
-  padding-left: 5em;
-  padding-right: 5em;
+  padding-left: 4em;
+  padding-right: 4em;
 }
 
 a {
@@ -116,7 +116,7 @@ a:hover {
 #main_container {
   margin-top: 4em;
   height: 35em;
-  padding-right: 1.8%;
+  padding-right: 1%;
 }
 
 body {
@@ -125,10 +125,53 @@ body {
   background-image: linear-gradient(to bottom right, white, #948eb3e6);
 }
 
-#form_container,
-#bar_chart,
-#line_chart,
+#bar_chart_div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  -webkit-box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+          box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+  height: 30em;
+  padding: 0;
+}
+
+#pie_chart_div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: white;
+  -webkit-box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+          box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+  height: 30em;
+  padding: 0;
+}
+
+#line_chart_div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: white;
+  -webkit-box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+          box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+  height: 30em;
+  padding: 0;
+}
+
 #pie_chart {
+  margin-left: 20%;
+  margin-top: 5%;
+}
+
+#graph_dimension_div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  -webkit-box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+          box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+  height: 3em;
+  padding: 0;
+  padding-top: 0.5em;
+}
+
+#form_container {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   background-color: #f7f7f7;
@@ -260,7 +303,7 @@ pre {
        appearance: none;
   width: 100%;
   /* Full-width */
-  height: 9px;
+  height: 7px;
   /* Specified height */
   background: whitesmoke;
   /* Grey background */

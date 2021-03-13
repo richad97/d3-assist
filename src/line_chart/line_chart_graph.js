@@ -12,11 +12,12 @@ export function responsiveLineChart() {
       return arr;
     }
     let dates = makeDateArray();
-
+    let i = 1;
     let data = dates.map(function (x) {
+      i += 30;
       return {
         date: x,
-        num: Math.floor(Math.random() * 101),
+        num: Math.floor(Math.random() * 101 + i++),
       };
     });
     return data;
@@ -24,24 +25,49 @@ export function responsiveLineChart() {
 
   const data = createData();
 
-  const margin = { top: 30, left: 30, bottom: 30, right: 5 };
+  console.log(data);
+
+  const margin = { top: 80, right: 50, bottom: 80, left: 80 };
 
   const svg = d3
     .select("#line_chart_div")
     .append("svg")
     .attr("id", "line_chart")
     .attr("width", "100%")
-    .attr("height", "400px");
+    .attr("height", "100%");
 
   const g = svg
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
+  const title = g.append("text").attr("id", "bar_title").text("Weather");
+
+  const xAxisTitle = g
+    .append("text")
+    .attr("id", "bar_xaxis_title")
+    .text("Days");
+
+  const yAxisTitle = g
+    .append("text")
+    .attr("id", "bar_yaxis_title")
+    .text("Temperature");
+
   const xScale = d3.scaleTime();
   const yScale = d3.scaleLinear();
 
-  const xAxis = g.append("g");
-  const yAxis = g.append("g");
+  const xAxis = g.append("g").attr("id", "x_axis");
+  const yAxis = g.append("g").attr("id", "y_axis");
+
+  const xGrid = g.append("g").attr("class", "grid");
+  const yGrid = g.append("g").attr("class", "grid");
+
+  function make_x_gridlines() {
+    return d3.axisBottom(xScale).ticks();
+  }
+
+  function make_y_gridlines() {
+    return d3.axisLeft(yScale).ticks();
+  }
 
   const line = d3
     .line()
@@ -67,6 +93,34 @@ export function responsiveLineChart() {
       .call(d3.axisBottom(xScale));
 
     yAxis.call(d3.axisLeft(yScale));
+
+    xGrid
+      .attr("id", "x_grid")
+      .attr("transform", "translate(0," + height + ")")
+      .call(make_x_gridlines().tickSize(-height).tickFormat(""));
+
+    yGrid
+      .attr("id", "y_grid")
+      .call(make_y_gridlines().tickSize(-width).tickFormat(""));
+
+    title
+      .attr("x", width / 2)
+      .attr("y", -40)
+      .attr("font-size", "1.1em")
+      .attr("text-anchor", "middle");
+
+    xAxisTitle
+      .attr("x", width / 2)
+      .attr("y", height + margin.top - 30)
+      .attr("font-size", "0.9em")
+      .attr("text-anchor", "middle");
+
+    yAxisTitle
+      .attr("x", 5 * -28)
+      .attr("y", -50)
+      .attr("font-size", "0.9em")
+      .attr("text-anchor", "middle")
+      .style("transform", "rotate(270deg)");
 
     linePath
       .data([data])

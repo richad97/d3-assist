@@ -29,8 +29,9 @@
       }
     </script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/bar_chart/bar_chart_main.js"></script>
   </head>
+
   <div id="overlay">
     <div class="container" id="overlay_main_container">
       <p id="overlay_close_button">X</p>
@@ -158,29 +159,28 @@
               .attr("class", "grid")
               .call(make_y_gridlines().tickSize(-width).tickFormat(""));  
             </span>
-
             const bars = g.selectAll("rect").data(data);
             
             bars.exit().remove();
             <span id="bar_horizontal_bar_logic_span">
             bars.enter().append("rect")
+                .attr("class", "bars")
                 .attr("height", yScale.bandwidth())
                 .attr("width", function(d,i) {return xScale(d.x)})
                 .attr("y", function(d,i) { return yScale(i)})</span>
           <span id="bar_vertical_bar_logic_span">
-            bars
-            .enter()
-            .append("rect")
-            .attr("height", function (d, i) {
-              return height - yScale(d.x);
-            })
-            .attr("x", function (d, i) {
-              return xScale(i);
-            })
-            .attr("width", xScale.bandwidth())
-            .attr("y", function (d) {
-              return yScale(d.x);
-            })</span>
+            bars.enter().append("rect")
+                .attr("class", "bars")
+                .attr("height", function (d, i) {
+                  return height - yScale(d.x);
+                })
+                .attr("x", function (d, i) {
+                  return xScale(i);
+                })
+                .attr("width", xScale.bandwidth())
+                .attr("y", function (d) {
+                  return yScale(d.x);
+                })</span>
                 .attr("stroke", "<span class="span-c" id="bar_border_cp_span"></span>")
                 .attr("fill", "<span class="span-c" id="bar_cp_span"></span>")<span class="span-c span-c2 hide" id="bar_hover_span"> 
                 .on("mouseover", function (d, i) {
@@ -189,6 +189,44 @@
                 .on("mouseout", function (d, i) {
                   d3.select(this).attr("opacity", "1");
                 });</span>
+            <span id="bar_tooltip_logic_span" class="hide">
+            let tooltip = d3.select("body").append("div").attr("class", "bar_tooltip");
+
+            d3.select(".bar_tooltip")
+              .style("background-color", "white")
+              .style("border", "1px solid rgba(0,0,0,0.2)");
+
+            let tooltip_bars = d3.selectAll(".bars");
+
+            tooltip_bars
+              .on("mousemove", function (d) {
+                tooltip
+                  .style("left", d3.event.pageX + 10 + "px")
+                  .style("top", d3.event.pageY + 10 + "px")
+                  .style("display", "inline-block");
+              })
+              .on("mouseout", function (d) {
+                tooltip.style("display", "none");
+              });
+
+            /*
+            Copy this style for tooltip to work
+
+            .bar_tooltip {
+              position: absolute;
+              display: none;
+              min-width: 80px;
+              height: auto;
+              background: none repeat scroll;
+              border: 1px solid #6f257f;
+              padding: 14px;
+              text-align: center;
+              background-color: white;
+              z-index: 1;
+            }
+
+            */
+            </span>
             <span class="span-c span-c2" id="bar_x_line_span">
             d3.select("#x_axis > path").attr("display", "none");
             </span>
@@ -224,26 +262,37 @@
   </div>
 
   <nav class="navbar">
-    <div class="col-2 text-center"><a href="#">BAR CHART</a></div>
-    <div class="col-2 text-center"><a href="#">PIE CHART</a></div>
-    <div class="col-4 text-center">
+    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
+      <a href="./bar_chart.html">BAR CHART</a>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
+      <a href="./pie_chart.html">PIE CHART</a>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
       <img
         src="https://raw.githubusercontent.com/d3/d3-logo/master/d3.svg"
-        width="30"
+        width="40"
         height="30"
         alt="d3logo"
         class="text-center"
       />
     </div>
-    <div class="col-2 text-center"><a href="#">LINE CHART</a></div>
-    <div class="col-2 text-center"><a href="#">MAP</a></div>
+    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
+      <a href="./line_chart.html">LINE CHART</a>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
+      <a href="#">MAP</a>
+    </div>
   </nav>
 
   <body>
     <div class="container" id="main_container">
       <div class="row">
-        <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12" id="form_container">
-          <form action="#">
+        <div
+          class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12 mb-5"
+          id="form_container"
+        >
+          <form action="#" id="form">
             <div class="row">
               <h6>Titles</h6>
               <div class="col-4 col-c">
@@ -551,8 +600,62 @@
           </div>
         </div>
 
-        <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12" id="graph_container">
-          <div id="bar_chart_div"></div>
+        <div
+          class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12 mb-5"
+          id="graph_container"
+        >
+          <div class="row">
+            <div id="bar_chart_div"></div>
+          </div>
+          <div class="row" id="graph_dimension_div">
+            <div class="col-1">
+              <label for="bar_responsive_checkbox">Responsive</label>
+            </div>
+            <div class="col-2">
+              <input
+                type="checkbox"
+                name="bar_responsive_checkbox"
+                id="bar_responsive_checkbox"
+              />
+            </div>
+            <div class="col-1">
+              <label for="">Sorted</label>
+            </div>
+            <div class="col-2">
+              <input type="checkbox" />
+            </div>
+            <div class="col-1">
+              <label for="">Bars</label>
+            </div>
+            <div class="col-2">
+              <input type="number" min="1" max="20" value="10" />
+            </div>
+            <!--
+            <div class="col-2"></div>
+            <div class="col-1 d-flex justify-content-around">
+              <label for="bar_height_dimension_input">Height </label>
+            </div>
+            <div class="col-2" id="my-input-container">
+              <input
+                type="number"
+                id="bar_height_dimension_input"
+                name="bar_height_dimension_input"
+                placeholder="528px"
+              />
+            </div>
+            <div class="col-1 d-flex justify-content-around">
+              <label for="bar_width_dimension_input">Width </label>
+            </div>
+            <div class="col-2">
+              <input
+                type="number"
+                id="bar_width_dimension_input"
+                name="bar_width_dimension_input"
+                placeholder="630px"
+              />
+            </div>
+            -->
+          </div>
         </div>
       </div>
     </div>

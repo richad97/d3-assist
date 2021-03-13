@@ -106,8 +106,8 @@ nav {
   background-color: #322f40e6;
 }
 .navbar {
-  padding-left: 5em;
-  padding-right: 5em;
+  padding-left: 4em;
+  padding-right: 4em;
 }
 
 a {
@@ -125,7 +125,7 @@ a:hover {
 #main_container {
   margin-top: 4em;
   height: 35em;
-  padding-right: 1.8%;
+  padding-right: 1%;
 }
 
 body {
@@ -137,11 +137,49 @@ body {
     #948eb3e6
   );
 }
+#bar_chart_div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: $formBackground;
+  box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+  height: 30em;
+  padding: 0;
+}
 
-#form_container,
-#bar_chart,
-#line_chart,
+#pie_chart_div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+  height: 30em;
+  padding: 0;
+}
+
+#line_chart_div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+  height: 30em;
+  padding: 0;
+}
+
 #pie_chart {
+  margin-left: 20%;
+  margin-top: 5%;
+}
+
+#graph_dimension_div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: $formBackground;
+  box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
+  height: 3em;
+  padding: 0;
+  padding-top: 0.5em;
+}
+
+#form_container {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   background-color: $formBackground;
@@ -280,7 +318,7 @@ pre {
   -webkit-appearance: none; /* Override default CSS styles */
   appearance: none;
   width: 100%; /* Full-width */
-  height: 9px; /* Specified height */
+  height: 7px; /* Specified height */
   background: rgb(245, 245, 245); /* Grey background */
   outline: none; /* Remove outline */
   opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */

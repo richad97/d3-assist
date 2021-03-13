@@ -1,8 +1,8 @@
 export function fixedPieChart() {
-  const data = [10, 20, 100];
+  const data = [20, 27, 43, 67, 88];
 
-  const width = 500,
-    height = 500,
+  const width = 400,
+    height = 400,
     radius = Math.min(width, height) / 2;
 
   const svg = d3
@@ -28,7 +28,7 @@ export function fixedPieChart() {
   const arc = d3
     .arc()
     .outerRadius(radius - 10)
-    .innerRadius(0);
+    .innerRadius(100);
 
   const labelArc = d3
     .arc()
@@ -45,6 +45,8 @@ export function fixedPieChart() {
   arcs
     .append("path")
     .attr("d", arc)
+    .attr("stroke", "white")
+    .attr("stroke-width", "2px")
     .style("fill", function (d) {
       return pieScale(d.data);
     });

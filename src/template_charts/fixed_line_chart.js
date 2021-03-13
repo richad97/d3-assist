@@ -28,7 +28,7 @@ export function fixedLineChart() {
 
   const margin = { top: 30, left: 30, bottom: 30, right: 5 },
     width = 600 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 480 - margin.top - margin.bottom;
 
   const svg = d3
     .select("#line_chart_div")
