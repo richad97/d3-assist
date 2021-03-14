@@ -139,64 +139,67 @@
             <div class="row">
               <h6>Sliders</h6>
               <div class="col-4 col-c">
-                <label for="line_title_slider"
-                  >Title
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value="5"
-                    name="line_title_slider"
-                    id="line_title_slider"
-                    class="slider"
-                  />
-                </label>
+                <label for="line_title_slider">Title </label>
+                <input
+                  type="range"
+                  min="0"
+                  max="26"
+                  value="13"
+                  name="line_title_slider"
+                  id="line_title_slider"
+                  class="slider"
+                />
               </div>
               <div class="col-4 col-c">
-                <label for="line_xaxis_title_slider"
-                  >x-Axis
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value="5"
-                    name="line_xaxis_title_slider"
-                    id="line_xaxis_title_slider"
-                    class="slider"
-                  />
-                </label>
+                <label for="line_xaxis_title_slider">x-Axis </label>
+                <input
+                  type="range"
+                  min="0"
+                  max="26"
+                  value="13"
+                  name="line_xaxis_title_slider"
+                  id="line_xaxis_title_slider"
+                  class="slider"
+                />
               </div>
               <div class="col-4 col-c">
-                <label for="line_yaxis_title_slider"
-                  >y-Axis
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value="5"
-                    name="line_yaxis_title_slider"
-                    id="line_yaxis_title_slider"
-                    class="slider"
-                  />
-                </label>
+                <label for="line_yaxis_title_slider">y-Axis </label>
+                <input
+                  type="range"
+                  min="-17"
+                  max="-1"
+                  value="-9Sw"
+                  name="line_yaxis_title_slider"
+                  id="line_yaxis_title_slider"
+                  class="slider"
+                />
               </div>
             </div>
             <div class="row">
               <div class="col-4 col-c">
-                <label for="line_title_slider"
-                  >Line Width
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value="5"
-                    name="line_title_slider"
-                    id="line_title_slider"
-                    class="slider"
-                  />
-                </label>
+                <label for="line_width_slider">Line Width </label>
+                <input
+                  type="range"
+                  min="1"
+                  max="11"
+                  value="2"
+                  name="line_width_slider"
+                  id="line_width_slider"
+                  class="slider"
+                />
               </div>
-              <div class="col-4 col-c"></div>
+              <div class="col-4 col-c">
+                <label for="line_point_radius_slider">Point Radius </label>
+                <input
+                  type="range"
+                  min="1"
+                  max="11"
+                  value="6"
+                  name="line_point_radius_slider"
+                  id="line_point_radius_slider"
+                  class="slider"
+                />
+              </div>
               <div class="col-4 col-c"></div>
             </div>
             <div class="row">
@@ -217,6 +220,7 @@
                     type="checkbox"
                     name="line_datapoint_checkbox"
                     id="line_datapoint_checkbox"
+                    checked
                 /></label>
               </div>
               <div class="col-4 col-c"></div>
@@ -275,6 +279,7 @@
                     type="checkbox"
                     name="line_xaxis_line_checkbox"
                     id="line_xaxis_line_checkbox"
+                    checked
                   />
                 </label>
               </div>
@@ -315,12 +320,12 @@
               </div>
               <div class="col-4 col-c">
                 <div class="row">
-                  <label for="line_datapoint_cp">Datapoint</label>
+                  <label for="line_tick_cp">Ticks</label>
                 </div>
                 <input
-                  name="line_datapoint_cp"
-                  id="line_datapoint_cp"
-                  value="rgba(245,245,245,1)"
+                  name="line_tick_cp"
+                  id="line_tick_cp"
+                  value="rgb(130, 130, 130)"
                 />
               </div>
             </div>
@@ -393,12 +398,22 @@
             <div class="row">
               <div class="col-4 col-c">
                 <div class="row">
-                  <label for="line_tick_cp">Ticks</label>
+                  <label for="line_datapoint_cp">Datapoint</label>
                 </div>
                 <input
-                  name="bar_tick_cp"
-                  id="bar_tick_cp"
-                  value="rgb(130, 130, 130)"
+                  name="line_datapoint_cp"
+                  id="line_datapoint_cp"
+                  value="rgba(245,245,245,1)"
+                />
+              </div>
+              <div class="col-4 col-c">
+                <div class="row">
+                  <label for="line_datapoint_border_cp">Datapoint Border</label>
+                </div>
+                <input
+                  name="line_datapoint_border_cp"
+                  id="line_datapoint_border_cp"
+                  value="rgba(245,245,245,1)"
                 />
               </div>
             </div>
@@ -432,7 +447,7 @@
               <label for="">Lines</label>
             </div>
             <div class="col-2">
-              <input type="number" min="1" max="5" value="5" />
+              <input type="number" min="1" max="5" value="1" />
             </div>
           </div>
         </div>

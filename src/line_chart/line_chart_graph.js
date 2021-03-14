@@ -2,8 +2,8 @@ export function responsiveLineChart() {
   function createData() {
     function makeDateArray() {
       let arr = [];
-      let startDate = new Date("2020-01-01"); //YYYY-MM-DD
-      let endDate = new Date("2020-03-01"); //YYYY-MM-DD
+      let startDate = new Date("2020-01-02"); //YYYY-MM-DD
+      let endDate = new Date("2020-01-22"); //YYYY-MM-DD
 
       while (startDate <= endDate) {
         arr.push(new Date(startDate));
@@ -40,16 +40,16 @@ export function responsiveLineChart() {
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
-  const title = g.append("text").attr("id", "bar_title").text("Weather");
+  const title = g.append("text").attr("id", "line_title").text("Weather");
 
   const xAxisTitle = g
     .append("text")
-    .attr("id", "bar_xaxis_title")
+    .attr("id", "line_xaxis_title")
     .text("Days");
 
   const yAxisTitle = g
     .append("text")
-    .attr("id", "bar_yaxis_title")
+    .attr("id", "line_yaxis_title")
     .text("Temperature");
 
   const xScale = d3.scaleTime();
@@ -127,7 +127,53 @@ export function responsiveLineChart() {
       .attr("class", "line")
       .attr("d", line)
       .attr("stroke", "red")
+      .attr("stroke-width", "1px")
       .attr("fill", "none");
+
+    // let tooltip = d3.select("body").append("div").attr("class", "line_tooltip");
+    // d3.select(".line_tooltip").style("background-color", "white");
+    // d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
+
+    const circles = g.selectAll("circles").data(data);
+
+    circles.exit().remove();
+
+    circles
+      .enter()
+      .append("circle")
+      .attr("class", "circles")
+      .attr("r", 3)
+      .attr("cx", function (d, i) {
+        return xScale(d.date);
+      })
+      .attr("cy", function (d, i) {
+        return yScale(d.num);
+      })
+      .attr("fill", "white")
+      .attr("stroke", "black")
+      .attr("stroke-width", "1px");
+
+    // .on("mousemove", function (d) {
+    //   tooltip
+    //     .style("left", d3.event.pageX + 10 + "px")
+    //     .style("top", d3.event.pageY + 10 + "px")
+    //     .style("display", "inline-block");
+    // })
+    // .on("mouseout", function (d) {
+    //   tooltip.style("display", "none");
+    // });
+
+    // circles
+    //   .attr("r", 2.5)
+    //   .attr("cx", function (d, i) {
+    //     return xScale(d.date);
+    //   })
+    //   .attr("cy", function (d, i) {
+    //     return yScale(d.num);
+    //   })
+    //   .attr("fill", "black")
+    //   .attr("stroke", "white")
+    //   .attr("stroke-width", "2px");
   }
 
   function loadData() {
@@ -148,4 +194,6 @@ export function responsiveLineChart() {
 
   window.addEventListener("resize", draw);
   loadData();
+
+  document.querySelector("#y_grid > g:nth-child(2) > line").remove();
 }
