@@ -18,17 +18,15 @@
     />
     <link rel="stylesheet" href="./scss/main.css" />
     <script>
-      /*
       function copyDivToClipboard() {
         var range = document.createRange();
-        range.selectNode(document.getElementById("line_horizontal_template"));
+        range.selectNode(document.getElementById("line_template"));
         window.getSelection().removeAllRanges(); // clear current selection
         window.getSelection().addRange(range); // to select text
         document.execCommand("copy");
         window.getSelection().removeAllRanges(); // to deselect
         window.alert("Code has been copied to your clipboard.");
       }
-      */
     </script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script type="module" src="./src/line_chart/line_chart_main.js"></script>
@@ -46,7 +44,117 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <div id="overlay_code_container"></div>
+          <div id="overlay_code_container">
+            <pre><code id="line_template">
+              function createData() {
+                function makeDateArray() {
+                  let arr = [];
+                  let startDate = new Date("2020-01-01"); //YYYY-MM-DD
+                  let endDate = new Date("2020-03-01"); //YYYY-MM-DD
+            
+                  while (startDate &lt;= endDate) {
+                    arr.push(new Date(startDate));
+                    startDate.setDate(startDate.getDate() + 1);
+                  }
+                  return arr;
+                }
+                let dates = makeDateArray();
+            
+                let data = dates.map(function (x) {
+                  return {
+                    date: x,
+                    num: Math.floor(Math.random() * 101),
+                  };
+                });
+                return data;
+              }
+            
+              const data = createData();
+                        
+              const margin = { top: 30, left: 30, bottom: 30, right: 5 },
+                width = 600 - margin.left - margin.right,
+                height = 480 - margin.top - margin.bottom;
+            
+              const svg = d3
+                .select("body")
+                .append("svg")
+                .attr("id", "line_chart")
+                .attr("width", `${width + margin.left + margin.right}`)
+                .attr("height", `${height + margin.top + margin.bottom}`);
+            
+              const g = svg
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+              const title = g
+                .append("text")
+                .attr("x", width / 2)
+                .attr("y", 0 - margin.top / 2)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .attr("fill", "rgb(103, 103, 103)")
+                .text("<span class="span-c" id="line_title_span"></span>");
+          
+              const xTitle = g
+                .append("text")
+                .attr("x", 13 * 20)
+                .attr("y", height + margin.top - 30)
+                .attr("text-anchor", "middle")
+                .style("font-size", "16px")
+                .attr("fill", "rgb(103, 103, 103)")
+                .text("<span class="span-c" id="line_x_title_span"></span>");
+          
+              const yTitle = g
+                .append("text")
+                .attr("y", -40)
+                .attr("x", -9 * 20)
+                .style("transform", "rotate(270deg)")
+                .attr("font-size", "0.9em")
+                .attr("text-anchor", "middle")
+                .attr("fill", "rgb(103, 103, 103)")
+                .text("<span class="span-c" id="line_y_title_span"></span>");
+            
+              const xScale = d3
+                .scaleTime()
+                .domain(
+                  d3.extent(data, function (d) {
+                    return d.date;
+                  })
+                )
+                .range([0, width]);
+              const yScale = d3
+                .scaleLinear()
+                .domain([
+                  0,
+                  d3.max(data, function (d) {
+                    return d.num;
+                  }),
+                ])
+                .range([height, 0]);
+            
+              const xAxis = g
+                .append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(xScale));
+              const yAxis = g.append("g").call(d3.axisLeft(yScale));
+            
+              const line = d3
+                .line()
+                .x(function (d) {
+                  return xScale(d.date);
+                })
+                .y(function (d) {
+                  return yScale(d.num);
+                });
+            
+              g.append("path")
+                .data([data])
+                .attr("class", "line")
+                .attr("d", line)
+                .attr("stroke", "red")
+                .attr("fill", "none");
+            </code></pre>
+          </div>
         </div>
       </div>
       <div class="row" id="overlay_button_container">
@@ -63,12 +171,6 @@
   </div>
 
   <nav class="navbar">
-    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
-      <a href="./bar_chart.html">BAR CHART</a>
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
-      <a href="./pie_chart.html">PIE CHART</a>
-    </div>
     <div class="col-lg-4 col-md-4 col-sm-12 text-center">
       <img
         src="https://raw.githubusercontent.com/d3/d3-logo/master/d3.svg"
@@ -79,7 +181,14 @@
       />
     </div>
     <div class="col-lg-2 col-md-2 col-sm-12 text-center">
-      <a href="./line_chart.html">LINE CHART</a>
+      <a href="./bar_chart.html">BAR CHART</a>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
+      <a href="./pie_chart.html">PIE CHART</a>
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
+      <a href="./line_chart.html" class="selected">LINE CHART</a>
     </div>
     <div class="col-lg-2 col-md-2 col-sm-12 text-center">
       <a href="#">MAP</a>
@@ -88,11 +197,8 @@
 
   <body>
     <div class="container" id="main_container">
-      <div class="row">
-        <div
-          class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12 mb-5"
-          id="form_container"
-        >
+      <div class="row justify-content-around">
+        <div class="col-lg-5 col-sm-12 mb-5" id="form_container">
           <form action="#" id="form">
             <div class="row">
               <h6>Titles</h6>
@@ -104,7 +210,7 @@
                     name="line_title_input"
                     id="line_title_input"
                     class="text_inputs"
-                    value=""
+                    value="Total Reported Cases"
                     placeholder="Enter text..."
                   />
                 </label>
@@ -117,7 +223,7 @@
                     name="line_xaxis_title_input"
                     id="line_xaxis_title_input"
                     class="text_inputs"
-                    value=""
+                    value="Days"
                     placeholder="Enter text..."
                   />
                 </label>
@@ -130,7 +236,7 @@
                     name="line_yaxis_title_input"
                     id="line_yaxis_title_input"
                     class="text_inputs"
-                    value=""
+                    value="Cases"
                     placeholder="Enter text..."
                   />
                 </label>
@@ -182,7 +288,7 @@
                   type="range"
                   min="1"
                   max="11"
-                  value="2"
+                  value="1"
                   name="line_width_slider"
                   id="line_width_slider"
                   class="slider"
@@ -214,38 +320,12 @@
                 /></label>
               </div>
               <div class="col-4 col-c">
-                <label for="line_datapoint_checkbox"
-                  >Datapoints
-                  <input
-                    type="checkbox"
-                    name="line_datapoint_checkbox"
-                    id="line_datapoint_checkbox"
-                    checked
-                /></label>
-              </div>
-              <div class="col-4 col-c"></div>
-            </div>
-            <div class="row">
-              <div class="col-4 col-c">
-                <label for="line_grid_checkbox"
-                  >Grid
-                  <input
-                    type="checkbox"
-                    name="line_grid_checkbox"
-                    id="line_grid_checkbox"
-                    checked
-                    disabled
-                  />
-                </label>
-              </div>
-              <div class="col-4 col-c">
                 <label for="line_xaxis_grid_checkbox"
                   >x-Axis Grid
                   <input
                     type="checkbox"
                     name="line_xaxis_grid_checkbox"
                     id="line_xaxis_grid_checkbox"
-                    checked
                   />
                 </label>
               </div>
@@ -263,14 +343,14 @@
             </div>
             <div class="row">
               <div class="col-4 col-c">
-                <label for="line_hover_checkbox"
-                  >Hover
+                <label for="line_datapoint_checkbox"
+                  >Datapoints
                   <input
                     type="checkbox"
-                    name="line_hover_checkbox"
-                    id="line_hover_checkbox"
-                  />
-                </label>
+                    name="line_datapoint_checkbox"
+                    id="line_datapoint_checkbox"
+                    checked
+                /></label>
               </div>
               <div class="col-4 col-c">
                 <label for="line_xaxis_line_checkbox"
@@ -290,10 +370,23 @@
                     type="checkbox"
                     name="line_yaxis_line_checkbox"
                     id="line_yaxis_line_checkbox"
-                    checked
                   />
                 </label>
               </div>
+            </div>
+            <div class="row">
+              <div class="col-4 col-c">
+                <label for="line_hover_checkbox"
+                  >Hover
+                  <input
+                    type="checkbox"
+                    name="line_hover_checkbox"
+                    id="line_hover_checkbox"
+                  />
+                </label>
+              </div>
+              <div class="col-4 col-c"></div>
+              <div class="col-4 col-c"></div>
             </div>
             <div class="row">
               <h6>Colors</h6>
@@ -305,17 +398,7 @@
                 <input
                   name="line_background_cp"
                   id="line_background_cp"
-                  value="rgba(245,245,245,1)"
-                />
-              </div>
-              <div class="col-4 col-c">
-                <div class="row">
-                  <label for="line_color_cp">Line</label>
-                </div>
-                <input
-                  name="line_color_cp"
-                  id="line_color_cp"
-                  value="rgba(245,245,245,1)"
+                  value="rgb(84, 81, 93)"
                 />
               </div>
               <div class="col-4 col-c">
@@ -325,9 +408,10 @@
                 <input
                   name="line_tick_cp"
                   id="line_tick_cp"
-                  value="rgb(130, 130, 130)"
+                  value="rgb(238, 238, 238)"
                 />
               </div>
+              <div class="col-4 col-c"></div>
             </div>
             <div class="row">
               <div class="col-4 col-c">
@@ -337,7 +421,7 @@
                 <input
                   name="line_title_cp"
                   id="line_title_cp"
-                  value="rgb(103, 103, 103)"
+                  value="rgb(255, 255, 255)"
                 />
               </div>
 
@@ -348,7 +432,7 @@
                 <input
                   name="line_xaxis_title_cp"
                   id="line_xaxis_title_cp"
-                  value="rgb(103, 103, 103)"
+                  value="rgb(255, 255, 255)"
                 />
               </div>
               <div class="col-4 col-c">
@@ -358,7 +442,7 @@
                 <input
                   name="line_yaxis_title_cp"
                   id="line_yaxis_title_cp"
-                  value="rgb(103, 103, 103)"
+                  value="rgb(255, 255, 255)"
                 />
               </div>
             </div>
@@ -370,7 +454,7 @@
                 <input
                   name="line_grid_cp"
                   id="line_grid_cp"
-                  value="rgba(0, 0, 0, 0.108)"
+                  value="rgba(255, 255, 255, 0.337)"
                 />
               </div>
 
@@ -381,7 +465,7 @@
                 <input
                   name="line_xaxis_line_cp"
                   id="line_xaxis_line_cp"
-                  value="rgb(211, 211, 211)"
+                  value="rgb(255, 255, 255)"
                 />
               </div>
               <div class="col-4 col-c">
@@ -403,7 +487,7 @@
                 <input
                   name="line_datapoint_cp"
                   id="line_datapoint_cp"
-                  value="rgba(245,245,245,1)"
+                  value="rgba(255, 255, 255, 0)"
                 />
               </div>
               <div class="col-4 col-c">
@@ -413,7 +497,49 @@
                 <input
                   name="line_datapoint_border_cp"
                   id="line_datapoint_border_cp"
-                  value="rgba(245,245,245,1)"
+                  value="rgb(255, 255, 255)"
+                />
+              </div>
+              <div class="col-4 col-c">
+                <div class="row">
+                  <label for="line_area_cp">Line Area</label>
+                </div>
+                <input
+                  name="line_area_cp"
+                  id="line_area_cp"
+                  value="rgb(245, 245, 245)"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4 col-c">
+                <div class="row">
+                  <label for="line_color_cp1">Line 1</label>
+                </div>
+                <input
+                  name="line_color_cp1"
+                  id="line_color_cp1"
+                  value="rgb(250, 250, 250)"
+                />
+              </div>
+              <div class="col-4 col-c">
+                <div class="row">
+                  <label for="line_color_cp2">Line 2</label>
+                </div>
+                <input
+                  name="line_color_cp2"
+                  id="line_color_cp2"
+                  value="rgb(250, 250, 250)"
+                />
+              </div>
+              <div class="col-4 col-c">
+                <div class="row">
+                  <label for="line_color_cp3">Line 3</label>
+                </div>
+                <input
+                  name="line_color_cp3"
+                  id="line_color_cp3"
+                  value="rgb(250, 250, 250)"
                 />
               </div>
             </div>
@@ -422,11 +548,7 @@
             <input type="submit" value="Preview" id="form_submit_button" />
           </div>
         </div>
-
-        <div
-          class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12 mb-5"
-          id="graph_container"
-        >
+        <div class="col-lg-5 col-sm-12 mb-5" id="graph_container">
           <div class="row">
             <div id="line_chart_div"></div>
           </div>
@@ -438,16 +560,40 @@
               <input type="checkbox" min="1" max="5" value="5" />
             </div>
             <div class="col-1">
-              <label for="">Sorted</label>
+              <label for="line_area_checkbox">Area</label>
             </div>
             <div class="col-2">
-              <input type="checkbox" disabled />
+              <input
+                type="checkbox"
+                name="line_area_checkbox"
+                id="line_area_checkbox"
+              />
             </div>
             <div class="col-1">
-              <label for="">Lines</label>
+              <label for="line_amount_input">Lines</label>
             </div>
             <div class="col-2">
-              <input type="number" min="1" max="5" value="1" />
+              <input
+                type="number"
+                name="line_amount_input"
+                id="line_amount_input"
+                min="1"
+                max="3"
+                value="1"
+              />
+            </div>
+            <div class="col-1">
+              <label for="line_theme_input">Theme</label>
+            </div>
+            <div class="col-2">
+              <input
+                type="number"
+                name="line_theme_input"
+                id="line_theme_input"
+                min="1"
+                max="3"
+                value="1"
+              />
             </div>
           </div>
         </div>

@@ -23,154 +23,112 @@
   </head>
   <body></body>
   <script>
-    function makeData(x, num) {
-      let arr = [];
-      let objNum = num + 1;
-      for (let i = 1; i < objNum; i++) {
-        let obj = {
-          [x]: Math.floor(Math.random() * 11 + 1),
-        };
-        arr.push(obj);
+    function createData() {
+      function makeDateArray() {
+        let arr = [];
+        let startDate = new Date("2020-01-01"); //YYYY-MM-DD
+        let endDate = new Date("2020-03-01"); //YYYY-MM-DD
+
+        while (startDate <= endDate) {
+          arr.push(new Date(startDate));
+          startDate.setDate(startDate.getDate() + 1);
+        }
+        return arr;
       }
-      return arr;
+      let dates = makeDateArray();
+
+      let data = dates.map(function (x) {
+        return {
+          date: x,
+          num: Math.floor(Math.random() * 101),
+        };
+      });
+      return data;
     }
 
-    const data = makeData("x", 10);
+    const data = createData();
 
-    const margin = { top: 80, right: 50, bottom: 100, left: 70 },
-      width = 630 - margin.left - margin.right,
-      height = 528 - margin.top - margin.bottom;
+    const margin = { top: 80, right: 50, bottom: 80, left: 80 },
+      width = 600 - margin.left - margin.right,
+      height = 480 - margin.top - margin.bottom;
 
     const svg = d3
       .select("body")
       .append("svg")
-      .attr("id", "bar_chart")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .style("background-color", "rgb(49, 49, 49)");
+      .attr("id", "line_chart")
+      .attr("width", `${width + margin.left + margin.right}`)
+      .attr("height", `${height + margin.top + margin.bottom}`);
 
     const g = svg
       .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    const xScale = d3
-      .scaleLinear()
-      .domain([
-        0,
-        d3.max(data, function (d) {
-          return d.x;
-        }),
-      ])
-      .range([0, width]);
-
-    const yScale = d3
-      .scaleBand()
-      .domain(d3.range(0, data.length))
-      .range([height, 0])
-      .padding(0.4);
-
-    const xAxis = g
-      .append("g")
-      .attr("id", "x_axis")
-      .attr("transform", `translate(0, ${height})`)
-      .call(d3.axisBottom(xScale));
-
-    const yAxis = g.append("g").attr("id", "y_axis").call(d3.axisLeft(yScale));
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
     const title = g
       .append("text")
-      .attr("x", 5 * 20)
+      .attr("x", width / 2)
       .attr("y", 0 - margin.top / 2)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
-      .attr("fill", "rgb(255, 255, 255)")
-      .text("Times I've Been Cat Called");
+      .attr("fill", "rgb(103, 103, 103)")
+      .text("Weather");
 
     const xTitle = g
       .append("text")
-      .attr("x", 2 * 20)
+      .attr("x", 13 * 20)
       .attr("y", height + margin.top - 30)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
-      .attr("fill", "rgb(243, 246, 244)")
-      .text("Times");
+      .attr("fill", "rgb(103, 103, 103)")
+      .text("Weeks");
 
     const yTitle = g
       .append("text")
       .attr("y", -40)
-      .attr("x", -14 * 20)
+      .attr("x", -9 * 20)
       .style("transform", "rotate(270deg)")
       .attr("font-size", "0.9em")
       .attr("text-anchor", "middle")
-      .attr("fill", "rgb(243, 246, 244)")
-      .text("Weeks");
+      .attr("fill", "rgb(103, 103, 103)")
+      .text("Temperature");
 
-    function make_x_gridlines() {
-      return d3.axisBottom(xScale).ticks();
-    }
+    const xScale = d3
+      .scaleTime()
+      .domain(
+        d3.extent(data, function (d) {
+          return d.date;
+        })
+      )
+      .range([0, width]);
+    const yScale = d3
+      .scaleLinear()
+      .domain([
+        0,
+        d3.max(data, function (d) {
+          return d.num;
+        }),
+      ])
+      .range([height, 0]);
 
-    const xGrid = g.append("g").attr("class", "grid");
-
-    xGrid
-      .attr("id", "x_grid")
-      .attr("class", "grid")
+    const xAxis = g
+      .append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(make_x_gridlines().tickSize(-height).tickFormat(""));
+      .call(d3.axisBottom(xScale));
+    const yAxis = g.append("g").call(d3.axisLeft(yScale));
 
-    function make_y_gridlines() {
-      return d3.axisLeft(yScale).ticks();
-    }
-
-    const yGrid = g.append("g").attr("class", "grid");
-
-    yGrid
-      .attr("id", "y_grid")
-      .attr("class", "grid")
-      .call(make_y_gridlines().tickSize(-width).tickFormat(""));
-
-    const bars = g.selectAll("rect").data(data);
-
-    bars.exit().remove();
-
-    bars
-      .enter()
-      .append("rect")
-      .attr("class", "bars")
-      .attr("height", yScale.bandwidth())
-      .attr("width", function (d, i) {
-        return xScale(d.x);
+    const line = d3
+      .line()
+      .x(function (d) {
+        return xScale(d.date);
       })
-      .attr("y", function (d, i) {
-        return yScale(i);
-      })
-
-      .attr("stroke", "rgba(255, 255, 255, 0.672)")
-      .attr("fill", "rgba(143, 255, 133, 0.46)")
-      .on("mouseover", function (d, i) {
-        d3.select(this).attr("opacity", "0.7");
-      })
-      .on("mouseout", function (d, i) {
-        d3.select(this).attr("opacity", "1");
+      .y(function (d) {
+        return yScale(d.num);
       });
 
-    d3.selectAll(".grid > g > line").attr(
-      "stroke",
-      "rgba(255, 255, 255, 0.108)"
-    );
-    d3.selectAll(".tick > text").style("fill", "rgb(255, 255, 255)");
-    d3.select("#x_axis > path").style("stroke", "rgb(211, 211, 211)");
-    d3.select("#y_axis > path").style("stroke", "rgb(211, 211, 211)");
-    d3.selectAll("#x_axis >.tick>line").style("display", "none");
-    d3.selectAll("#y_axis >.tick>line").style("display", "none");
-    d3.select("#x_grid > g:nth-child(2) > line").attr(
-      "stroke",
-      "rgba(0,0,0,0)"
-    );
-    d3.select("#y_grid > g:nth-child(1) > line").attr(
-      "stroke",
-      "rgba(0,0,0,0)"
-    );
-    d3.select("#x_grid > path").attr("stroke", "rgba(0,0,0,0)");
-    d3.select("#y_grid > path").attr("stroke", "rgba(0,0,0,0)");
+    g.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", line)
+      .attr("stroke", "red")
+      .attr("fill", "none");
   </script>
 </html>

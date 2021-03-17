@@ -63,12 +63,6 @@
   </div>
 
   <nav class="navbar">
-    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
-      <a href="./bar_chart.html">BAR CHART</a>
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
-      <a href="./pie_chart.html">PIE CHART</a>
-    </div>
     <div class="col-lg-4 col-md-4 col-sm-12 text-center">
       <img
         src="https://raw.githubusercontent.com/d3/d3-logo/master/d3.svg"
@@ -79,6 +73,13 @@
       />
     </div>
     <div class="col-lg-2 col-md-2 col-sm-12 text-center">
+      <a href="./bar_chart.html">BAR CHART</a>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
+      <a href="./pie_chart.html" class="selected">PIE CHART</a>
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-12 text-center">
       <a href="./line_chart.html">LINE CHART</a>
     </div>
     <div class="col-lg-2 col-md-2 col-sm-12 text-center">
@@ -88,11 +89,8 @@
 
   <body>
     <div class="container" id="main_container">
-      <div class="row">
-        <div
-          class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12 mb-5"
-          id="form_container"
-        >
+      <div class="row justify-content-around">
+        <div class="col-lg-5 col-sm-12 mb-5" id="form_container">
           <form action="#" id="form">
             <div class="row">
               <h6>Titles</h6>
@@ -206,10 +204,7 @@
           </div>
         </div>
 
-        <div
-          class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12 mb-5"
-          id="graph_container"
-        >
+        <div class="col-lg-5 col-sm-12 mb-5" id="graph_container">
           <div class="row">
             <div id="pie_chart_div"></div>
           </div>

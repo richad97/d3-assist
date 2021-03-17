@@ -31,6 +31,9 @@ const lineYAxisLineCheckbox = document.querySelector(
 );
 const lineHoverCheckbox = document.querySelector("#line_hover_checkbox");
 
+const lineAreaCheckbox = document.querySelector("#line_area_checkbox");
+const lineAmountInput = document.querySelector("#line_amount_input");
+
 let lineTitleInputValue = lineTitleInput.value;
 let lineXAxisTitleInputValue = lineXAxisTitleInput.value;
 let lineYAxisTitleInputValue = lineYAxisTitleInput.value;
@@ -43,37 +46,96 @@ let linePointRadiusSliderValue = linePointRadiusSlider.value;
 
 let lineTooltipCheckboxValue = "unchecked";
 let lineDatapointCheckboxValue = "checked";
-let lineXAxisGridCheckboxValue = "checked";
+let lineXAxisGridCheckboxValue = "unchecked";
 let lineYAxisGridCheckboxValue = "checked";
 let lineXAxisLineCheckboxValue = "checked";
-let lineYAxisLineCheckboxValue = "checked";
+let lineYAxisLineCheckboxValue = "unchecked";
 let lineHoverCheckboxValue = "unchecked";
 
-let lineBackgroudCPValue = "rgba(255,255,255,1)";
-let lineCPValue = "rgba(249, 203, 156, 0.46)";
-let lineTickCPValue = "rgba(42, 42, 42, 0.187)";
-let lineTitleCPValue = "rgb(103, 103, 103)";
-let lineXAxisTitleCPValue = "rgb(103, 103, 103)";
-let lineYAxisTitleCPValue = "rgb(103, 103, 103)";
-let lineGridCPValue = "rgba(0, 0, 0, 0.108)";
-let lineXAxisLineCPValue = "rgb(211, 211, 211)";
+let lineBackgroundCPValue = "rgb(84, 81, 93)";
+let lineCPValue1 = "rgb(250, 250, 250)";
+let lineCPValue2 = "rgb(250, 250, 250)";
+let lineCPValue3 = "rgb(250, 250, 250)";
+let lineTickCPValue = "rgb(238, 238, 238)";
+let lineTitleCPValue = "rgb(255, 255, 255)";
+let lineXAxisTitleCPValue = "rgb(255, 255, 255)";
+let lineYAxisTitleCPValue = "rgb(255, 255, 255)";
+let lineGridCPValue = "rgba(255, 255, 255, 0.337)";
+let lineXAxisLineCPValue = "rgb(255, 255, 255)";
 let lineYAxisLineCPValue = "rgb(211, 211, 211)";
-let lineDatapointCPValue = "rgb(130, 130, 130)";
-let lineDatapointBorderCPValue = "rgb(130, 130, 130)";
+let lineDatapointCPValue = "rgba(255, 255, 255, 0)";
+let lineDatapointBorderCPValue = "rgba(255, 255, 255, 1)";
+let lineAreaCPValue = "rgba(245, 245, 245, 0.2)";
+
+let lineAreaCheckboxValue = "unchecked";
+let lineAmountInputValue = lineAmountInput.value;
+
+responsiveLineChart(
+  lineTitleInputValue,
+  lineXAxisTitleInputValue,
+  lineYAxisTitleInputValue,
+  lineTitleSliderValue,
+  lineXAxisTitleSliderValue,
+  lineYAxisTitleSliderValue,
+  lineWidthSliderValue,
+  linePointRadiusSliderValue,
+  lineTooltipCheckboxValue,
+  lineDatapointCheckboxValue,
+  lineXAxisGridCheckboxValue,
+  lineYAxisGridCheckboxValue,
+  lineXAxisLineCheckboxValue,
+  lineYAxisLineCheckboxValue,
+  lineHoverCheckboxValue,
+  lineBackgroundCPValue,
+  lineCPValue1,
+  lineCPValue2,
+  lineCPValue3,
+  lineTickCPValue,
+  lineTitleCPValue,
+  lineXAxisTitleCPValue,
+  lineYAxisTitleCPValue,
+  lineGridCPValue,
+  lineXAxisLineCPValue,
+  lineYAxisLineCPValue,
+  lineDatapointCPValue,
+  lineDatapointBorderCPValue,
+  lineAreaCPValue
+);
+
+d3.select("#line_area").attr("display", "none");
+
+d3.select("#line1").attr("display", "");
+d3.select("#line2").attr("display", "none");
+d3.select("#line3").attr("display", "none");
+
+document.getElementById("line_title_span").innerHTML = lineTitleInputValue;
+document.getElementById(
+  "line_x_title_span"
+).innerHTML = lineXAxisTitleInputValue;
+document.getElementById(
+  "line_y_title_span"
+).innerHTML = lineYAxisTitleInputValue;
 
 lineTitleInput.addEventListener("keyup", function () {
   d3.select("#line_title").text(lineTitleInput.value);
   lineTitleInputValue = lineTitleInput.value;
+  document.getElementById("line_title_span").innerHTML = lineTitleInputValue;
 });
 
 lineXAxisTitleInput.addEventListener("keyup", function () {
   d3.select("#line_xaxis_title").text(lineXAxisTitleInput.value);
   lineXAxisTitleInputValue = lineXAxisTitleInput.value;
+  document.getElementById(
+    "line_x_title_span"
+  ).innerHTML = lineXAxisTitleInputValue;
 });
 
 lineYAxisTitleInput.addEventListener("keyup", function () {
   d3.select("#line_yaxis_title").text(lineYAxisTitleInput.value);
   lineYAxisTitleInputValue = lineYAxisTitleInput.value;
+  document.getElementById(
+    "line_y_title_span"
+  ).innerHTML = lineYAxisTitleInputValue;
 });
 
 lineTitleSlider.addEventListener("mousedown", function () {
@@ -191,6 +253,38 @@ lineHoverCheckbox.addEventListener("change", function () {
   }
 });
 
+lineAmountInput.addEventListener("change", function () {
+  if (lineAmountInput.value == 1) {
+    console.log(1);
+    d3.select("#line1").attr("display", "");
+    d3.select("#line2").attr("display", "none");
+    d3.select("#line3").attr("display", "none");
+  } else if (lineAmountInput.value == 2) {
+    console.log(2);
+    d3.select("#line1").attr("display", "");
+    d3.select("#line2").attr("display", "");
+    d3.select("#line3").attr("display", "none");
+  } else if (lineAmountInput.value == 3) {
+    console.log(3);
+    d3.select("#line1").attr("display", "");
+    d3.select("#line2").attr("display", "");
+    d3.select("#line3").attr("display", "");
+  }
+});
+
+lineAreaCheckbox.addEventListener("change", function () {
+  if (this.checked) {
+    lineAmountInputValue = 1;
+    lineAmountInput.value = 1;
+    lineAmountInput.disabled = true;
+    d3.select("#line2").attr("display", "none");
+    d3.select("#line3").attr("display", "none");
+    d3.select("#line_area").attr("display", "");
+  } else if (this.checked === false) {
+    d3.select("#line_area").attr("display", "none");
+    lineAmountInput.disabled = false;
+  }
+});
 //  Color Picker Input - Spectrum
 $("#line_background_cp").spectrum({
   type: "color",
@@ -201,20 +295,46 @@ $("#line_background_cp").spectrum({
   move: function (color) {
     d3.select("svg").style("background-color", color.toRgbString());
 
-    lineBackgroudCPValue = color.toRgbString();
+    lineBackgroundCPValue = color.toRgbString();
   },
 });
 
-$("#line_color_cp").spectrum({
+$("#line_color_cp1").spectrum({
   type: "color",
   preferredFormat: "rgb",
   showInput: true,
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.selectAll(".line").style("stroke", color.toRgbString());
+    d3.select("#line1").style("stroke", color.toRgbString());
 
-    lineCPValue = color.toRgbString();
+    lineCPValue1 = color.toRgbString();
+  },
+});
+
+$("#line_color_cp2").spectrum({
+  type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
+  move: function (color) {
+    d3.select("#line2").style("stroke", color.toRgbString());
+
+    lineCPValue2 = color.toRgbString();
+  },
+});
+
+$("#line_color_cp3").spectrum({
+  type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
+  move: function (color) {
+    d3.select("#line3").style("stroke", color.toRgbString());
+
+    lineCPValue3 = color.toRgbString();
   },
 });
 $("#line_tick_cp").spectrum({
@@ -326,4 +446,15 @@ $("#line_datapoint_border_cp").spectrum({
   },
 });
 
-responsiveLineChart();
+$("#line_area_cp").spectrum({
+  type: "color",
+  preferredFormat: "rgb",
+  showInput: true,
+  showButtons: false,
+  allowEmpty: false,
+  move: function (color) {
+    d3.select("#line_area").style("fill", color.toRgbString());
+
+    lineAreaCPValue = color.toRgbString();
+  },
+});
