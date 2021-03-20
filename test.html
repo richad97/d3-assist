@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .bar_tooltip {
+      .line_tooltip {
         position: absolute;
         display: none;
         min-width: 80px;
@@ -26,8 +26,8 @@
     function createData() {
       function makeDateArray() {
         let arr = [];
-        let startDate = new Date("2020-01-01"); //YYYY-MM-DD
-        let endDate = new Date("2020-03-01"); //YYYY-MM-DD
+        let startDate = new Date("2020-01-02"); //YYYY-MM-DD
+        let endDate = new Date("2020-01-22"); //YYYY-MM-DD
 
         while (startDate <= endDate) {
           arr.push(new Date(startDate));
@@ -36,11 +36,14 @@
         return arr;
       }
       let dates = makeDateArray();
-
+      let i = 1;
       let data = dates.map(function (x) {
+        i += 30;
         return {
           date: x,
-          num: Math.floor(Math.random() * 101),
+          num1: Math.floor(Math.random() * 101 + i++),
+          num2: Math.floor(Math.random() * 101 + i++),
+          num3: Math.floor(Math.random() * 101 + i++),
         };
       });
       return data;
@@ -57,7 +60,8 @@
       .append("svg")
       .attr("id", "line_chart")
       .attr("width", `${width + margin.left + margin.right}`)
-      .attr("height", `${height + margin.top + margin.bottom}`);
+      .attr("height", `${height + margin.top + margin.bottom}`)
+      .style("background-color", "rgb(84, 81, 93)");
 
     const g = svg
       .append("g")
@@ -65,12 +69,12 @@
 
     const title = g
       .append("text")
-      .attr("x", width / 2)
+      .attr("x", 13 * 20)
       .attr("y", 0 - margin.top / 2)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
-      .attr("fill", "rgb(103, 103, 103)")
-      .text("Weather");
+      .attr("fill", "rgb(255, 255, 255)")
+      .text("Total Reported Cases");
 
     const xTitle = g
       .append("text")
@@ -78,8 +82,8 @@
       .attr("y", height + margin.top - 30)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
-      .attr("fill", "rgb(103, 103, 103)")
-      .text("Weeks");
+      .attr("fill", "rgb(255, 255, 255)")
+      .text("Days");
 
     const yTitle = g
       .append("text")
@@ -88,8 +92,8 @@
       .style("transform", "rotate(270deg)")
       .attr("font-size", "0.9em")
       .attr("text-anchor", "middle")
-      .attr("fill", "rgb(103, 103, 103)")
-      .text("Temperature");
+      .attr("fill", "rgb(255, 255, 255)")
+      .text("Cases");
 
     const xScale = d3
       .scaleTime()
@@ -104,31 +108,71 @@
       .domain([
         0,
         d3.max(data, function (d) {
-          return d.num;
+          return d.num1;
         }),
       ])
       .range([height, 0]);
 
     const xAxis = g
       .append("g")
+      .attr("id", "x_axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(xScale));
-    const yAxis = g.append("g").call(d3.axisLeft(yScale));
 
-    const line = d3
+    const yAxis = g.append("g").attr("id", "y_axis").call(d3.axisLeft(yScale));
+
+    function make_y_gridlines() {
+      return d3.axisLeft(yScale).ticks();
+    }
+
+    const yGrid = g
+      .append("g")
+      .attr("class", "grid")
+      .attr("id", "y_grid")
+      .call(make_y_gridlines().tickSize(-width).tickFormat(""));
+
+    const line1 = d3
       .line()
       .x(function (d) {
         return xScale(d.date);
       })
       .y(function (d) {
-        return yScale(d.num);
+        return yScale(d.num1);
       });
 
     g.append("path")
       .data([data])
       .attr("class", "line")
-      .attr("d", line)
-      .attr("stroke", "red")
+      .attr("d", line1)
+      .attr("stroke", "rgb(250, 250, 250)")
+      .attr("stroke-width", `${1 * 0.5}px`)
       .attr("fill", "none");
+
+    const area = d3
+      .area()
+      .x((d) => xScale(d.date))
+      .y0(yScale(0))
+      .y1((d) => yScale(d.num1));
+
+    const lineArea = g
+      .append("path")
+      .datum(data)
+      .attr("id", "line_area")
+      .attr("fill", "rgba(245, 245, 245, 0.2)")
+      .attr("d", area);
+
+    d3.select("#y_axis > path").attr("display", "none");
+
+    d3.selectAll("#x_axis >.tick>line").style("display", "none");
+    d3.selectAll("#y_axis >.tick>line").style("display", "none");
+    d3.select("#x_grid > path").attr("stroke", "rgba(0,0,0,0)");
+    d3.select("#y_grid > path").attr("stroke", "rgba(0,0,0,0)");
+    d3.selectAll(".tick > text").style("fill", "rgb(238, 238, 238)");
+    d3.selectAll(".grid > g > line").attr(
+      "stroke",
+      "rgba(255, 255, 255, 0.337)"
+    );
+    d3.select("#x_axis > path").style("stroke", "rgb(255, 255, 255)");
+    d3.select("#y_axis > path").style("stroke", "rgb(211, 211, 211)");
   </script>
 </html>

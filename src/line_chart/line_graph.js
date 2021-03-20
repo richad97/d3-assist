@@ -57,7 +57,7 @@ export function responsiveLineChart(
 
   const data = createData();
 
-  const margin = { top: 80, right: 50, bottom: 80, left: 80 };
+  const margin = { top: 80, right: 40, bottom: 80, left: 80 };
 
   const svg = d3
     .select("#line_chart_div")

@@ -2,6 +2,7 @@
 let formSubmitButton = document.querySelector("#form_submit_button");
 let overlayCloseButton = document.querySelector("#overlay_close_button");
 let navPieChartButton = document.querySelector("#nav_pie_chart_button");
+let overlayButtonTab = document.querySelector("#overlay_button_tab");
 
 formSubmitButton.addEventListener("click", function () {
   $("#overlay").fadeIn();
@@ -29,3 +30,8 @@ document
   .addEventListener("click", function () {
     copyDivToClipboard();
   });
+
+overlayButtonTab.addEventListener("click", function () {
+  console.log("yes");
+  window.open("./test.html");
+});
