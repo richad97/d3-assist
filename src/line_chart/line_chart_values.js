@@ -37,7 +37,7 @@ export let lineValues = {
   yAxisLineCheckbox: "unchecked",
   hoverCheckbox: "unchecked",
 
-  backgroundCP: "rgb(84, 81, 93)",
+  backgroundCP: "rgba(0, 0, 0, 0.55)",
   lineCP1: "rgb(250, 250, 250)",
   lineCP2: "rgb(250, 250, 250)",
   lineCP3: "rgb(250, 250, 250)",

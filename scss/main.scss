@@ -1,12 +1,23 @@
 //colors
 $background: rgba(132, 187, 243, 1);
-$formBackground: rgb(247, 247, 247);
+$containerBackground: rgba(247, 247, 247, 0.9);
 $formRowTitles: rgba(0, 0, 0, 0.5);
-$formLabelBackground: rgb(255, 255, 255);
-$labelBorders: 1px solid rgba(0, 0, 0, 0.02);
+$labelBackground: rgb(255, 255, 255);
+$labelHover: rgba(248, 248, 248, 1);
+$labelBorders: 1px solid rgba(0, 0, 0, 0.03);
 $labelFontColor: rgba(0, 0, 0, 0.5);
-$navColor: rgba(255, 255, 255, 0);
+$navColor: rgba(0, 0, 0, 0.626);
+$navFont: rgb(215, 215, 215);
 
+body {
+  height: 100vh;
+  //background-color: $background;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(200, 200, 200),
+    rgb(230, 230, 230)
+  );
+}
 //  Custom classes
 .span-c {
   color: red;
@@ -18,14 +29,14 @@ $navColor: rgba(255, 255, 255, 0);
 
 .col-c {
   text-align: center;
-  background-color: $formLabelBackground;
+  background-color: $labelBackground;
   border: $labelBorders;
   transition: background-color 0.25s ease-in-out;
   padding: 0;
 }
 
 .col-c:hover {
-  background-color: rgb(249, 249, 249);
+  background-color: $labelHover;
   border-color: rgb(240, 240, 240);
 }
 
@@ -113,9 +124,9 @@ nav {
 
 a {
   text-decoration: none;
-  color: rgb(148, 148, 148);
+  color: $navFont;
   font-size: 1em;
-  font-weight: normal;
+  font-weight: lighter;
 }
 
 a:hover {
@@ -132,23 +143,11 @@ a:hover {
   height: 35em;
 }
 
-body {
-  height: 100vh;
-  //background-color: $background;
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(255, 255, 255),
-    rgba(148, 142, 179, 0.902)
-  );
-}
-
 #bar_chart_div,
 #line_chart_div,
 #pie_chart_div {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  background-color: white;
-  box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
   height: 30em;
   padding: 0;
 }
@@ -161,7 +160,7 @@ body {
 #form_container {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  background-color: $formBackground;
+  background-color: $containerBackground;
   box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
   height: 33em;
   width: 48%;
@@ -171,7 +170,7 @@ body {
 #graph_container {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  background-color: $formBackground;
+  background-color: $containerBackground;
   box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.1);
   height: 33em;
   width: 48%;
@@ -233,6 +232,14 @@ input {
   width: 90%;
   font-size: 0.8em;
   color: rgb(50, 50, 50);
+  //text-align: center;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 1; /* Firefox */
+  text-align: start;
 }
 
 .text_inputs {
@@ -364,10 +371,4 @@ pre {
   cursor: pointer; /* Cursor on hover */
   border-radius: 10px;
   border: 1px solid rgba(220, 220, 220, 0.5);
-}
-
-::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: rgba(0, 0, 0, 0.4);
-  opacity: 1; /* Firefox */
 }

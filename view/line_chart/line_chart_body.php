@@ -6,7 +6,7 @@
             <div class="row">
               <h6>Titles</h6>
               <div class="col-4 col-c">
-                <label for="line_title_input">
+                <label id="line_title_input_label" for="line_title_input">
                   Title
                   <input
                     type="text"
@@ -201,7 +201,7 @@
                 <input
                   name="line_background_cp"
                   id="line_background_cp"
-                  value="rgb(84, 81, 93)"
+                  value="rgba(0, 0, 0, 0.55)"
                 />
               </div>
               <div class="col-4 col-c">

@@ -276,10 +276,11 @@
           </button>
         </div>
         <div class="col-6">
-          <button id="overlay_button_tab" class="overlay_buttons">
-            Preview On New Tab
-          </button>
+            <button id="overlay_button_tab" class="overlay_buttons">
+              Preview On New Tab
+            </button>
         </div>
       </div>
     </div>
   </div>
+

@@ -45,4 +45,5 @@
     <?php require "./view/nav.html";?>
     <?php require "./view/{$page_requested}/{$page_requested}_body.php";?>
 
+
 </html>
