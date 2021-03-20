@@ -94,7 +94,7 @@
 
 nav {
   height: 8vh;
-  background-color: rgba(50, 47, 64, 0.902);
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .navbar {
@@ -104,13 +104,13 @@ nav {
 
 a {
   text-decoration: none;
-  color: #bebebe;
+  color: #949494;
   font-size: 1em;
   font-weight: normal;
 }
 
 a:hover {
-  color: gainsboro;
+  color: white;
 }
 
 .selected {
@@ -124,8 +124,8 @@ a:hover {
 
 body {
   height: 100vh;
-  background-image: -webkit-gradient(linear, left top, right bottom, from(white), to(#948eb3e6));
-  background-image: linear-gradient(to bottom right, white, #948eb3e6);
+  background-image: -webkit-gradient(linear, left top, right bottom, from(white), to(rgba(148, 142, 179, 0.902)));
+  background-image: linear-gradient(to bottom right, white, rgba(148, 142, 179, 0.902));
 }
 
 #bar_chart_div,

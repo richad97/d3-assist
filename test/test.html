@@ -148,18 +148,25 @@
       .attr("stroke-width", `${1 * 0.5}px`)
       .attr("fill", "none");
 
-    const area = d3
-      .area()
-      .x((d) => xScale(d.date))
-      .y0(yScale(0))
-      .y1((d) => yScale(d.num1));
+    const circles = g.selectAll(".circles").data(data);
 
-    const lineArea = g
-      .append("path")
-      .datum(data)
-      .attr("id", "line_area")
-      .attr("fill", "rgba(245, 245, 245, 0.2)")
-      .attr("d", area);
+    circles.exit().remove();
+
+    circles
+      .enter()
+      .append("circle")
+      .attr("class", "circles")
+      .attr("display", "")
+      .attr("r", 6 * 0.5)
+      .attr("cx", function (d, i) {
+        return xScale(d.date);
+      })
+      .attr("cy", function (d, i) {
+        return yScale(d.num1);
+      })
+      .attr("fill", "rgba(255, 255, 255, 0)")
+      .attr("stroke", "rgba(255, 255, 255, 1)")
+      .attr("stroke-width", "1px");
 
     d3.select("#y_axis > path").attr("display", "none");
 
@@ -167,6 +174,7 @@
     d3.selectAll("#y_axis >.tick>line").style("display", "none");
     d3.select("#x_grid > path").attr("stroke", "rgba(0,0,0,0)");
     d3.select("#y_grid > path").attr("stroke", "rgba(0,0,0,0)");
+    d3.select("#y_grid > g:nth-child(2) > line").remove();
     d3.selectAll(".tick > text").style("fill", "rgb(238, 238, 238)");
     d3.selectAll(".grid > g > line").attr(
       "stroke",

@@ -1,4 +1,4 @@
-import { lineValues } from "./line_values.js";
+import { lineValues } from "./line_chart_values.js";
 
 $("#line_background_cp").spectrum({
   type: "color",

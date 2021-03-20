@@ -226,7 +226,6 @@ export function responsiveLineChart(
       .enter()
       .append("circle")
       .attr("class", "circles")
-      .attr("display", "none")
       .attr("r", 3)
       .attr("cx", function (d, i) {
         return xScale(d.date);
@@ -280,7 +279,7 @@ export function responsiveLineChart(
   window.addEventListener("resize", draw);
   loadData();
 
-  document.querySelector("#y_grid > g:nth-child(2) > line").remove();
+  d3.select("#y_grid > g:nth-child(2) > line").remove();
 
   //  init params
   ////  I pass all parameters at the end instead of directly replacing the code above

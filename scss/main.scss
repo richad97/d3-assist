@@ -5,6 +5,7 @@ $formRowTitles: rgba(0, 0, 0, 0.5);
 $formLabelBackground: rgb(255, 255, 255);
 $labelBorders: 1px solid rgba(0, 0, 0, 0.02);
 $labelFontColor: rgba(0, 0, 0, 0.5);
+$navColor: rgba(255, 255, 255, 0);
 
 //  Custom classes
 .span-c {
@@ -103,7 +104,7 @@ $labelFontColor: rgba(0, 0, 0, 0.5);
 // Navs
 nav {
   height: 8vh;
-  background-color: rgba(50, 47, 64, 0.902);
+  background-color: $navColor;
 }
 .navbar {
   padding-left: 4em;
@@ -112,13 +113,13 @@ nav {
 
 a {
   text-decoration: none;
-  color: rgb(190, 190, 190);
+  color: rgb(148, 148, 148);
   font-size: 1em;
   font-weight: normal;
 }
 
 a:hover {
-  color: rgb(220, 220, 220);
+  color: rgb(255, 255, 255);
 }
 
 .selected {
@@ -137,7 +138,7 @@ body {
   background-image: linear-gradient(
     to bottom right,
     rgb(255, 255, 255),
-    #948eb3e6
+    rgba(148, 142, 179, 0.902)
   );
 }
 

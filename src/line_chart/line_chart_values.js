@@ -16,7 +16,7 @@ import {
   lineHoverCheckbox,
   lineAreaCheckbox,
   lineAmountInput,
-} from "./line_inputs.js";
+} from "./line_chart_inputs.js";
 
 export let lineValues = {
   titleInput: lineTitleInput.value,

@@ -16,9 +16,9 @@ import {
   lineHoverCheckbox,
   lineAreaCheckbox,
   lineAmountInput,
-} from "./line_inputs.js";
+} from "./line_chart_inputs.js";
 
-import { lineValues } from "./line_values.js";
+import { lineValues } from "./line_chart_values.js";
 
 lineTitleInput.addEventListener("keyup", function () {
   d3.select("#line_title").text(lineTitleInput.value);
