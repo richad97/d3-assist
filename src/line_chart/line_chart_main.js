@@ -1,3 +1,5 @@
+const d3 = require("d3");
+
 import { responsiveLineChart } from "./line_chart_graph.js";
 import { lineValues } from "./line_chart_values.js";
 import "./line_chart_listeners.js";
@@ -36,7 +38,6 @@ import "../overlay_nav.js";
     lineValues.datapointBorderCP,
     lineValues.areaCP
   );
-
   document.getElementById("line_title_span").innerHTML = lineValues.titleInput;
   document.getElementById("line_x_title_span").innerHTML =
     lineValues.xAxisTitleInput;

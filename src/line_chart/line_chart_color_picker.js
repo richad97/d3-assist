@@ -1,3 +1,5 @@
+const d3 = require("d3");
+
 import { lineValues } from "./line_chart_values.js";
 
 $("#line_background_cp").spectrum({
