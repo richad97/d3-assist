@@ -13,12 +13,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>D3 Assist</title>
-    <link rel="stylesheet" type="text/css" href="./node_modules/spectrum-colorpicker/spectrum.css">
+    <link rel="stylesheet" type="text/css" href="./node_modules/spectrum-colorpicker2/dist/spectrum.css">
     <link rel="stylesheet" href="./scss/main.css" />
 
     <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="./node_modules/spectrum-colorpicker/spectrum.js"></script>
+    <script type="text/javascript" src="./node_modules/spectrum-colorpicker2/dist/spectrum.min.js"></script>
     <script>
       function copyDivToClipboard() {
         var range = document.createRange();

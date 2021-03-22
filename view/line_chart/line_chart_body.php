@@ -189,12 +189,7 @@
                 </label>
               </div>
               <div class="col-4 col-c">
-                <div class="pretty p-default">
-                    <input type="checkbox" />
-                    <div class="state">
-                        <label>Check me</label>
-                    </div>
-                </div>
+
               </div>
               <div class="col-4 col-c"></div>
             </div>
