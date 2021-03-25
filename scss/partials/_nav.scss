@@ -1,0 +1,24 @@
+// Navs
+nav {
+  height: 8vh;
+  background-color: rgba(0, 0, 0, 0.626);
+}
+.navbar {
+  padding-left: 4em;
+  padding-right: 4em;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(215, 215, 215);
+  font-size: 1em;
+  font-weight: lighter;
+}
+
+a:hover {
+  color: rgb(255, 255, 255);
+}
+
+.selected {
+  color: white;
+}

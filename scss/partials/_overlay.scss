@@ -1,0 +1,84 @@
+// Overlay
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+#overlay_main_container {
+  background-color: rgb(235, 235, 235);
+  margin-top: 7em;
+  height: 35em;
+  border-radius: 5px;
+}
+
+#overlay_code_container {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: whitesmoke;
+  height: 23em;
+  width: 95%;
+  margin-left: 2.5%;
+  overflow-y: scroll;
+}
+
+#overlay_close_button {
+  position: absolute;
+  color: gray;
+  font-size: 1.8em;
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+#overlay_header {
+  font-weight: lighter;
+  font-size: 1.9em;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+#overlay_subheader {
+  font-weight: lighter;
+  font-size: 1.1em;
+  margin-bottom: 0.4em;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+#overlay_button_container {
+  margin-top: 1em;
+  height: 4em;
+}
+
+.overlay_buttons {
+  width: 100%;
+  height: 4em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: lighter;
+  font-size: 1.1em;
+  border-radius: 3px;
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.span-c {
+  color: red;
+}
+
+.span-c2 {
+  color: black;
+}
+
+pre {
+  padding-left: 20%;
+  font-size: 0.8em;
+}
+
+.hide_code_template {
+  display: none;
+}
+
+.hide {
+  display: none;
+}

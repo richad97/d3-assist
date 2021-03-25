@@ -1,4 +1,5 @@
 import { barChart } from "./bar_chart_graph.js";
+const d3 = require("d3");
 
 import {
   barTitleInput,

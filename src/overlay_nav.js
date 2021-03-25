@@ -4,11 +4,11 @@ let overlayCloseButton = document.querySelector("#overlay_close_button");
 let navPieChartButton = document.querySelector("#nav_pie_chart_button");
 
 formSubmitButton.addEventListener("click", function () {
-  $("#overlay").fadeIn();
+  $("#overlay").fadeIn(600);
 });
 
 overlayCloseButton.addEventListener("click", function () {
-  $("#overlay").fadeOut();
+  $("#overlay").fadeOut(400);
 });
 
 // navPieChartButton.addEventListener("click", function () {

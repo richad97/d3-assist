@@ -1,18 +1,4 @@
-<div id="overlay">
-    <div class="container" id="overlay_main_container">
-      <p id="overlay_close_button">X</p>
-
-      <div class="row">
-        <div class="col-12 text-center">
-          <p id="overlay_header">Enjoy!</p>
-          <p id="overlay_subheader">Please review your code before copying.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div id="overlay_code_container">
-            <pre><code id="line_chart_template">
-              function createData() {
+<pre><code id="line_chart_template">              function createData() {
                 function makeDateArray() {
                   let arr = [];
                   let startDate = new Date("2020-01-02"); //YYYY-MM-DD
@@ -266,21 +252,3 @@
               d3.select("#y_axis > path").style("stroke", "<span class="span-c" id="line_y_line_cp_span"></span>");
 
             </code></pre>
-          </div>
-        </div>
-      </div>
-      <div class="row" id="overlay_button_container">
-        <div class="col-6">
-          <button id="overlay_button_copy" class="overlay_buttons">
-            Copy To Clipboard
-          </button>
-        </div>
-        <div class="col-6">
-            <button id="overlay_button_tab" class="overlay_buttons">
-              Preview On New Tab
-            </button>
-        </div>
-      </div>
-    </div>
-  </div>
-

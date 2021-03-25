@@ -1,4 +1,5 @@
 import { barValues } from "./bar_chart_values.js";
+const d3 = require("d3");
 
 $("#bar_background_cp").spectrum({
   type: "color",

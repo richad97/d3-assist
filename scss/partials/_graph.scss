@@ -1,0 +1,71 @@
+// Graph related
+#bar_chart_div,
+#line_chart_div,
+#pie_chart_div {
+  height: 30em;
+  padding: 0;
+}
+
+#pie_chart {
+  margin-left: 20%;
+  margin-top: 5%;
+}
+
+.hovered:hover {
+  opacity: 0.7;
+}
+
+.circle_hovered:hover {
+  opacity: 0.4;
+  fill: black;
+}
+
+.grid {
+  color: rgb(214, 214, 214);
+}
+
+.bar_tooltip {
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: none repeat scroll;
+  border: 1px solid #6f257f;
+  padding: 14px;
+  text-align: center;
+  background-color: white;
+  z-index: 1;
+}
+.line_tooltip {
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: none repeat scroll;
+  border: 1px solid #6f257f;
+  padding: 14px;
+  text-align: center;
+  background-color: white;
+  z-index: 1;
+}
+
+#x_axis,
+#y_axis {
+  .tick {
+    line {
+      stroke: none;
+    }
+  }
+}
+
+#x_grid,
+#y_grid {
+  g:nth-child(1) {
+    line {
+      //stroke: none;
+    }
+  }
+  path {
+    stroke: none;
+  }
+}

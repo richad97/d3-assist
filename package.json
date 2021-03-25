@@ -2,11 +2,11 @@
   "name": "d3assist2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/main.js",
   "scripts": {
     "test": "jest",
     "start": "browserify ./src/line_chart/line_chart_main.js > ./bundle.js -t babelify -d",
-    "watch": "watchify ./src/line_chart/line_chart_main.js -o ./bundle.js -t babelify -d -v"
+    "watch": "watchify ./src/main.js -o ./dist/bundle.js -t babelify -d -v"
   },
   "repository": {
     "type": "git",

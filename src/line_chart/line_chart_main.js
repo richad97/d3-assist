@@ -6,7 +6,7 @@ import "./line_chart_listeners.js";
 import "./line_chart_color_picker.js";
 import "../overlay_nav.js";
 
-(function init() {
+export function initLineChart() {
   responsiveLineChart(
     lineValues.titleInput,
     lineValues.xAxisTitleInput,
@@ -98,4 +98,4 @@ import "../overlay_nav.js";
   d3.select("#line1").attr("display", "");
   d3.select("#line2").attr("display", "none");
   d3.select("#line3").attr("display", "none");
-})();
+}
