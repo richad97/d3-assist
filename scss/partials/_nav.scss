@@ -1,8 +1,8 @@
-// Navs
 nav {
   height: 8vh;
   background-color: rgba(0, 0, 0, 0.626);
 }
+
 .navbar {
   padding-left: 4em;
   padding-right: 4em;
@@ -21,4 +21,10 @@ a:hover {
 
 .selected {
   color: white;
+}
+
+@media only screen and (max-width: 992px) {
+  nav {
+    height: 18vh;
+  }
 }

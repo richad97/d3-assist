@@ -1,12 +1,8 @@
 //@import "../node_modules/bootstrap/scss/bootstrap";
 @import "partials/containers", "partials/graph", "partials/input_range",
   "partials/nav", "partials/overlay", "partials/scroller";
-@import "../node_modules/pretty-checkbox/src/pretty-checkbox.scss";
 
-* {
-  font-family: Arial;
-  font-weight: lighter;
-}
+@import "../node_modules/pretty-checkbox/src/pretty-checkbox.scss";
 
 body {
   height: 100vh;
@@ -16,4 +12,48 @@ body {
 .pretty {
   margin-top: 0.8em;
   line-height: 0.84;
+}
+
+h6 {
+  font-size: 1em;
+  font-weight: normal;
+  position: relative;
+  top: 6px;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0 0 15px 0;
+  text-align: start;
+}
+
+label {
+  font-size: 0.9em;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+.text_inputs {
+  height: 2em;
+  border-radius: 2px;
+  border: 1px solid rgba(150, 150, 150, 0.3);
+  width: 90%;
+  font-size: 0.8em;
+  color: rgb(50, 50, 50);
+}
+
+#line_theme_input,
+#line_amount_input {
+  height: 2em;
+  border-radius: 2px;
+  margin-bottom: 5px;
+  border: 1px solid rgba(150, 150, 150, 0.3);
+  width: 90%;
+  font-size: 0.8em;
+  color: rgb(50, 50, 50);
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 1; /* Firefox */
+  text-align: start;
 }

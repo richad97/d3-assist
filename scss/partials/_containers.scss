@@ -1,4 +1,3 @@
-// Main Containers
 #main_container {
   margin-top: 4em;
   height: 35em;
@@ -10,7 +9,7 @@
   border: 1px solid rgba(0, 0, 0, 0.03);
   transition: background-color 0.25s ease-in-out;
   padding: 0;
-  height: 3em;
+  height: 3.25em;
 }
 
 .col-c:hover {
@@ -22,7 +21,6 @@
   background-color: rgba(247, 247, 247, 0.9);
   box-shadow: 18px 5px 50px rgba(0, 0, 0, 0.3);
   height: 33em;
-  padding: 0;
 }
 
 #graph_container {
@@ -66,50 +64,4 @@ form {
 #form_submit_button:hover {
   background-color: rgba(250, 250, 250, 1);
   color: rgb(165, 165, 165);
-}
-
-h6 {
-  font-size: 1em;
-  font-weight: lighter;
-  position: relative;
-  top: 6px;
-  color: rgba(0, 0, 0, 0.5);
-  margin: 0 0 10px 0;
-}
-
-label {
-  font-size: 0.9em;
-  font-weight: lighter;
-  color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  //text-align: center;
-}
-
-.text_inputs {
-  height: 2em;
-  border-radius: 2px;
-  margin-bottom: 5px;
-  border: 1px solid rgba(150, 150, 150, 0.3);
-  width: 90%;
-  font-size: 0.8em;
-  color: rgb(50, 50, 50);
-  //text-align: center;
-}
-
-#line_theme_input,
-#line_amount_input {
-  height: 2em;
-  border-radius: 2px;
-  margin-bottom: 5px;
-  border: 1px solid rgba(150, 150, 150, 0.3);
-  width: 90%;
-  font-size: 0.8em;
-  color: rgb(50, 50, 50);
-}
-
-::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: rgba(0, 0, 0, 0.4);
-  opacity: 1; /* Firefox */
-  text-align: start;
 }
