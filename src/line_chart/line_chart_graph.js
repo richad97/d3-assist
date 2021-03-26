@@ -31,18 +31,19 @@ export function responsiveLineChart(
   lineDatapointBorderCPValue,
   lineAreaCPValue
 ) {
-  function createData() {
-    function makeDateArray() {
-      let arr = [];
-      let startDate = new Date("2020-01-02"); //YYYY-MM-DD
-      let endDate = new Date("2020-01-22"); //YYYY-MM-DD
+  function makeDateArray() {
+    let arr = [];
+    let startDate = new Date("01/02/2020");
+    let endDate = new Date("01/22/2020");
 
-      while (startDate <= endDate) {
-        arr.push(new Date(startDate));
-        startDate.setDate(startDate.getDate() + 1);
-      }
-      return arr;
+    while (startDate <= endDate) {
+      arr.push(new Date(startDate));
+      startDate.setDate(startDate.getDate() + 1);
     }
+    return arr;
+  }
+
+  function createData() {
     let dates = makeDateArray();
     let i = 1;
     let data = dates.map(function (x) {
@@ -62,7 +63,7 @@ export function responsiveLineChart(
   const margin = { top: 80, right: 40, bottom: 80, left: 80 };
 
   const svg = d3
-    .select("#line_chart_div")
+    .select("#graph_div")
     .append("svg")
     .attr("id", "line_chart")
     .attr("width", "100%")
@@ -146,7 +147,7 @@ export function responsiveLineChart(
 
     xAxis
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(xScale));
+      .call(d3.axisBottom(xScale).ticks().tickFormat(d3.timeFormat("%m/%d")));
 
     yAxis.call(d3.axisLeft(yScale));
 

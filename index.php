@@ -72,7 +72,29 @@
 
     <body>
       <div class="container" id="main_container">
-        <?php require "./view/{$page_requested}/{$page_requested}_body.html";?>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="col-lg-12 col-md-12 col-12 mb-5" id="form_container">
+                <?php require "./view/{$page_requested}/{$page_requested}_form.php";?>
+              <div class="row mt-2">
+                <input type="submit" value="Preview" id="form_submit_button" />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="col-lg-12 col-md-12 col-12 mb-5" id="graph_container">
+              <div class="row">
+                <div id="graph_div"></div>
+              </div>
+              <div class="row" id="graph_dimension_div">
+                <?php require "./view/line_chart/line_chart_dimension.html";?>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </body>
 

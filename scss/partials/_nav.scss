@@ -1,6 +1,6 @@
 nav {
-  height: 8vh;
-  background-color: rgba(0, 0, 0, 0.626);
+  height: 4em;
+  background-color: $nav;
 }
 
 .navbar {
@@ -10,13 +10,15 @@ nav {
 
 a {
   text-decoration: none;
-  color: rgb(215, 215, 215);
+  color: $nav_titles;
   font-size: 1em;
   font-weight: lighter;
+  transition-duration: 0.8s;
 }
 
 a:hover {
-  color: rgb(255, 255, 255);
+  color: $nav_titles_hovered;
+  transition-duration: 0.5s;
 }
 
 .selected {
@@ -25,6 +27,6 @@ a:hover {
 
 @media only screen and (max-width: 992px) {
   nav {
-    height: 18vh;
+    height: 10em;
   }
 }
