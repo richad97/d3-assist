@@ -1276,9 +1276,20 @@ body {
 
 .p-form-checkbox {
   margin-top: 1em;
-  margin-left: 5em;
+  margin-left: 8em;
   line-height: 0.84;
-  text-indent: -12.5em;
+  text-indent: -17.2em;
+}
+
+.sec_label_down_i,
+.sec_label_right_i {
+  color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+i {
+  width: 14px;
+  height: 16px;
 }
 
 .color_labels {
@@ -1288,10 +1299,11 @@ body {
   left: 0.5em;
   color: gray;
   width: 70%;
+  text-align: initial;
 }
 
 .sp-replacer {
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.02);
   border-radius: 0;
   width: 20%;
   height: 100%;
@@ -1301,7 +1313,7 @@ body {
 }
 
 .sp-replacer:hover {
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .sp-dd {
@@ -1313,6 +1325,7 @@ h6 {
   font-weight: normal;
   position: relative;
   top: 6px;
+  left: 1.2em;
   color: rgba(0, 0, 0, 0.5);
   margin: 0 0 15px 0;
   text-align: start;
