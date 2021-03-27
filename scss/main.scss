@@ -2,18 +2,19 @@ $nav: rgba(0, 0, 0, 0.626);
 $nav_titles: rgb(200, 200, 200);
 $nav_titles_hovered: rgb(255, 255, 255);
 
-$main_background: rgba(0, 0, 0, 0.347);
+$main_background: rgba(0, 0, 0, 0.2);
 $main_color: rgb(236, 236, 236);
 $sec_color: rgb(255, 255, 255);
 
 $section_label: rgba(0, 0, 0, 0.5);
-$section_label_font_size: 1em;
+$section_label_font_size: 0.9em;
 $input_labels: rgba(0, 0, 0, 0.5);
 $input_labels_font_size: 0.82em;
 
 //@import "../node_modules/bootstrap/scss/bootstrap";
-@import "partials/containers", "partials/graph", "partials/input_range",
-  "partials/nav", "partials/overlay", "partials/scroller";
+@import "partials/containers", "partials/graph", "partials/sliders",
+  "partials/nav", "partials/overlay", "partials/scroller", "partials/checkboxes",
+  "partials/colors", "partials/form", "partials/icons", "partials/titles";
 
 @import "../node_modules/pretty-checkbox/src/pretty-checkbox.scss";
 
@@ -22,71 +23,14 @@ body {
   background-color: $main_background;
 }
 
-.p-dim-checkbox {
-  line-height: 0.7;
-  text-indent: -6em;
-  margin-left: 5em;
-}
-
-.p-form-checkbox {
-  margin-top: 1em;
-  margin-left: 8em;
-  line-height: 0.84;
-  text-indent: -17.2em;
-}
-
-.sec_label_down_i,
-.sec_label_right_i {
-  color: rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-}
-
-i {
-  width: 14px;
-  height: 16px;
-}
-
-.color_labels {
-  //display: none;
-  z-index: 1;
-  position: relative;
-  top: 1em;
-  left: 0.5em;
-  color: hsl(0, 0%, 50%);
-  width: 70%;
-  text-align: initial;
-}
-
-.colors-c {
-  //border: 1px solid rgba(0, 0, 0, 0.02);
-}
-
-.sp-replacer {
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  border-radius: 0;
-  width: 20%;
-  height: 100%;
-  position: relative;
-  bottom: 1.2em;
-  margin-left: 80%;
-}
-
-.sp-replacer:hover {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.sp-dd {
-  display: none;
-}
-
 h6 {
   font-size: $section_label_font_size;
   font-weight: normal;
   position: relative;
   top: 6px;
-  left: 1.2em;
+  left: 1em;
   color: $input_labels;
-  margin: 0 0 15px 0;
+  margin: 0 0 0.9em 0;
   text-align: start;
 }
 
@@ -95,33 +39,4 @@ label {
   font-weight: lighter !important;
   color: $section_label;
   width: 100%;
-}
-
-.text_inputs {
-  height: 2em;
-  border-radius: 2px;
-  border: 1px solid rgba(150, 150, 150, 0.3);
-  width: 90%;
-  font-size: 0.8em;
-  color: rgb(50, 50, 50);
-  outline: none;
-}
-
-#line_theme_input,
-#line_amount_input {
-  height: 2em;
-  border-radius: 2px;
-  margin-bottom: 5px;
-  border: 1px solid rgba(150, 150, 150, 0.3);
-  width: 90%;
-  font-size: 0.8em;
-  color: rgb(50, 50, 50);
-  outline: none;
-}
-
-::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: rgba(0, 0, 0, 0.4);
-  opacity: 1; /* Firefox */
-  text-align: start;
 }

@@ -78,6 +78,7 @@
                   })
                 )
                 .range([0, width]);
+                
               const yScale = d3
                 .scaleLinear()
                 .domain([
@@ -109,8 +110,7 @@
                 .attr("id", "x_grid")
                 .attr("transform", "translate(0," + height + ")")
                 .call(make_x_gridlines().tickSize(-height).tickFormat(""));
-              </span>
-              <span class="span-c" id="line_y_grid_checkbox_span">
+              </span><span class="span-c" id="line_y_grid_checkbox_span">
               function make_y_gridlines() {
                 return d3.axisLeft(yScale).ticks();
               }
@@ -120,8 +120,7 @@
                 .attr("class", "grid")
                 .attr("id", "y_grid")
                 .call(make_y_gridlines().tickSize(-width).tickFormat(""));
-              </span>
-              <span class="span-c" id="line_1_select_span">
+              </span><span class="span-c" id="line_1_select_span">
               const line1 = d3
                 .line()
                 .x(function (d) {
@@ -138,8 +137,7 @@
                 .attr("stroke", "<span class="span-c" id="line_1_cp_span"></span>")
                 .attr("stroke-width", `${<span class="span-c" id="line_1_width_slider_span"></span> * 0.5 }px`)
                 .attr("fill", "none");
-              </span>
-              <span class="span-c" id="line_2_select_span">
+              </span><span class="span-c" id="line_2_select_span">
               const line2 = d3
                 .line()
                 .x(function (d) {
@@ -156,8 +154,7 @@
                 .attr("stroke", "<span class="span-c" id="line_2_cp_span"></span>")
                 .attr("stroke-width", `${<span class="span-c" id="line_2_width_slider_span"></span> * 0.5 }px`)
                 .attr("fill", "none");
-              </span>
-              <span class="span-c" id="line_3_select_span">
+              </span><span class="span-c" id="line_3_select_span">
               const line3 = d3
                 .line()
                 .x(function (d) {
@@ -174,8 +171,7 @@
                 .attr("stroke", "<span class="span-c" id="line_3_cp_span"></span>")
                 .attr("stroke-width", `${<span class="span-c" id="line_3_width_slider_span"></span> * 0.5 }px`)
                 .attr("fill", "none");
-              </span>
-              <span class="span-c" id="line_area_checkbox_span">
+              </span><span class="span-c" id="line_area_checkbox_span">
               const area = d3
                 .area()
                 .x((d) => xScale(d.date))
@@ -188,8 +184,7 @@
                 .attr("id", "line_area")
                 .attr("fill", "<span class="span-c" id="line_area_cp_span"></span>")
                 .attr("d", area);
-              </span>
-              <span class="span-c" id="line_datapoint_checkbox_span">
+              </span><span class="span-c" id="line_datapoint_checkbox_span">
               const circles = g.selectAll(".circles").data(data);
 
               circles.exit().remove();
@@ -215,8 +210,7 @@
                 .on("mouseout", function (d, i) {
                   d3.select(this).attr("opacity", "1");
                 });</span>
-              </span>
-              <span class="span-c" id="line_tooltip_checkbox_span">
+              </span><span class="span-c" id="line_tooltip_checkbox_span">
               let tooltip = d3.select("body").append("div").attr("class", "line_tooltip");
 
               d3.select(".line_tooltip").style("background-color", "white");
@@ -233,12 +227,9 @@
                 .on("mouseout", function (d) {
                   tooltip.style("display", "none");
                 });
-              </span>
-
-              <span class="span-c" id="line_x_line_checkbox_span">
+              </span><span class="span-c" id="line_x_line_checkbox_span">
               d3.select("#x_axis > path").attr("display", "none");
-              </span>
-              <span class="span-c" id="line_y_line_checkbox_span">
+              </span><span class="span-c" id="line_y_line_checkbox_span">
               d3.select("#y_axis > path").attr("display", "none");
               </span>
               d3.selectAll("#x_axis >.tick>line").style("display", "none");
@@ -250,5 +241,4 @@
               d3.selectAll(".grid > g > line").attr("stroke", "<span class="span-c" id="line_grid_cp_span"></span>");
               d3.select("#x_axis > path").style("stroke", "<span class="span-c" id="line_x_line_cp_span"></span>");
               d3.select("#y_axis > path").style("stroke", "<span class="span-c" id="line_y_line_cp_span"></span>");
-
             </code></pre>

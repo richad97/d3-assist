@@ -35,31 +35,3 @@
   padding-left: 1em;
   margin: 0;
 }
-
-form {
-  height: 90%;
-  overflow-x: hidden;
-  .row {
-    margin: 0 5px 0 5px;
-    padding: 0 5px 0 5px;
-  }
-}
-
-#form_submit_button {
-  height: 2.1em;
-  font-size: 1em;
-  font-weight: lighter;
-  background-color: $sec_color;
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  color: rgb(181, 181, 181);
-  outline: none;
-  width: 93.2%;
-  margin-left: 3.3%;
-  transition: background-color 0.3s ease;
-}
-
-#form_submit_button:hover {
-  background-color: rgb(247, 247, 247);
-  color: rgb(165, 165, 165);
-  transition: background-color 0.3s ease;
-}

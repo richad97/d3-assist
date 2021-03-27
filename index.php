@@ -40,9 +40,9 @@
 
     <div id="overlay">
       <div class="container" id="overlay_main_container">
-        <p id="overlay_close_button">X</p>
 
         <div class="row" id="overlay_title_container">
+        <span id="overlay_close_button">X</span>
           <div class="col-12 text-center">
             <p id="overlay_header">Enjoy!</p>
             <p id="overlay_subheader">Please review your code before copying.</p>
@@ -57,14 +57,19 @@
         </div>
         <div class="row" id="overlay_button_container">
           <div class="col-6">
-            <button id="overlay_button_copy" class="overlay_buttons">
-              Copy To Clipboard
-            </button>
+            <div class="col-12">
+              <button id="overlay_button_copy" class="overlay_buttons">
+                Copy To Clipboard
+              </button>
+            </div>
           </div>
+
           <div class="col-6">
-            <button id="overlay_button_tab" class="overlay_buttons">
-              Preview On New Tab
-            </button>
+            <div class="col-12">
+              <button id="overlay_button_tab" class="overlay_buttons">
+                Preview On New Tab
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -78,7 +83,64 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="col-lg-12 col-md-12 col-12 mb-5" id="form_container">
-                <?php require "./view/{$page_requested}/{$page_requested}_form.php";?>
+                <form action="#" id="form" autocomplete="off">
+
+                  <h6>
+                    <i
+                      class="fas fa-chevron-down sec_label_down_i"
+                      id="title_arrow_down_icon"
+                    ></i>
+                    <i
+                      class="fas fa-chevron-right sec_label_right_i"
+                      id="title_arrow_right_icon"
+                    ></i>
+                    Titles
+                  </h6>
+                    <?php require "./view/{$page_requested}/form/{$page_requested}_form_titles.html";?>
+
+                  <h6>
+                    <i
+                      class="fas fa-chevron-down sec_label_down_i"
+                      id="slider_arrow_down_icon"
+                    ></i>
+                    <i
+                      class="fas fa-chevron-right sec_label_right_i"
+                      id="slider_arrow_right_icon"
+                    ></i>
+
+                    Sliders
+                  </h6>
+                    <?php require "./view/{$page_requested}/form/{$page_requested}_form_sliders.html";?>
+
+                  <h6>
+                    <i
+                      class="fas fa-chevron-down sec_label_down_i"
+                      id="checkbox_arrow_down_icon"
+                    ></i>
+                    <i
+                      class="fas fa-chevron-right sec_label_right_i"
+                      id="checkbox_arrow_right_icon"
+                    ></i>
+
+                    Checkboxes
+                  </h6>
+                    <?php require "./view/{$page_requested}/form/{$page_requested}_form_checkboxes.html";?>
+
+                  <h6>
+                    <i
+                      class="fas fa-chevron-down sec_label_down_i"
+                      id="color_arrow_down_icon"
+                    ></i>
+                    <i
+                      class="fas fa-chevron-right sec_label_right_i"
+                      id="color_arrow_right_icon"
+                    ></i>
+
+                    Colors
+                  </h6>
+                    <?php require "./view/{$page_requested}/form/{$page_requested}_form_colors.html";?>
+                    
+                </form>
               <div class="row mt-2">
                 <input type="submit" value="Preview" id="form_submit_button" />
               </div>
@@ -91,7 +153,7 @@
                 <div id="graph_div"></div>
               </div>
               <div class="row" id="graph_dimension_div">
-                <?php require "./view/line_chart/line_chart_dimension.html";?>
+                <?php require "./view/{$page_requested}/{$page_requested}_dimension.html";?>
               </div>
             </div>
           </div>

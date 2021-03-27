@@ -1,0 +1,28 @@
+.text_inputs {
+  height: 2em;
+  border-radius: 2px;
+  border: 1px solid rgba(150, 150, 150, 0.3);
+  width: 90%;
+  font-size: 0.8em;
+  color: rgb(50, 50, 50);
+  outline: none;
+}
+
+#line_theme_input,
+#line_amount_input {
+  height: 2em;
+  border-radius: 2px;
+  margin-bottom: 5px;
+  border: 1px solid rgba(150, 150, 150, 0.3);
+  width: 90%;
+  font-size: 0.8em;
+  color: rgb(50, 50, 50);
+  outline: none;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 1; /* Firefox */
+  text-align: start;
+}

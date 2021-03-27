@@ -147,7 +147,7 @@ export function responsiveLineChart(
 
     xAxis
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(xScale).ticks().tickFormat(d3.timeFormat("%m / %d")));
+      .call(d3.axisBottom(xScale).ticks().tickFormat(d3.timeFormat("%m/%d")));
 
     yAxis.call(d3.axisLeft(yScale));
 

@@ -1,0 +1,28 @@
+//  spectrum
+.color_labels {
+  z-index: 1;
+  position: relative;
+  top: 1em;
+  left: 0.5em;
+  color: hsl(0, 0%, 50%);
+  width: 70%;
+  text-align: initial;
+}
+
+.sp-replacer {
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  border-radius: 0;
+  width: 20%;
+  height: 100%;
+  position: relative;
+  bottom: 1.2em;
+  margin-left: 80%;
+}
+
+.sp-replacer:hover {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.sp-dd {
+  display: none;
+}
