@@ -32,9 +32,9 @@ export function responsiveLineChart(
   lineAreaCPValue
 ) {
   function makeDateArray() {
-    let arr = [];
-    let startDate = new Date("01/02/2020");
-    let endDate = new Date("01/22/2020");
+    let arr = [],
+      startDate = new Date("01/02/2020"),
+      endDate = new Date("01/22/2020");
 
     while (startDate <= endDate) {
       arr.push(new Date(startDate));
@@ -63,7 +63,7 @@ export function responsiveLineChart(
   const margin = { top: 80, right: 40, bottom: 80, left: 80 };
 
   const svg = d3
-    .select("#graph_div")
+    .select("#line_div")
     .append("svg")
     .attr("id", "line_chart")
     .attr("width", "100%")
@@ -88,11 +88,18 @@ export function responsiveLineChart(
   const xScale = d3.scaleTime();
   const yScale = d3.scaleLinear();
 
-  const xAxis = g.append("g").attr("id", "x_axis");
-  const yAxis = g.append("g").attr("id", "y_axis");
+  const xAxis = g.append("g").attr("id", "line_x_axis");
+  const yAxis = g.append("g").attr("id", "line_y_axis");
 
-  const xGrid = g.append("g").attr("class", "grid");
-  const yGrid = g.append("g").attr("class", "grid");
+  const xGrid = g
+    .append("g")
+    .attr("class", "line_grid")
+    .attr("id", "line_x_grid");
+
+  const yGrid = g
+    .append("g")
+    .attr("class", "line_grid")
+    .attr("id", "line_y_grid");
 
   function make_x_gridlines() {
     return d3.axisBottom(xScale).ticks();
@@ -152,13 +159,11 @@ export function responsiveLineChart(
     yAxis.call(d3.axisLeft(yScale));
 
     xGrid
-      .attr("id", "x_grid")
+
       .attr("transform", "translate(0," + height + ")")
       .call(make_x_gridlines().tickSize(-height).tickFormat(""));
 
-    yGrid
-      .attr("id", "y_grid")
-      .call(make_y_gridlines().tickSize(-width).tickFormat(""));
+    yGrid.call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
     title
       .attr("x", width / 2)
@@ -221,14 +226,14 @@ export function responsiveLineChart(
     // d3.select(".line_tooltip").style("background-color", "white");
     // d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
 
-    const circles = g.selectAll(".circles").data(data);
+    const circles = g.selectAll(".circles_line").data(data);
 
     circles.exit().remove();
 
     circles
       .enter()
       .append("circle")
-      .attr("class", "circles")
+      .attr("class", "circles_line")
       .attr("r", 3)
       .attr("cx", function (d, i) {
         return xScale(d.date);
@@ -282,7 +287,7 @@ export function responsiveLineChart(
   window.addEventListener("resize", draw);
   loadData();
 
-  d3.select("#y_grid > g:nth-child(2) > line").remove();
+  d3.select("#line_y_grid > g:nth-child(2) > line").remove();
 
   //  init params
   ////  I pass all parameters at the end instead of directly replacing the code above
@@ -297,12 +302,6 @@ export function responsiveLineChart(
   if (lineXAxisTitleInputValue != undefined) {
     if (lineXAxisTitleInputValue != "") {
       d3.select("#line_xaxis_title").text(lineXAxisTitleInputValue);
-    }
-  }
-
-  if (lineYAxisTitleInputValue != undefined) {
-    if (lineYAxisTitleInputValue != "") {
-      d3.select("#line_yaxis_title").text(lineYAxisTitleInputValue);
     }
   }
 
@@ -329,7 +328,7 @@ export function responsiveLineChart(
   }
 
   if (linePointRadiusSliderValue != undefined) {
-    d3.select(".circles").attr("r", linePointRadiusSliderValue * 0.5);
+    d3.select(".circles_line").attr("r", linePointRadiusSliderValue * 0.5);
   }
 
   if (lineTooltipCheckboxValue != undefined) {
@@ -340,7 +339,7 @@ export function responsiveLineChart(
         .attr("class", "line_tooltip");
       d3.select(".line_tooltip").style("background-color", "white");
       d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
-      let circles = d3.selectAll(".circles");
+      let circles = d3.selectAll(".circles_line");
       circles
         .on("mousemove", function (d) {
           tooltip
@@ -361,55 +360,55 @@ export function responsiveLineChart(
 
   if (lineDatapointCheckboxValue != undefined) {
     if (lineDatapointCheckboxValue == "checked") {
-      d3.selectAll(".circles").attr("display", "");
+      d3.selectAll(".circles_line").attr("display", "");
     } else if (lineDatapointCheckboxValue == "unchecked") {
-      d3.selectAll(".circles").attr("display", "");
+      d3.selectAll(".circles_line").attr("display", "none");
     }
   }
 
   if (lineXAxisGridCheckboxValue != undefined) {
     if (lineXAxisGridCheckboxValue == "checked") {
-      d3.select("#x_grid").attr("display", "");
+      d3.select("#line_x_grid").attr("display", "");
     } else if (lineXAxisGridCheckboxValue == "unchecked") {
-      d3.select("#x_grid").attr("display", "none");
+      d3.select("#line_x_grid").attr("display", "none");
     }
   }
 
   if (lineYAxisGridCheckboxValue != undefined) {
     if (lineYAxisGridCheckboxValue == "checked") {
-      d3.select("#y_grid").attr("display", "");
+      d3.select("#line_y_grid").attr("display", "");
     } else if (lineYAxisGridCheckboxValue == "unchecked") {
-      d3.select("#y_grid").attr("display", "none");
+      d3.select("#line_y_grid").attr("display", "none");
     }
   }
 
   if (lineXAxisLineCheckboxValue != undefined) {
     if (lineXAxisLineCheckboxValue == "checked") {
-      d3.select("#x_axis > path").attr("display", "");
+      d3.select("#line_x_axis > path").attr("display", "");
     } else if (lineXAxisLineCheckboxValue == "unchecked") {
-      d3.select("#x_axis > path").attr("display", "none");
+      d3.select("#line_x_axis > path").attr("display", "none");
     }
   }
 
   if (lineYAxisLineCheckboxValue != undefined) {
     if (lineYAxisLineCheckboxValue == "checked") {
-      d3.select("#y_axis > path").attr("display", "");
+      d3.select("#line_y_axis > path").attr("display", "");
     } else if (lineYAxisLineCheckboxValue == "unchecked") {
-      d3.select("#y_axis > path").attr("display", "none");
+      d3.select("#line_y_axis > path").attr("display", "none");
     }
   }
 
   if (lineHoverCheckboxValue != undefined) {
     if (lineHoverCheckboxValue == "checked") {
-      d3.selectAll(".circles").classed("circle_hovered", true);
+      d3.selectAll(".circles_line").classed("circle_hovered", true);
     } else if (lineHoverCheckboxValue == "unchecked") {
-      d3.selectAll(".circles").classed("circle_hovered", false);
+      d3.selectAll(".circles_line").classed("circle_hovered", false);
     }
   }
 
   if (lineBackgroundCPValue != undefined) {
     if (lineBackgroundCPValue != "") {
-      d3.select("svg").style("background-color", lineBackgroundCPValue);
+      d3.select("#line_chart").style("background-color", lineBackgroundCPValue);
     }
   }
 
@@ -430,10 +429,13 @@ export function responsiveLineChart(
       d3.select("#line3").style("stroke", lineCPValue3);
     }
   }
-
+  console.log(lineTickCPValue);
   if (lineTickCPValue != undefined) {
     if (lineTickCPValue != "") {
-      d3.selectAll(".tick > text").style("fill", lineTickCPValue);
+      d3.selectAll("#line_chart > g > g > .tick > text").style(
+        "fill",
+        lineTickCPValue
+      );
     }
   }
 
@@ -457,31 +459,31 @@ export function responsiveLineChart(
 
   if (lineGridCPValue != undefined) {
     if (lineGridCPValue != "") {
-      d3.selectAll(".grid").style("color", lineGridCPValue);
+      d3.selectAll(".line_grid").style("color", lineGridCPValue);
     }
   }
 
   if (lineXAxisLineCPValue != undefined) {
     if (lineXAxisLineCPValue != "") {
-      d3.select("#x_axis > path").style("stroke", lineXAxisLineCPValue);
+      d3.select("#line_x_axis > path").style("stroke", lineXAxisLineCPValue);
     }
   }
 
   if (lineYAxisLineCPValue != undefined) {
     if (lineYAxisLineCPValue != "") {
-      d3.select("#y_axis > path").style("stroke", lineYAxisLineCPValue);
+      d3.select("#line_y_axis > path").style("stroke", lineYAxisLineCPValue);
     }
   }
 
   if (lineDatapointCPValue != undefined) {
     if (lineDatapointCPValue != "") {
-      d3.selectAll(".circles").style("fill", lineDatapointCPValue);
+      d3.selectAll(".circles_line").style("fill", lineDatapointCPValue);
     }
   }
 
   if (lineDatapointBorderCPValue != undefined) {
     if (lineDatapointBorderCPValue != "") {
-      d3.selectAll(".circles").style("stroke", lineDatapointBorderCPValue);
+      d3.selectAll(".circles_line").style("stroke", lineDatapointBorderCPValue);
     }
   }
 

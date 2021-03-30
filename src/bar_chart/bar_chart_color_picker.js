@@ -8,7 +8,7 @@ $("#bar_background_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("svg").style("background-color", color.toRgbString());
+    d3.select("#bar_chart").style("background-color", color.toRgbString());
 
     barValues.backgroudCP = color.toRgbString();
 
@@ -37,7 +37,10 @@ $("#bar_tick_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.selectAll(".tick > text").style("fill", color.toRgbString());
+    d3.selectAll("#bar_chart > g > g > .tick > text").style(
+      "fill",
+      color.toRgbString()
+    );
 
     barValues.tickCP = color.toRgbString();
 
@@ -95,7 +98,7 @@ $("#bar_grid_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.selectAll(".grid").style("color", color.toRgbString());
+    d3.selectAll(".bar_grid").style("color", color.toRgbString());
 
     barValues.gridCP = color.toRgbString();
 
@@ -109,7 +112,7 @@ $("#bar_xaxis_line_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("#x_axis > path").style("stroke", color.toRgbString());
+    d3.select("#bar_x_axis > path").style("stroke", color.toRgbString());
 
     barValues.xAxisLineCP = color.toRgbString();
 
@@ -124,7 +127,7 @@ $("#bar_yaxis_line_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("#y_axis > path").style("stroke", color.toRgbString());
+    d3.select("#bar_y_axis > path").style("stroke", color.toRgbString());
 
     barValues.yAxisLineCP = color.toRgbString();
 

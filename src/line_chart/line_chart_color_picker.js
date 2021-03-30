@@ -9,7 +9,7 @@ $("#line_background_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("svg").style("background-color", color.toRgbString());
+    d3.select("#line_chart").style("background-color", color.toRgbString());
 
     lineValues.backgroundCP = color.toRgbString();
 
@@ -71,7 +71,10 @@ $("#line_tick_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.selectAll(".tick > text").style("fill", color.toRgbString());
+    d3.selectAll("#line_chart > g > g > .tick > text").style(
+      "fill",
+      color.toRgbString()
+    );
 
     lineValues.tickCP = color.toRgbString();
 
@@ -139,7 +142,7 @@ $("#line_grid_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.selectAll(".grid").style("color", color.toRgbString());
+    d3.selectAll(".line_grid").style("color", color.toRgbString());
 
     lineValues.gridCP = color.toRgbString();
 
@@ -156,7 +159,7 @@ $("#line_xaxis_line_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("#x_axis > path").style("stroke", color.toRgbString());
+    d3.select("#line_x_axis > path").style("stroke", color.toRgbString());
 
     lineValues.xAxisLineCP = color.toRgbString();
 
@@ -173,7 +176,7 @@ $("#line_yaxis_line_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("#y_axis > path").style("stroke", color.toRgbString());
+    d3.select("#line_y_axis > path").style("stroke", color.toRgbString());
 
     lineValues.yAxisLineCP = color.toRgbString();
 
@@ -189,7 +192,7 @@ $("#line_datapoint_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.selectAll(".circles").style("fill", color.toRgbString());
+    d3.selectAll(".circles_line").style("fill", color.toRgbString());
 
     lineValues.datapointCP = color.toRgbString();
 
@@ -206,7 +209,7 @@ $("#line_datapoint_border_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.selectAll(".circles").style("stroke", color.toRgbString());
+    d3.selectAll(".circles_line").style("stroke", color.toRgbString());
 
     lineValues.datapointBorderCP = color.toRgbString();
 

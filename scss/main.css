@@ -14,7 +14,7 @@
 }
 
 .col-c:hover {
-  background-color: #f8f8f8;
+  background-color: #fcfcfc;
   border-color: #f0f0f0;
 }
 
@@ -39,7 +39,8 @@
   margin: 0;
 }
 
-#graph_div {
+#line_div,
+#bar_div {
   height: 30em;
 }
 
@@ -57,7 +58,11 @@
   fill: black;
 }
 
-.grid {
+.line_grid {
+  color: #d6d6d6;
+}
+
+.bar_grid {
   color: #d6d6d6;
 }
 
@@ -87,13 +92,23 @@
   z-index: 1;
 }
 
-#x_axis .tick line,
-#y_axis .tick line {
+#line_x_axis .tick line,
+#line_y_axis .tick line {
   stroke: none;
 }
 
-#x_grid path,
-#y_grid path {
+#line_x_grid path,
+#line_y_grid path {
+  stroke: none;
+}
+
+#bar_x_axis .tick line,
+#bar_y_axis .tick line {
+  stroke: none;
+}
+
+#bar_x_grid path,
+#bar_y_grid path {
   stroke: none;
 }
 
@@ -132,7 +147,17 @@
   cursor: pointer;
   /* Cursor on hover */
   border-radius: 10px;
-  border: 2px solid gainsboro;
+  border: 2px solid #c8c8c8;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #fbfbfb;
+  /* Green background */
+  border: 2px solid #d7d7d7;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
 }
 
 .slider::-moz-range-thumb {
@@ -1381,7 +1406,7 @@ i {
 
 body {
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 h6 {

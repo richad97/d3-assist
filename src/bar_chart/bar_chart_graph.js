@@ -49,7 +49,7 @@ export function barChart(
   const margin = { top: 80, right: 50, bottom: 80, left: 70 };
 
   const svg = d3
-    .select("#graph_div")
+    .select("#bar_div")
     .append("svg")
     .attr("id", "bar_chart")
     .attr("width", "100%")
@@ -71,13 +71,18 @@ export function barChart(
     .attr("id", "bar_yaxis_title")
     .text("Temperature");
 
-  const xAxis = g.append("g").attr("id", "x_axis");
+  const xAxis = g.append("g").attr("id", "bar_x_axis");
 
-  const yAxis = g.append("g").attr("id", "y_axis");
+  const yAxis = g.append("g").attr("id", "bar_y_axis");
 
-  const xGrid = g.append("g").attr("class", "grid");
-
-  const yGrid = g.append("g").attr("class", "grid");
+  const xGrid = g
+    .append("g")
+    .attr("class", "bar_grid")
+    .attr("id", "bar_x_grid");
+  const yGrid = g
+    .append("g")
+    .attr("class", "bar_grid")
+    .attr("id", "bar_y_grid");
 
   if (direction == "horizontal") {
     const xScale = d3.scaleLinear();
@@ -109,17 +114,14 @@ export function barChart(
       const xAxisLine = d3.select("#bar_chart > g > g.xAxis > path");
       const yAxisLine = d3.select("#bar_chart > g > g.yAxis > path");
 
-      xAxisLine.attr("id", "x_axis_line");
-      yAxisLine.attr("id", "y_axis_line");
+      xAxisLine.attr("id", "bar_x_axis_line");
+      yAxisLine.attr("id", "bar_y_axis_line");
 
       xGrid
-        .attr("id", "x_grid")
         .attr("transform", "translate(0," + height + ")")
         .call(make_x_gridlines().tickSize(-height).tickFormat(""));
 
-      yGrid
-        .attr("id", "y_grid")
-        .call(make_y_gridlines().tickSize(-width).tickFormat(""));
+      yGrid.call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
       title
         .attr("x", width / 2)
@@ -184,7 +186,7 @@ export function barChart(
     window.addEventListener("resize", draw);
     loadData();
 
-    document.querySelector("#x_grid > g:nth-child(2) > line").remove();
+    document.querySelector("#bar_x_grid > g:nth-child(2) > line").remove();
   } else if (direction == "vertical") {
     const xScale = d3.scaleBand().padding(0.3);
 
@@ -214,17 +216,14 @@ export function barChart(
       const xAxisLine = d3.select("#bar_chart > g > g.xAxis > path");
       const yAxisLine = d3.select("#bar_chart > g > g.yAxis > path");
 
-      xAxisLine.attr("id", "x_axis_line");
-      yAxisLine.attr("id", "y_axis_line");
+      xAxisLine.attr("id", "bar_x_axis_line");
+      yAxisLine.attr("id", "bar_y_axis_line");
 
       xGrid
-        .attr("id", "x_grid")
         .attr("transform", "translate(0," + height + ")")
         .call(make_x_gridlines().tickSize(-height).tickFormat(""));
 
-      yGrid
-        .attr("id", "y_grid")
-        .call(make_y_gridlines().tickSize(-width).tickFormat(""));
+      yGrid.call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
       title
         .attr("x", width / 2 + 13)
@@ -295,7 +294,7 @@ export function barChart(
     loadData();
 
     //document.querySelector("#x_grid > g:nth-child(2) > line").remove();
-    document.querySelector("#y_grid > g:nth-child(2) > line").remove();
+    document.querySelector("#bar_y_grid > g:nth-child(2) > line").remove();
   }
 
   if (barTitleInputValue != undefined) {
@@ -330,16 +329,16 @@ export function barChart(
 
   if (barXAxisGridCheckboxValue != undefined) {
     if (barXAxisGridCheckboxValue == "checked") {
-      d3.select("#x_grid").attr("display", "");
+      d3.select("#bar_x_grid").attr("display", "");
     } else if (barXAxisGridCheckboxValue == "unchecked") {
-      d3.select("#x_grid").attr("display", "none");
+      d3.select("#bar_x_grid").attr("display", "none");
     }
   }
   if (barYAxisGridCheckboxValue != undefined) {
     if (barYAxisGridCheckboxValue == "checked") {
-      d3.select("#y_grid").attr("display", "");
+      d3.select("#bar_y_grid").attr("display", "");
     } else if (barYAxisGridCheckboxValue == "unchecked") {
-      d3.select("#y_grid").attr("display", "none");
+      d3.select("#bar_y_grid").attr("display", "none");
     }
   }
   if (barHoverCheckboxValue != undefined) {
@@ -351,16 +350,16 @@ export function barChart(
   }
   if (barXAxisLineCheckboxValue != undefined) {
     if (barXAxisLineCheckboxValue == "checked") {
-      d3.select("#x_axis > path").attr("display", "");
+      d3.select("#bar_x_axis > path").attr("display", "");
     } else if (barXAxisLineCheckboxValue == "unchecked") {
-      d3.select("#x_axis > path").attr("display", "none");
+      d3.select("#bar_x_axis > path").attr("display", "none");
     }
   }
   if (barYAxisLineCheckboxValue != undefined) {
     if (barYAxisLineCheckboxValue == "checked") {
-      d3.select("#y_axis > path").attr("display", "");
+      d3.select("#bar_y_axis > path").attr("display", "");
     } else if (barYAxisLineCheckboxValue == "unchecked") {
-      d3.select("#y_axis > path").attr("display", "none");
+      d3.select("#bar_y_axis > path").attr("display", "none");
     }
   }
   if (barTooltipCheckboxValue != undefined) {
@@ -389,7 +388,7 @@ export function barChart(
 
   if (barBackgroudCPValue != undefined) {
     if (barBackgroudCPValue != "") {
-      d3.select("svg").style("background-color", barBackgroudCPValue);
+      d3.select("#bar_chart").style("background-color", barBackgroudCPValue);
     }
   }
   if (barBarsCPValue != undefined) {
@@ -399,7 +398,10 @@ export function barChart(
   }
   if (barTickCPValue != undefined) {
     if (barTickCPValue != "") {
-      d3.selectAll(".tick > text").style("fill", barTickCPValue);
+      d3.selectAll("#bar_chart > g > g > .tick > text").style(
+        "fill",
+        barTickCPValue
+      );
     }
   }
   if (barTitleCPValue != undefined) {
@@ -419,17 +421,17 @@ export function barChart(
   }
   if (barGridCPValue != undefined) {
     if (barGridCPValue != "") {
-      d3.selectAll(".grid").style("color", barGridCPValue);
+      d3.selectAll(".bar_grid").style("color", barGridCPValue);
     }
   }
   if (barXAxisLineCPValue != undefined) {
     if (barXAxisLineCPValue != "") {
-      d3.select("#x_axis > path").style("stroke", barXAxisLineCPValue);
+      d3.select("#bar_x_axis > path").style("stroke", barXAxisLineCPValue);
     }
   }
   if (barYAxisLineCPValue != undefined) {
     if (barYAxisLineCPValue != "") {
-      d3.select("#y_axis > path").style("stroke", barYAxisLineCPValue);
+      d3.select("#bar_y_axis > path").style("stroke", barYAxisLineCPValue);
     }
   }
   if (barBorderCPValue != undefined) {

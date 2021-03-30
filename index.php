@@ -9,7 +9,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,7 +51,8 @@
         <div class="row">
           <div class="col-12">
             <div id="overlay_code_container">
-              <?php require "./view/{$page_requested}/{$page_requested}_template.html";?>
+              <?php require "./view/line_chart/line_chart_template.html";?>
+              <?php require "./view/bar_chart/bar_chart_template.html";?>
             </div>
           </div>
         </div>
@@ -96,8 +97,10 @@
                     ></i>
                     Titles
                   </h6>
-                    <?php require "./view/{$page_requested}/form/{$page_requested}_form_titles.html";?>
-
+                      <div id="title_row_group">
+                        <?php require "./view/line_chart/form/line_chart_form_titles.html";?>
+                        <?php require "./view/bar_chart/form/bar_chart_form_titles.html";?>
+                      </div>
                   <h6>
                     <i
                       class="fas fa-chevron-down sec_label_down_i"
@@ -110,8 +113,10 @@
 
                     Sliders
                   </h6>
-                    <?php require "./view/{$page_requested}/form/{$page_requested}_form_sliders.html";?>
-
+                    <div id="slider_row_group">
+                      <?php require "./view/line_chart/form/line_chart_form_sliders.html";?>
+                      <?php require "./view/bar_chart/form/bar_chart_form_sliders.html";?>
+                    </div>
                   <h6>
                     <i
                       class="fas fa-chevron-down sec_label_down_i"
@@ -124,7 +129,10 @@
 
                     Checkboxes
                   </h6>
-                    <?php require "./view/{$page_requested}/form/{$page_requested}_form_checkboxes.html";?>
+                    <div id="checkbox_row_group">
+                      <?php require "./view/line_chart/form/line_chart_form_checkboxes.html";?>
+                      <?php require "./view/bar_chart/form/bar_chart_form_checkboxes.html";?>
+                    </div>
 
                   <h6>
                     <i
@@ -138,8 +146,10 @@
 
                     Colors
                   </h6>
-                    <?php require "./view/{$page_requested}/form/{$page_requested}_form_colors.html";?>
-                    
+                    <div id="color_row_group">
+                      <?php require "./view/line_chart/form/line_chart_form_colors.html";?>
+                      <?php require "./view/bar_chart/form/bar_chart_form_colors.html";?>
+                    </div>
                 </form>
               <div class="row mt-2">
                 <input type="submit" value="Preview" id="form_submit_button" />
@@ -149,11 +159,17 @@
 
           <div class="col-lg-6">
             <div class="col-lg-12 col-md-12 col-12 mb-5" id="graph_container">
+
               <div class="row">
-                <div id="graph_div"></div>
+                <div id="bar_div"></div>
               </div>
+              <div class="row">
+                <div id="line_div"></div>
+              </div>
+
               <div class="row" id="graph_dimension_div">
-                <?php require "./view/{$page_requested}/{$page_requested}_dimension.html";?>
+                <?php require "./view/line_chart/line_chart_dimension.html";?>
+                <?php require "./view/bar_chart/bar_chart_dimension.html";?>
               </div>
             </div>
           </div>

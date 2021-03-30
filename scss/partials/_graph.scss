@@ -1,4 +1,5 @@
-#graph_div {
+#line_div,
+#bar_div {
   height: 30em;
 }
 
@@ -16,7 +17,11 @@
   fill: black;
 }
 
-.grid {
+.line_grid {
+  color: rgb(214, 214, 214);
+}
+
+.bar_grid {
   color: rgb(214, 214, 214);
 }
 
@@ -45,8 +50,8 @@
   z-index: 1;
 }
 
-#x_axis,
-#y_axis {
+#line_x_axis,
+#line_y_axis {
   .tick {
     line {
       stroke: none;
@@ -54,8 +59,29 @@
   }
 }
 
-#x_grid,
-#y_grid {
+#line_x_grid,
+#line_y_grid {
+  g:nth-child(1) {
+    line {
+      //stroke: none;
+    }
+  }
+  path {
+    stroke: none;
+  }
+}
+
+#bar_x_axis,
+#bar_y_axis {
+  .tick {
+    line {
+      stroke: none;
+    }
+  }
+}
+
+#bar_x_grid,
+#bar_y_grid {
   g:nth-child(1) {
     line {
       //stroke: none;

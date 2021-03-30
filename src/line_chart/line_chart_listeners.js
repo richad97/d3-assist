@@ -87,7 +87,7 @@ lineWidthSlider.addEventListener("mousedown", function () {
 
 linePointRadiusSlider.addEventListener("mousedown", function () {
   linePointRadiusSlider.addEventListener("mousemove", function () {
-    d3.selectAll(".circles").attr("r", linePointRadiusSlider.value * 0.5);
+    d3.selectAll(".circles_line").attr("r", linePointRadiusSlider.value * 0.5);
     lineValues.pointRadiusSlider = linePointRadiusSlider.value;
     document.getElementById("line_point_radius_slider_span").innerHTML =
       lineValues.pointRadiusSlider;
@@ -99,7 +99,7 @@ lineTooltipCheckbox.addEventListener("change", function () {
     let tooltip = d3.select("body").append("div").attr("class", "line_tooltip");
     d3.select(".line_tooltip").style("background-color", "white");
     d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
-    let circles = d3.selectAll(".circles");
+    let circles = d3.selectAll(".circles_line");
     circles
       .on("mousemove", function (d) {
         tooltip
@@ -121,11 +121,11 @@ lineTooltipCheckbox.addEventListener("change", function () {
 
 lineDatapointCheckbox.addEventListener("change", function () {
   if (this.checked) {
-    d3.selectAll(".circles").attr("display", "");
+    d3.selectAll(".circles_line").attr("display", "");
     lineValues.datapointCheckbox = "checked";
     d3.select("#line_datapoint_checkbox_span").classed("hide", false);
   } else if (this.checked === false) {
-    d3.selectAll(".circles").attr("display", "none");
+    d3.selectAll(".circles_line").attr("display", "none");
     lineValues.datapointCheckbox = "unchecked";
     d3.select("#line_datapoint_checkbox_span").classed("hide", true);
   }
@@ -133,11 +133,11 @@ lineDatapointCheckbox.addEventListener("change", function () {
 
 lineXAxisGridCheckbox.addEventListener("change", function () {
   if (this.checked) {
-    d3.select("#x_grid").attr("display", "");
+    d3.select("#line_x_grid").attr("display", "");
     lineValues.xAxisGridCheckbox = "checked";
     d3.select("#line_x_grid_checkbox_span").classed("hide", false);
   } else if (this.checked === false) {
-    d3.select("#x_grid").attr("display", "none");
+    d3.select("#line_x_grid").attr("display", "none");
     lineValues.xAxisGridCheckbox = "unchecked";
     d3.select("#line_x_grid_checkbox_span").classed("hide", true);
   }
@@ -145,11 +145,11 @@ lineXAxisGridCheckbox.addEventListener("change", function () {
 
 lineYAxisGridCheckbox.addEventListener("change", function () {
   if (this.checked) {
-    d3.select("#y_grid").attr("display", "");
+    d3.select("#line_y_grid").attr("display", "");
     lineValues.yAxisGridCheckbox = "checked";
     d3.select("#line_y_grid_checkbox_span").classed("hide", false);
   } else if (this.checked === false) {
-    d3.select("#y_grid").attr("display", "none");
+    d3.select("#line_y_grid").attr("display", "none");
     lineValues.yAxisGridCheckbox = "unchecked";
     d3.select("#line_y_grid_checkbox_span").classed("hide", true);
   }
@@ -157,11 +157,11 @@ lineYAxisGridCheckbox.addEventListener("change", function () {
 
 lineXAxisLineCheckbox.addEventListener("change", function () {
   if (this.checked) {
-    d3.select("#x_axis > path").attr("display", "");
+    d3.select("#line_x_axis > path").attr("display", "");
     lineValues.xAxisLineCheckbox = "checked";
     d3.select("#line_x_line_checkbox_span").classed("hide", true);
   } else if (this.checked === false) {
-    d3.select("#x_axis > path").attr("display", "none");
+    d3.select("#line_x_axis > path").attr("display", "none");
     lineValues.xAxisLineCheckbox = "unchecked";
     d3.select("#line_x_line_checkbox_span").classed("hide", false);
   }
@@ -169,11 +169,11 @@ lineXAxisLineCheckbox.addEventListener("change", function () {
 
 lineYAxisLineCheckbox.addEventListener("change", function () {
   if (this.checked) {
-    d3.select("#y_axis > path").attr("display", "");
+    d3.select("#line_y_axis > path").attr("display", "");
     lineValues.yAxisLineCheckbox = "checked";
     d3.select("#line_y_line_checkbox_span").classed("hide", true);
   } else if (this.checked === false) {
-    d3.select("#y_axis > path").attr("display", "none");
+    d3.select("#line_y_axis > path").attr("display", "none");
     lineValues.yAxisLineCheckbox = "unchecked";
     d3.select("#line_y_line_checkbox_span").classed("hide", false);
   }
@@ -181,11 +181,11 @@ lineYAxisLineCheckbox.addEventListener("change", function () {
 
 lineHoverCheckbox.addEventListener("change", function () {
   if (this.checked) {
-    d3.selectAll(".circles").classed("circle_hovered", true);
+    d3.selectAll(".circles_line").classed("circle_hovered", true);
     lineValues.hoverCheckbox = "checked";
     d3.select("#line_hover_checkbox_span").classed("hide", false);
   } else if (this.checked === false) {
-    d3.selectAll(".circles").classed("circle_hovered", false);
+    d3.selectAll(".circles_line").classed("circle_hovered", false);
     lineValues.hoverCheckbox = "unchecked";
     d3.select("#line_hover_checkbox_span").classed("hide", true);
   }

@@ -260,11 +260,11 @@ barVerticalCheckbox.addEventListener("change", function () {
 
 barXAxisGridCheckbox.addEventListener("change", function () {
   if (this.checked) {
-    d3.select("#x_grid").attr("display", "");
+    d3.select("#bar_x_grid").attr("display", "");
     barValues.xAxisGridCheckbox = "checked";
     d3.select("#bar_x_grid_span").classed("hide", false);
   } else if (this.checked === false) {
-    d3.select("#x_grid").attr("display", "none");
+    d3.select("#bar_x_grid").attr("display", "none");
     barValues.xAxisGridCheckbox = "unchecked";
     d3.select("#bar_x_grid_span").classed("hide", true);
   }
@@ -272,11 +272,11 @@ barXAxisGridCheckbox.addEventListener("change", function () {
 
 barYAxisGridCheckbox.addEventListener("change", function () {
   if (this.checked) {
-    d3.select("#y_grid").attr("display", "");
+    d3.select("#bar_y_grid").attr("display", "");
     barValues.yAxisGridCheckbox = "checked";
     d3.select("#bar_y_grid_span").classed("hide", false);
   } else if (this.checked === false) {
-    d3.select("#y_grid").attr("display", "none");
+    d3.select("#bar_y_grid").attr("display", "none");
     barValues.yAxisGridCheckbox = "unchecked";
     d3.select("#bar_y_grid_span").classed("hide", true);
   }
@@ -296,11 +296,11 @@ barHoverCheckbox.addEventListener("change", function () {
 
 barXAxisLineCheckbox.addEventListener("change", function () {
   if (this.checked) {
-    d3.select("#x_axis > path").attr("display", "");
+    d3.select("#bar_x_axis > path").attr("display", "");
     barValues.xAxisLineCheckbox = "checked";
     d3.select("#bar_x_line_span").classed("hide", true);
   } else if (this.checked === false) {
-    d3.select("#x_axis > path").attr("display", "none");
+    d3.select("#bar_x_axis > path").attr("display", "none");
     barValues.xAxisLineCheckbox = "unchecked";
     d3.select("#bar_x_line_span").classed("hide", false);
   }
@@ -308,11 +308,11 @@ barXAxisLineCheckbox.addEventListener("change", function () {
 
 barYAxisLineCheckbox.addEventListener("change", function () {
   if (this.checked) {
-    d3.select("#y_axis > path").attr("display", "");
+    d3.select("#bar_y_axis > path").attr("display", "");
     barValues.yAxisLineCheckbox = "checked";
     d3.select("#bar_y_line_span").classed("hide", true);
   } else if (this.checked === false) {
-    d3.select("#y_axis > path").attr("display", "none");
+    d3.select("#bar_y_axis > path").attr("display", "none");
     barValues.yAxisLineCheckbox = "unchecked";
     d3.select("#bar_y_line_span").classed("hide", false);
   }
