@@ -79,6 +79,7 @@ export function barChart(
     .append("g")
     .attr("class", "bar_grid")
     .attr("id", "bar_x_grid");
+
   const yGrid = g
     .append("g")
     .attr("class", "bar_grid")
@@ -226,13 +227,13 @@ export function barChart(
       yGrid.call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
       title
-        .attr("x", width / 2 + 13)
+        .attr("x", width / 2)
         .attr("y", -40)
         .attr("text-anchor", "middle")
         .attr("font-size", "1.1em");
 
       xAxisTitle
-        .attr("x", width / 2 + 13)
+        .attr("x", width / 2)
         .attr("y", height + margin.top - 30)
         .attr("font-size", "0.9em")
         .attr("text-anchor", "middle");

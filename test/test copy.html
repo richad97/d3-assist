@@ -38,19 +38,18 @@
   </head>
   <body></body>
   <script>
-    function makeDateArray() {
-      let arr = [];
-      let startDate = new Date("2020-01-02"); //YYYY-MM-DD
-      let endDate = new Date("2020-01-22"); //YYYY-MM-DD
-
-      while (startDate <= endDate) {
-        arr.push(new Date(startDate));
-        startDate.setDate(startDate.getDate() + 1);
-      }
-      return arr;
-    }
-
     function createData() {
+      function makeDateArray() {
+        let arr = [];
+        let startDate = new Date("2020-01-02"); //YYYY-MM-DD
+        let endDate = new Date("2020-01-22"); //YYYY-MM-DD
+
+        while (startDate <= endDate) {
+          arr.push(new Date(startDate));
+          startDate.setDate(startDate.getDate() + 1);
+        }
+        return arr;
+      }
       let dates = makeDateArray();
       let i = 1;
       let data = dates.map(function (x) {
@@ -253,51 +252,7 @@
       .attr("stroke", "rgba(255, 255, 255, 1)")
       .attr("stroke-width", "1px");
 
-    let tooltip = d3.select("body").append("div").attr("class", "line_tooltip");
-
-    d3.select(".line_tooltip").style("background-color", "white");
-    d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
-
-    let circles1Tooltip = d3.selectAll(".circles1");
-    circles1Tooltip
-      .on("mousemove", function (d) {
-        tooltip
-          .style("left", d3.event.pageX + 10 + "px")
-          .style("top", d3.event.pageY + 10 + "px")
-          .style("display", "inline-block");
-      })
-      .on("mouseout", function (d) {
-        tooltip.style("display", "none");
-      });
-
-    let circles2Tooltip = d3.selectAll(".circles2");
-    circles2Tooltip
-      .on("mousemove", function (d) {
-        tooltip
-          .style("left", d3.event.pageX + 10 + "px")
-          .style("top", d3.event.pageY + 10 + "px")
-          .style("display", "inline-block");
-      })
-      .on("mouseout", function (d) {
-        tooltip.style("display", "none");
-      });
-
-    let circles3Tooltip = d3.selectAll(".circles3");
-    circles3Tooltip
-      .on("mousemove", function (d) {
-        tooltip
-          .style("left", d3.event.pageX + 10 + "px")
-          .style("top", d3.event.pageY + 10 + "px")
-          .style("display", "inline-block");
-      })
-      .on("mouseout", function (d) {
-        tooltip.style("display", "none");
-      });
-
     d3.select("#y_axis > path").attr("display", "none");
-    d3.selectAll(".circles1").classed("hovered", true);
-    d3.selectAll(".circles2").classed("hovered", true);
-    d3.selectAll(".circles3").classed("hovered", true);
 
     d3.selectAll("#x_axis >.tick>line").style("display", "none");
     d3.selectAll("#y_axis >.tick>line").style("display", "none");
@@ -311,5 +266,9 @@
     );
     d3.select("#x_axis > path").style("stroke", "rgb(255, 255, 255)");
     d3.select("#y_axis > path").style("stroke", "rgb(211, 211, 211)");
+
+    d3.selectAll(".circles1").classed("hovered", true);
+    d3.selectAll(".circles2").classed("hovered", true);
+    d3.selectAll(".circles3").classed("hovered", true);
   </script>
 </html>

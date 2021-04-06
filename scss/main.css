@@ -5,8 +5,7 @@
 
 .col-c {
   text-align: center;
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.015);
   -webkit-transition: background-color 0.25s ease-in-out;
   transition: background-color 0.25s ease-in-out;
   padding: 0;
@@ -37,6 +36,15 @@
   padding-top: 0.5em;
   padding-left: 1em;
   margin: 0;
+}
+
+#title_row_group,
+#slider_row_group,
+#checkbox_row_group,
+#color_row_group {
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  margin: 0 8px 0 8px;
+  background-color: white;
 }
 
 #line_div,
@@ -175,7 +183,7 @@
 
 nav {
   height: 4em;
-  background-color: rgba(0, 0, 0, 0.626);
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .navbar {
@@ -272,6 +280,7 @@ a:hover {
           box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.05);
   -webkit-transition: 0.2s ease;
   transition: 0.2s ease;
+  outline: none;
 }
 
 .overlay_buttons:hover {
@@ -343,7 +352,7 @@ pre {
 }
 
 .sp-replacer {
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.07);
   border-radius: 0;
   width: 20%;
   height: 100%;
@@ -366,8 +375,8 @@ form {
 }
 
 form .row {
-  margin: 0 5px 0 5px;
-  padding: 0 5px 0 5px;
+  margin: 0 0px 0 0px;
+  padding: 0 0px 0 0px;
 }
 
 #form_submit_button {
@@ -405,11 +414,12 @@ i {
 .text_inputs {
   height: 2em;
   border-radius: 2px;
-  border: 1px solid rgba(150, 150, 150, 0.3);
+  border: 1px solid rgba(150, 150, 150, 0.1);
   width: 90%;
   font-size: 0.8em;
   color: #323232;
   outline: none;
+  text-align: center;
 }
 
 #line_theme_input,
@@ -429,7 +439,7 @@ i {
   color: rgba(0, 0, 0, 0.4);
   opacity: 1;
   /* Firefox */
-  text-align: start;
+  text-align: center;
 }
 
 :-ms-input-placeholder {
@@ -437,7 +447,7 @@ i {
   color: rgba(0, 0, 0, 0.4);
   opacity: 1;
   /* Firefox */
-  text-align: start;
+  text-align: center;
 }
 
 ::-ms-input-placeholder {
@@ -445,7 +455,7 @@ i {
   color: rgba(0, 0, 0, 0.4);
   opacity: 1;
   /* Firefox */
-  text-align: start;
+  text-align: center;
 }
 
 ::placeholder {
@@ -453,7 +463,7 @@ i {
   color: rgba(0, 0, 0, 0.4);
   opacity: 1;
   /* Firefox */
-  text-align: start;
+  text-align: center;
 }
 
 .pretty * {

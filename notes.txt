@@ -1,0 +1,22 @@
+line chart 
+    [x] - fix datapoints with multiple lines 
+
+bar chart 
+    [] - add sort
+    [] - add amount changer 
+
+both 
+    [] - add themeing
+    [] - fix title scaling
+    [x] - add transition
+    [] - fix responsiveness 
+    [] - add responsive template
+
+
+general
+    [x] - add selected nav title
+    [] - make sure both are written consistantly
+    [] - make sure chart matches code given out
+    [x] - add new tab functionality
+    [] - refactor index.php
+    [] - refactor and test before moving to pie chart and map

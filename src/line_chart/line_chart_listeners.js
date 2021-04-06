@@ -1,5 +1,6 @@
 const d3 = require("d3");
 
+import { line } from "d3";
 import {
   lineTitleInput,
   lineXAxisTitleInput,
@@ -88,47 +89,12 @@ lineWidthSlider.addEventListener("mousedown", function () {
 linePointRadiusSlider.addEventListener("mousedown", function () {
   linePointRadiusSlider.addEventListener("mousemove", function () {
     d3.selectAll(".circles_line").attr("r", linePointRadiusSlider.value * 0.5);
+    d3.selectAll(".circles_line2").attr("r", linePointRadiusSlider.value * 0.5);
+    d3.selectAll(".circles_line3").attr("r", linePointRadiusSlider.value * 0.5);
     lineValues.pointRadiusSlider = linePointRadiusSlider.value;
     document.getElementById("line_point_radius_slider_span").innerHTML =
       lineValues.pointRadiusSlider;
   });
-});
-
-lineTooltipCheckbox.addEventListener("change", function () {
-  if (this.checked) {
-    let tooltip = d3.select("body").append("div").attr("class", "line_tooltip");
-    d3.select(".line_tooltip").style("background-color", "white");
-    d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
-    let circles = d3.selectAll(".circles_line");
-    circles
-      .on("mousemove", function (d) {
-        tooltip
-          .style("left", d3.event.pageX + 10 + "px")
-          .style("top", d3.event.pageY + 10 + "px")
-          .style("display", "inline-block");
-      })
-      .on("mouseout", function (d) {
-        tooltip.style("display", "none");
-      });
-    d3.select("#line_tooltip_checkbox_span").classed("hide", false);
-    lineValues.tooltipCheckbox = "checked";
-  } else if (this.checked === false) {
-    document.querySelector("body > div.line_tooltip").remove();
-    d3.select("#line_tooltip_checkbox_span").classed("hide", true);
-    lineValues.tooltipCheckbox = "unchecked";
-  }
-});
-
-lineDatapointCheckbox.addEventListener("change", function () {
-  if (this.checked) {
-    d3.selectAll(".circles_line").attr("display", "");
-    lineValues.datapointCheckbox = "checked";
-    d3.select("#line_datapoint_checkbox_span").classed("hide", false);
-  } else if (this.checked === false) {
-    d3.selectAll(".circles_line").attr("display", "none");
-    lineValues.datapointCheckbox = "unchecked";
-    d3.select("#line_datapoint_checkbox_span").classed("hide", true);
-  }
 });
 
 lineXAxisGridCheckbox.addEventListener("change", function () {
@@ -182,10 +148,14 @@ lineYAxisLineCheckbox.addEventListener("change", function () {
 lineHoverCheckbox.addEventListener("change", function () {
   if (this.checked) {
     d3.selectAll(".circles_line").classed("circle_hovered", true);
+    d3.selectAll(".circles_line2").classed("circle_hovered", true);
+    d3.selectAll(".circles_line3").classed("circle_hovered", true);
     lineValues.hoverCheckbox = "checked";
     d3.select("#line_hover_checkbox_span").classed("hide", false);
   } else if (this.checked === false) {
     d3.selectAll(".circles_line").classed("circle_hovered", false);
+    d3.selectAll(".circles_line2").classed("circle_hovered", false);
+    d3.selectAll(".circles_line3").classed("circle_hovered", false);
     lineValues.hoverCheckbox = "unchecked";
     d3.select("#line_hover_checkbox_span").classed("hide", true);
   }
@@ -200,22 +170,176 @@ lineAreaCheckbox.addEventListener("change", function () {
     d3.select("#line2").attr("display", "none");
     d3.select("#line3").attr("display", "none");
 
+    d3.selectAll(".circles_line2").attr("display", "none");
+    d3.selectAll(".circles_line3").attr("display", "none");
+
     d3.select("#line_1_select_span").classed("hide", false);
     d3.select("#line_2_select_span").classed("hide", true);
     d3.select("#line_3_select_span").classed("hide", true);
 
+    d3.select("#line_datapoint_checkbox_span").classed("hide", false);
+    d3.select("#line_datapoint2_checkbox_span").classed("hide", true);
+    d3.select("#line_datapoint3_checkbox_span").classed("hide", true);
+
     d3.select("#line_area").attr("display", "");
     d3.select("#line_area_checkbox_span").classed("hide", false);
-  } else if (this.checked === false) {
+  }
+  if (this.checked === false) {
     d3.select("#line_area").attr("display", "none");
     lineAmountInput.disabled = false;
     d3.select("#line_area_checkbox_span").classed("hide", true);
   }
 });
 
+lineTooltipCheckbox.addEventListener("change", function () {
+  if (this.checked) {
+    if (lineAmountInput.value == 1) {
+      let tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "line_tooltip");
+      d3.select(".line_tooltip").style("background-color", "white");
+      d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
+      let circles = d3.selectAll(".circles_line");
+      circles
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      d3.select("#line_tooltip_circle_checkbox_span").classed("hide", false);
+      d3.select("#line_tooltip2_circle_checkbox_span").classed("hide", true);
+      d3.select("#line_tooltip3_circle_checkbox_span").classed("hide", true);
+    }
+    if (lineAmountInput.value == 2) {
+      let tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "line_tooltip");
+      d3.select(".line_tooltip").style("background-color", "white");
+      d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
+      let circles = d3.selectAll(".circles_line");
+      circles
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      let circles2 = d3.selectAll(".circles_line2");
+      circles2
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      d3.select("#line_tooltip_circle_checkbox_span").classed("hide", false);
+      d3.select("#line_tooltip2_circle_checkbox_span").classed("hide", false);
+      d3.select("#line_tooltip3_circle_checkbox_span").classed("hide", true);
+    }
+    if (lineAmountInput.value == 3) {
+      let tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "line_tooltip");
+      d3.select(".line_tooltip").style("background-color", "white");
+      d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
+      let circles = d3.selectAll(".circles_line");
+      circles
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      let circles2 = d3.selectAll(".circles_line2");
+      circles2
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      let circles3 = d3.selectAll(".circles_line3");
+      circles3
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      d3.select("#line_tooltip_circle_checkbox_span").classed("hide", false);
+      d3.select("#line_tooltip2_circle_checkbox_span").classed("hide", false);
+      d3.select("#line_tooltip3_circle_checkbox_span").classed("hide", false);
+    }
+
+    d3.select("#line_tooltip_checkbox_span").classed("hide", false);
+
+    lineValues.tooltipCheckbox = "checked";
+  }
+  if (this.checked === false) {
+    document.querySelector("body > div.line_tooltip").remove();
+    d3.select("#line_tooltip_checkbox_span").classed("hide", true);
+    d3.select("#line_tooltip_circle_checkbox_span").classed("hide", true);
+    d3.select("#line_tooltip2_circle_checkbox_span").classed("hide", true);
+    d3.select("#line_tooltip3_circle_checkbox_span").classed("hide", true);
+    lineValues.tooltipCheckbox = "unchecked";
+  }
+});
+
 lineAmountInput.addEventListener("change", function () {
   if (lineAmountInput.value == 1) {
-    console.log(1);
+    if (lineDatapointCheckbox.checked) {
+      d3.selectAll(".circles_line").attr("display", "");
+      d3.selectAll(".circles_line2").attr("display", "none");
+      d3.selectAll(".circles_line3").attr("display", "none");
+
+      d3.select("#line_datapoint_checkbox_span").classed("hide", false);
+      d3.select("#line_datapoint2_checkbox_span").classed("hide", true);
+      d3.select("#line_datapoint3_checkbox_span").classed("hide", true);
+    }
+    if (lineTooltipCheckbox.checked) {
+      let tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "line_tooltip");
+      d3.select(".line_tooltip").style("background-color", "white");
+      d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
+      let circles = d3.selectAll(".circles_line");
+      circles
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      d3.select("#line_tooltip_circle_checkbox_span").classed("hide", false);
+      d3.select("#line_tooltip2_circle_checkbox_span").classed("hide", true);
+      d3.select("#line_tooltip3_circle_checkbox_span").classed("hide", true);
+    }
     d3.select("#line1").attr("display", "");
     d3.select("#line2").attr("display", "none");
     d3.select("#line3").attr("display", "none");
@@ -223,8 +347,52 @@ lineAmountInput.addEventListener("change", function () {
     d3.select("#line_1_select_span").classed("hide", false);
     d3.select("#line_2_select_span").classed("hide", true);
     d3.select("#line_3_select_span").classed("hide", true);
-  } else if (lineAmountInput.value == 2) {
-    console.log(2);
+
+    lineValues.amountInput = lineAmountInput.value;
+  }
+  if (lineAmountInput.value == 2) {
+    if (lineDatapointCheckbox.checked) {
+      d3.selectAll(".circles_line").attr("display", "");
+      d3.selectAll(".circles_line2").attr("display", "");
+      d3.selectAll(".circles_line3").attr("display", "none");
+
+      d3.select("#line_datapoint_checkbox_span").classed("hide", false);
+      d3.select("#line_datapoint2_checkbox_span").classed("hide", false);
+      d3.select("#line_datapoint3_checkbox_span").classed("hide", true);
+    }
+    if (lineTooltipCheckbox.checked) {
+      let tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "line_tooltip");
+      d3.select(".line_tooltip").style("background-color", "white");
+      d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
+      let circles = d3.selectAll(".circles_line");
+      circles
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      let circles2 = d3.selectAll(".circles_line2");
+      circles2
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      d3.select("#line_tooltip_circle_checkbox_span").classed("hide", false);
+      d3.select("#line_tooltip2_circle_checkbox_span").classed("hide", false);
+      d3.select("#line_tooltip3_circle_checkbox_span").classed("hide", true);
+    }
     d3.select("#line1").attr("display", "");
     d3.select("#line2").attr("display", "");
     d3.select("#line3").attr("display", "none");
@@ -232,8 +400,63 @@ lineAmountInput.addEventListener("change", function () {
     d3.select("#line_1_select_span").classed("hide", false);
     d3.select("#line_2_select_span").classed("hide", false);
     d3.select("#line_3_select_span").classed("hide", true);
-  } else if (lineAmountInput.value == 3) {
-    console.log(3);
+
+    lineValues.amountInput = lineAmountInput.value;
+  }
+  if (lineAmountInput.value == 3) {
+    if (lineDatapointCheckbox.checked) {
+      d3.selectAll(".circles_line").attr("display", "");
+      d3.selectAll(".circles_line2").attr("display", "");
+      d3.selectAll(".circles_line3").attr("display", "");
+
+      d3.select("#line_datapoint_checkbox_span").classed("hide", false);
+      d3.select("#line_datapoint2_checkbox_span").classed("hide", false);
+      d3.select("#line_datapoint3_checkbox_span").classed("hide", false);
+    }
+    if (lineTooltipCheckbox.checked) {
+      let tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "line_tooltip");
+      d3.select(".line_tooltip").style("background-color", "white");
+      d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
+      let circles = d3.selectAll(".circles_line");
+      circles
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      let circles2 = d3.selectAll(".circles_line2");
+      circles2
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      let circles3 = d3.selectAll(".circles_line3");
+      circles3
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+      d3.select("#line_tooltip_circle_checkbox_span").classed("hide", false);
+      d3.select("#line_tooltip2_circle_checkbox_span").classed("hide", false);
+      d3.select("#line_tooltip3_circle_checkbox_span").classed("hide", false);
+    }
     d3.select("#line1").attr("display", "");
     d3.select("#line2").attr("display", "");
     d3.select("#line3").attr("display", "");
@@ -241,5 +464,65 @@ lineAmountInput.addEventListener("change", function () {
     d3.select("#line_1_select_span").classed("hide", false);
     d3.select("#line_2_select_span").classed("hide", false);
     d3.select("#line_3_select_span").classed("hide", false);
+
+    lineValues.amountInput = lineAmountInput.value;
+  }
+});
+
+lineDatapointCheckbox.addEventListener("change", function () {
+  if (this.checked == true) {
+    if (lineAmountInput.value == 1) {
+      d3.selectAll(".circles_line").attr("display", "");
+      d3.selectAll(".circles_line2").attr("display", "none");
+      d3.selectAll(".circles_line3").attr("display", "none");
+      d3.select("#line_datapoint_checkbox_span").classed("hide", false);
+      d3.select("#line_datapoint2_checkbox_span").classed("hide", true);
+      d3.select("#line_datapoint3_checkbox_span").classed("hide", true);
+      d3.select("#line1").attr("display", "");
+      d3.select("#line2").attr("display", "none");
+      d3.select("#line3").attr("display", "none");
+      d3.select("#line_1_select_span").classed("hide", false);
+      d3.select("#line_2_select_span").classed("hide", true);
+      d3.select("#line_3_select_span").classed("hide", true);
+    }
+    if (lineAmountInput.value == 2) {
+      d3.selectAll(".circles_line").attr("display", "");
+      d3.selectAll(".circles_line2").attr("display", "");
+      d3.selectAll(".circles_line3").attr("display", "none");
+      d3.select("#line_datapoint_checkbox_span").classed("hide", false);
+      d3.select("#line_datapoint2_checkbox_span").classed("hide", false);
+      d3.select("#line_datapoint3_checkbox_span").classed("hide", true);
+      d3.select("#line1").attr("display", "");
+      d3.select("#line2").attr("display", "");
+      d3.select("#line3").attr("display", "none");
+      d3.select("#line_1_select_span").classed("hide", false);
+      d3.select("#line_2_select_span").classed("hide", false);
+      d3.select("#line_3_select_span").classed("hide", true);
+    }
+    if (lineAmountInput.value == 3) {
+      d3.selectAll(".circles_line").attr("display", "");
+      d3.selectAll(".circles_line2").attr("display", "");
+      d3.selectAll(".circles_line3").attr("display", "");
+      d3.select("#line_datapoint_checkbox_span").classed("hide", false);
+      d3.select("#line_datapoint2_checkbox_span").classed("hide", false);
+      d3.select("#line_datapoint3_checkbox_span").classed("hide", false);
+      d3.select("#line1").attr("display", "");
+      d3.select("#line2").attr("display", "");
+      d3.select("#line3").attr("display", "");
+      d3.select("#line_1_select_span").classed("hide", false);
+      d3.select("#line_2_select_span").classed("hide", false);
+      d3.select("#line_3_select_span").classed("hide", false);
+    }
+    lineValues.datapointCheckbox = "checked";
+  }
+  if (this.checked == false) {
+    d3.selectAll(".circles_line").attr("display", "none");
+    d3.selectAll(".circles_line2").attr("display", "none");
+    d3.selectAll(".circles_line3").attr("display", "none");
+    d3.select("#line_datapoint_checkbox_span").classed("hide", true);
+    d3.select("#line_datapoint2_checkbox_span").classed("hide", true);
+    d3.select("#line_datapoint3_checkbox_span").classed("hide", true);
+    lineValues.datapointCheckbox = "unchecked";
+    d3.select("#line_datapoint_checkbox_span").classed("hide", true);
   }
 });

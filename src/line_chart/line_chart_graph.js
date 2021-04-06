@@ -1,6 +1,6 @@
 const d3 = require("d3");
 
-export function responsiveLineChart(
+export function lineChart(
   lineTitleInputValue,
   lineXAxisTitleInputValue,
   lineYAxisTitleInputValue,
@@ -154,7 +154,7 @@ export function responsiveLineChart(
 
     xAxis
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(xScale).ticks().tickFormat(d3.timeFormat("%m/%d")));
+      .call(d3.axisBottom(xScale).ticks().tickFormat(d3.timeFormat("%b %e")));
 
     yAxis.call(d3.axisLeft(yScale));
 
@@ -222,11 +222,9 @@ export function responsiveLineChart(
       .attr("stroke-width", "0.5px")
       .attr("fill", "none");
 
-    // let tooltip = d3.select("body").append("div").attr("class", "line_tooltip");
-    // d3.select(".line_tooltip").style("background-color", "white");
-    // d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
-
     const circles = g.selectAll(".circles_line").data(data);
+    const circles2 = g.selectAll(".circles_line2").data(data);
+    const circles3 = g.selectAll(".circles_line3").data(data);
 
     circles.exit().remove();
 
@@ -245,15 +243,35 @@ export function responsiveLineChart(
       .attr("stroke", "black")
       .attr("stroke-width", "1px");
 
-    // .on("mousemove", function (d) {
-    //   tooltip
-    //     .style("left", d3.event.pageX + 10 + "px")
-    //     .style("top", d3.event.pageY + 10 + "px")
-    //     .style("display", "inline-block");
-    // })
-    // .on("mouseout", function (d) {
-    //   tooltip.style("display", "none");
-    // });
+    circles2
+      .enter()
+      .append("circle")
+      .attr("class", "circles_line2")
+      .attr("r", 3)
+      .attr("cx", function (d, i) {
+        return xScale(d.date);
+      })
+      .attr("cy", function (d, i) {
+        return yScale(d.num2);
+      })
+      .attr("fill", "white")
+      .attr("stroke", "black")
+      .attr("stroke-width", "1px");
+
+    circles3
+      .enter()
+      .append("circle")
+      .attr("class", "circles_line3")
+      .attr("r", 3)
+      .attr("cx", function (d, i) {
+        return xScale(d.date);
+      })
+      .attr("cy", function (d, i) {
+        return yScale(d.num3);
+      })
+      .attr("fill", "white")
+      .attr("stroke", "black")
+      .attr("stroke-width", "1px");
 
     circles
       .attr("r", 3)
@@ -262,6 +280,30 @@ export function responsiveLineChart(
       })
       .attr("cy", function (d, i) {
         return yScale(d.num1);
+      })
+      .attr("fill", "white")
+      .attr("stroke", "black")
+      .attr("stroke-width", "1px");
+
+    circles2
+      .attr("r", 3)
+      .attr("cx", function (d, i) {
+        return xScale(d.date);
+      })
+      .attr("cy", function (d, i) {
+        return yScale(d.num2);
+      })
+      .attr("fill", "white")
+      .attr("stroke", "black")
+      .attr("stroke-width", "1px");
+
+    circles3
+      .attr("r", 3)
+      .attr("cx", function (d, i) {
+        return xScale(d.date);
+      })
+      .attr("cy", function (d, i) {
+        return yScale(d.num3);
       })
       .attr("fill", "white")
       .attr("stroke", "black")
@@ -288,10 +330,6 @@ export function responsiveLineChart(
   loadData();
 
   d3.select("#line_y_grid > g:nth-child(2) > line").remove();
-
-  //  init params
-  ////  I pass all parameters at the end instead of directly replacing the code above
-  ////  Doing it like this keeps the original code as a default
 
   if (lineTitleInputValue != undefined) {
     if (lineTitleInputValue != "") {
@@ -325,10 +363,14 @@ export function responsiveLineChart(
 
   if (lineWidthSliderValue != undefined) {
     d3.select("#line1").attr("stroke-width", lineWidthSliderValue * 0.5);
+    d3.select("#line2").attr("stroke-width", lineWidthSliderValue * 0.5);
+    d3.select("#line3").attr("stroke-width", lineWidthSliderValue * 0.5);
   }
 
   if (linePointRadiusSliderValue != undefined) {
     d3.select(".circles_line").attr("r", linePointRadiusSliderValue * 0.5);
+    d3.select(".circles_line2").attr("r", linePointRadiusSliderValue * 0.5);
+    d3.select(".circles_line3").attr("r", linePointRadiusSliderValue * 0.5);
   }
 
   if (lineTooltipCheckboxValue != undefined) {
@@ -340,7 +382,31 @@ export function responsiveLineChart(
       d3.select(".line_tooltip").style("background-color", "white");
       d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
       let circles = d3.selectAll(".circles_line");
+      let circles2 = d3.selectAll(".circles_line2");
+      let circles3 = d3.selectAll(".circles_line3");
       circles
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+
+      circles2
+        .on("mousemove", function (d) {
+          tooltip
+            .style("left", d3.event.pageX + 10 + "px")
+            .style("top", d3.event.pageY + 10 + "px")
+            .style("display", "inline-block");
+        })
+        .on("mouseout", function (d) {
+          tooltip.style("display", "none");
+        });
+
+      circles3
         .on("mousemove", function (d) {
           tooltip
             .style("left", d3.event.pageX + 10 + "px")
@@ -361,8 +427,12 @@ export function responsiveLineChart(
   if (lineDatapointCheckboxValue != undefined) {
     if (lineDatapointCheckboxValue == "checked") {
       d3.selectAll(".circles_line").attr("display", "");
+      d3.selectAll(".circles_line2").attr("display", "");
+      d3.selectAll(".circles_line3").attr("display", "");
     } else if (lineDatapointCheckboxValue == "unchecked") {
       d3.selectAll(".circles_line").attr("display", "none");
+      d3.selectAll(".circles_line2").attr("display", "none");
+      d3.selectAll(".circles_line3").attr("display", "none");
     }
   }
 
@@ -401,8 +471,12 @@ export function responsiveLineChart(
   if (lineHoverCheckboxValue != undefined) {
     if (lineHoverCheckboxValue == "checked") {
       d3.selectAll(".circles_line").classed("circle_hovered", true);
+      d3.selectAll(".circles_line2").classed("circle_hovered", true);
+      d3.selectAll(".circles_line3").classed("circle_hovered", true);
     } else if (lineHoverCheckboxValue == "unchecked") {
       d3.selectAll(".circles_line").classed("circle_hovered", false);
+      d3.selectAll(".circles_line2").classed("circle_hovered", false);
+      d3.selectAll(".circles_line3").classed("circle_hovered", false);
     }
   }
 
@@ -429,7 +503,7 @@ export function responsiveLineChart(
       d3.select("#line3").style("stroke", lineCPValue3);
     }
   }
-  console.log(lineTickCPValue);
+
   if (lineTickCPValue != undefined) {
     if (lineTickCPValue != "") {
       d3.selectAll("#line_chart > g > g > .tick > text").style(
@@ -478,12 +552,22 @@ export function responsiveLineChart(
   if (lineDatapointCPValue != undefined) {
     if (lineDatapointCPValue != "") {
       d3.selectAll(".circles_line").style("fill", lineDatapointCPValue);
+      d3.selectAll(".circles_line2").style("fill", lineDatapointCPValue);
+      d3.selectAll(".circles_line3").style("fill", lineDatapointCPValue);
     }
   }
 
   if (lineDatapointBorderCPValue != undefined) {
     if (lineDatapointBorderCPValue != "") {
       d3.selectAll(".circles_line").style("stroke", lineDatapointBorderCPValue);
+      d3.selectAll(".circles_line2").style(
+        "stroke",
+        lineDatapointBorderCPValue
+      );
+      d3.selectAll(".circles_line3").style(
+        "stroke",
+        lineDatapointBorderCPValue
+      );
     }
   }
 

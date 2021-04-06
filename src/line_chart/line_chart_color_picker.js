@@ -193,11 +193,20 @@ $("#line_datapoint_cp").spectrum({
   allowEmpty: false,
   move: function (color) {
     d3.selectAll(".circles_line").style("fill", color.toRgbString());
+    d3.selectAll(".circles_line2").style("fill", color.toRgbString());
+    d3.selectAll(".circles_line3").style("fill", color.toRgbString());
 
     lineValues.datapointCP = color.toRgbString();
 
     document.getElementById(
       "line_datapoint_cp_span"
+    ).innerHTML = color.toRgbString();
+
+    document.getElementById(
+      "line_datapoint2_cp_span"
+    ).innerHTML = color.toRgbString();
+    document.getElementById(
+      "line_datapoint3_cp_span"
     ).innerHTML = color.toRgbString();
   },
 });
@@ -210,11 +219,19 @@ $("#line_datapoint_border_cp").spectrum({
   allowEmpty: false,
   move: function (color) {
     d3.selectAll(".circles_line").style("stroke", color.toRgbString());
+    d3.selectAll(".circles_line2").style("stroke", color.toRgbString());
+    d3.selectAll(".circles_line3").style("stroke", color.toRgbString());
 
     lineValues.datapointBorderCP = color.toRgbString();
 
     document.getElementById(
       "line_datapoint_border_cp_span"
+    ).innerHTML = color.toRgbString();
+    document.getElementById(
+      "line_datapoint2_border_cp_span"
+    ).innerHTML = color.toRgbString();
+    document.getElementById(
+      "line_datapoint3_border_cp_span"
     ).innerHTML = color.toRgbString();
   },
 });

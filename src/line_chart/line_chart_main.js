@@ -1,13 +1,12 @@
 const d3 = require("d3");
 
-import { responsiveLineChart } from "./line_chart_graph.js";
+import { lineChart } from "./line_chart_graph.js";
 import { lineValues } from "./line_chart_values.js";
 import "./line_chart_listeners.js";
 import "./line_chart_color_picker.js";
-import "../overlay_nav.js";
 
 export function initLineChart() {
-  responsiveLineChart(
+  lineChart(
     lineValues.titleInput,
     lineValues.xAxisTitleInput,
     lineValues.yAxisTitleInput,
@@ -38,6 +37,7 @@ export function initLineChart() {
     lineValues.datapointBorderCP,
     lineValues.areaCP
   );
+
   document.getElementById("line_title_span").innerHTML = lineValues.titleInput;
   document.getElementById("line_x_title_span").innerHTML =
     lineValues.xAxisTitleInput;
@@ -58,9 +58,18 @@ export function initLineChart() {
     lineValues.widthSlider;
   document.getElementById("line_point_radius_slider_span").innerHTML =
     lineValues.pointRadiusSlider;
+  document.getElementById("line_point2_radius_slider_span").innerHTML =
+    lineValues.pointRadiusSlider;
+  document.getElementById("line_point3_radius_slider_span").innerHTML =
+    lineValues.pointRadiusSlider;
 
   d3.select("#line_tooltip_checkbox_span").classed("hide", true);
+  d3.select("#line_tooltip_circle_checkbox_span").classed("hide", true);
+  d3.select("#line_tooltip2_circle_checkbox_span").classed("hide", true);
+  d3.select("#line_tooltip3_circle_checkbox_span").classed("hide", true);
   d3.select("#line_datapoint_checkbox_span").classed("hide", false);
+  d3.select("#line_datapoint2_checkbox_span").classed("hide", true);
+  d3.select("#line_datapoint3_checkbox_span").classed("hide", true);
   d3.select("#line_x_grid_checkbox_span").classed("hide", true);
   d3.select("#line_y_grid_checkbox_span").classed("hide", false);
   d3.select("#line_x_line_checkbox_span").classed("hide", true);
@@ -82,7 +91,15 @@ export function initLineChart() {
     lineValues.yAxisLineCP;
   document.getElementById("line_datapoint_cp_span").innerHTML =
     lineValues.datapointCP;
+  document.getElementById("line_datapoint2_cp_span").innerHTML =
+    lineValues.datapointCP;
+  document.getElementById("line_datapoint3_cp_span").innerHTML =
+    lineValues.datapointCP;
   document.getElementById("line_datapoint_border_cp_span").innerHTML =
+    lineValues.datapointBorderCP;
+  document.getElementById("line_datapoint2_border_cp_span").innerHTML =
+    lineValues.datapointBorderCP;
+  document.getElementById("line_datapoint3_border_cp_span").innerHTML =
     lineValues.datapointBorderCP;
   document.getElementById("line_area_cp_span").innerHTML = lineValues.areaCP;
   document.getElementById("line_1_cp_span").innerHTML = lineValues.lineCP1;
@@ -98,4 +115,8 @@ export function initLineChart() {
   d3.select("#line1").attr("display", "");
   d3.select("#line2").attr("display", "none");
   d3.select("#line3").attr("display", "none");
+
+  d3.selectAll(".circles_line").attr("display", "");
+  d3.selectAll(".circles_line2").attr("display", "none");
+  d3.selectAll(".circles_line3").attr("display", "none");
 }

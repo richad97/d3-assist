@@ -2,7 +2,6 @@ import { barChart } from "./bar_chart_graph.js";
 import { barValues } from "./bar_chart_values.js";
 import "./bar_chart_listeners.js";
 import "./bar_chart_color_picker.js";
-import "../overlay_nav.js";
 const d3 = require("d3");
 
 export function initBarChart() {

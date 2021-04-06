@@ -5,8 +5,7 @@
 
 .col-c {
   text-align: center;
-  background-color: $sec_color;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.015);
   transition: background-color 0.25s ease-in-out;
   padding: 0;
   height: 3.25em;
@@ -34,4 +33,13 @@
   padding-top: 0.5em;
   padding-left: 1em;
   margin: 0;
+}
+
+#title_row_group,
+#slider_row_group,
+#checkbox_row_group,
+#color_row_group {
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  margin: 0 8px 0 8px;
+  background-color: white;
 }

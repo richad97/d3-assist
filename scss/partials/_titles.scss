@@ -1,11 +1,12 @@
 .text_inputs {
   height: 2em;
   border-radius: 2px;
-  border: 1px solid rgba(150, 150, 150, 0.3);
+  border: 1px solid rgba(150, 150, 150, 0.1);
   width: 90%;
   font-size: 0.8em;
   color: rgb(50, 50, 50);
   outline: none;
+  text-align: center;
 }
 
 #line_theme_input,
@@ -24,5 +25,5 @@
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: rgba(0, 0, 0, 0.4);
   opacity: 1; /* Firefox */
-  text-align: start;
+  text-align: center;
 }
