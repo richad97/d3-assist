@@ -5,14 +5,6 @@ import {
   barTitleSlider,
   barXAxisTitleSlider,
   barYAxisTitleSlider,
-  barTooltipCheckbox,
-  barHorizontalCheckbox,
-  barVerticalCheckbox,
-  barXAxisGridCheckbox,
-  barYAxisGridCheckbox,
-  barXAxisLineCheckbox,
-  barYAxisLineCheckbox,
-  barHoverCheckbox,
 } from "./bar_chart_inputs.js";
 
 export let barValues = {

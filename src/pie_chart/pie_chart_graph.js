@@ -1,4 +1,6 @@
-export function fixedPieChart() {
+const d3 = require("d3");
+
+export function pieChart() {
   const data = [20, 27, 43, 67, 88];
 
   const width = 400,
@@ -6,7 +8,7 @@ export function fixedPieChart() {
     radius = Math.min(width, height) / 2;
 
   const svg = d3
-    .select("#pie_chart_div")
+    .select("#pie_div")
     .append("svg")
     .attr("id", "pie_chart")
     .attr("width", width)

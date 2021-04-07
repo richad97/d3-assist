@@ -1,6 +1,5 @@
 const d3 = require("d3");
 
-import { line } from "d3";
 import {
   lineTitleInput,
   lineXAxisTitleInput,
@@ -93,6 +92,10 @@ linePointRadiusSlider.addEventListener("mousedown", function () {
     d3.selectAll(".circles_line3").attr("r", linePointRadiusSlider.value * 0.5);
     lineValues.pointRadiusSlider = linePointRadiusSlider.value;
     document.getElementById("line_point_radius_slider_span").innerHTML =
+      lineValues.pointRadiusSlider;
+    document.getElementById("line_point2_radius_slider_span").innerHTML =
+      lineValues.pointRadiusSlider;
+    document.getElementById("line_point3_radius_slider_span").innerHTML =
       lineValues.pointRadiusSlider;
   });
 });

@@ -1,4 +1,6 @@
-import { fixedPieChart } from "./pie_chart_graph.js";
-import "../overlay_nav.js";
+import { pieChart } from "./pie_chart_graph.js";
+import "./pie_chart_color_picker.js";
 
-fixedPieChart();
+export function initPieChart() {
+  pieChart();
+}

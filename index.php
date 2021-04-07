@@ -29,6 +29,7 @@
             <div id="overlay_code_container">
               <?php require "./view/line_chart/line_chart_template.html";?>
               <?php require "./view/bar_chart/bar_chart_template.html";?>
+              <?php require "./view/pie_chart/pie_chart_template.html";?>
             </div>
           </div>
         </div>
@@ -87,6 +88,7 @@
                     <div id="title_row_group">
                       <?php require "./view/line_chart/form/line_chart_form_titles.html";?>
                       <?php require "./view/bar_chart/form/bar_chart_form_titles.html";?>
+                      <?php require "./view/pie_chart/form/pie_chart_form_titles.html";?>
                     </div>
 
                   <h6>
@@ -104,6 +106,7 @@
                     <div id="slider_row_group">
                       <?php require "./view/line_chart/form/line_chart_form_sliders.html";?>
                       <?php require "./view/bar_chart/form/bar_chart_form_sliders.html";?>
+                      <?php require "./view/pie_chart/form/pie_chart_form_sliders.html";?>
                     </div>
 
                   <h6>
@@ -121,6 +124,7 @@
                     <div id="checkbox_row_group">
                       <?php require "./view/line_chart/form/line_chart_form_checkboxes.html";?>
                       <?php require "./view/bar_chart/form/bar_chart_form_checkboxes.html";?>
+                      <?php require "./view/pie_chart/form/pie_chart_form_checkboxes.html";?>
                     </div>
 
                   <h6>
@@ -138,6 +142,7 @@
                     <div id="color_row_group">
                       <?php require "./view/line_chart/form/line_chart_form_colors.html";?>
                       <?php require "./view/bar_chart/form/bar_chart_form_colors.html";?>
+                      <?php require "./view/pie_chart/form/pie_chart_form_colors.html";?>
                     </div>
                 </form>
                 
@@ -156,10 +161,14 @@
               <div class="row">
                 <div id="line_div"></div>
               </div>
+              <div class="row">
+                <div id="pie_div"></div>
+              </div>
 
               <div class="row" id="graph_dimension_div">
                 <?php require "./view/line_chart/line_chart_dimension.html";?>
                 <?php require "./view/bar_chart/bar_chart_dimension.html";?>
+                <?php require "./view/pie_chart/pie_chart_dimension.html";?>
               </div>
             </div>
           </div>

@@ -2,9 +2,7 @@ const d3 = require("d3");
 
 import { initLineChart } from "./line_chart/line_chart_main.js";
 import { initBarChart } from "./bar_chart/bar_chart_main.js";
-import { lineValues } from "./line_chart/line_chart_values.js";
-
-let selected = "line_chart";
+import { initPieChart } from "./pie_chart/pie_chart_main.js";
 
 const overlayCloseButton = document.querySelector("#overlay_close_button");
 const overlayCopyButton = document.querySelector("#overlay_button_copy");
@@ -12,6 +10,9 @@ const formSubmitButton = document.querySelector("#form_submit_button");
 const formHiddenLine = document.querySelector("#line_form_input");
 const navLineButton = document.querySelector("#test_line");
 const navBarButton = document.querySelector("#test_bar");
+const navPieButton = document.querySelector("#test_pie");
+
+let selected = "pie_chart";
 
 (function rowButtons() {
   $("#title_arrow_right_icon").hide();
@@ -72,7 +73,7 @@ const navBarButton = document.querySelector("#test_bar");
   });
 })();
 
-function copyChartToClipboard(chart = "line_chart") {
+function copyChartToClipboard(chart = "pie_chart") {
   var range = document.createRange();
   range.selectNode(document.getElementById(`${chart}_template`));
 
@@ -85,7 +86,7 @@ function copyChartToClipboard(chart = "line_chart") {
   window.alert("Code has been copied to your clipboard.");
 }
 
-function copyChartToValue(chart = "line_chart") {
+function copyChartToValue(chart = "pie_chart") {
   $("#overlay").fadeIn(600);
 
   var range = document.createRange();
@@ -102,6 +103,15 @@ function copyChartToValue(chart = "line_chart") {
 function showLine() {
   selected = "line_chart";
 
+  $(".line_title_col_row").show();
+  $(".line_slider_col_row").show();
+  $(".line_checkbox_col_row").show();
+  $(".line_color_col_row").show();
+  $("#line_chart_template").show();
+  $("#line_dimension_div").show();
+  $("#line_div").show();
+  $("#line_form_button").show();
+
   $(".bar_title_col_row").hide();
   $(".bar_slider_col_row").hide();
   $(".bar_checkbox_col_row").hide();
@@ -111,14 +121,14 @@ function showLine() {
   $("#bar_div").hide();
   $("#bar_form_button").hide();
 
-  $(".line_title_col_row").show();
-  $(".line_slider_col_row").show();
-  $(".line_checkbox_col_row").show();
-  $(".line_color_col_row").show();
-  $("#line_chart_template").show();
-  $("#line_dimension_div").show();
-  $("#line_div").show();
-  $("#line_form_button").show();
+  $(".pie_title_col_row").hide();
+  $(".pie_slider_col_row").hide();
+  $(".pie_checkbox_col_row").hide();
+  $(".pie_color_col_row").hide();
+  //$("#pie_chart_template").hide();
+  $("#pie_dimension_div").hide();
+  $("#pie_div").hide();
+  //$("#pie_form_button").hide();
 }
 
 function showBar() {
@@ -139,12 +149,49 @@ function showBar() {
   $("#line_chart_template").hide();
   $("#line_dimension_div").hide();
   $("#line_div").hide();
+
+  $(".pie_title_col_row").hide();
+  $(".pie_slider_col_row").hide();
+  $(".pie_checkbox_col_row").hide();
+  $(".pie_color_col_row").hide();
+  //$("#pie_chart_template").hide();
+  $("#pie_dimension_div").hide();
+  $("#pie_div").hide();
+  //$("#pie_form_button").hide();
+}
+
+function showPie() {
+  selected = "pie_chart";
+
+  $(".pie_title_col_row").show();
+  $(".pie_slider_col_row").show();
+  $(".pie_checkbox_col_row").show();
+  $(".pie_color_col_row").show();
+  //$("#pie_chart_template").show();
+  $("#pie_dimension_div").show();
+  $("#pie_div").show();
+  //$("#pie_form_button").show();
+
+  $(".bar_title_col_row").hide();
+  $(".bar_slider_col_row").hide();
+  $(".bar_checkbox_col_row").hide();
+  $(".bar_color_col_row").hide();
+  $("#bar_chart_template").hide();
+  $("#bar_dimension_div").hide();
+  $("#bar_div").hide();
+
+  $(".line_title_col_row").hide();
+  $(".line_slider_col_row").hide();
+  $(".line_checkbox_col_row").hide();
+  $(".line_color_col_row").hide();
+  $("#line_chart_template").hide();
+  $("#line_dimension_div").hide();
+  $("#line_div").hide();
 }
 
 formSubmitButton.addEventListener("click", function () {
   if (selected == "line_chart") {
     copyChartToValue("line_chart");
-    console.log(lineValues);
   }
   if (selected == "bar_chart") {
     copyChartToValue("bar_chart");
@@ -188,6 +235,7 @@ $(navLineButton).click(function (e) {
 
   d3.select(this).classed("selected", true);
   d3.select(navBarButton).classed("selected", false);
+  d3.select(navPieButton).classed("selected", false);
 });
 
 $(navBarButton).click(function (e) {
@@ -207,11 +255,33 @@ $(navBarButton).click(function (e) {
 
   d3.select(this).classed("selected", true);
   d3.select(navLineButton).classed("selected", false);
+  d3.select(navPieButton).classed("selected", false);
+});
+
+$(navPieButton).click(function (e) {
+  e.preventDefault();
+
+  if (selected != "pie_chart") {
+    $("#form_container").fadeOut(850);
+    $("#graph_container").fadeOut(850);
+
+    setTimeout(function () {
+      showPie();
+
+      $("#form_container").fadeIn(850);
+      $("#graph_container").fadeIn(850);
+    }, 850);
+  }
+
+  d3.select(this).classed("selected", true);
+  d3.select(navLineButton).classed("selected", false);
+  d3.select(navBarButton).classed("selected", false);
 });
 
 initBarChart();
 initLineChart();
+initPieChart();
 
-showLine();
+showPie();
 
-d3.select(navLineButton).classed("selected", true);
+d3.select(navPieButton).classed("selected", true);

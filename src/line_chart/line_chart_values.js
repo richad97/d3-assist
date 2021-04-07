@@ -7,14 +7,6 @@ import {
   lineYAxisTitleSlider,
   lineWidthSlider,
   linePointRadiusSlider,
-  lineTooltipCheckbox,
-  lineDatapointCheckbox,
-  lineXAxisGridCheckbox,
-  lineYAxisGridCheckbox,
-  lineXAxisLineCheckbox,
-  lineYAxisLineCheckbox,
-  lineHoverCheckbox,
-  lineAreaCheckbox,
   lineAmountInput,
 } from "./line_chart_inputs.js";
 
