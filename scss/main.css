@@ -57,6 +57,12 @@
   background-color: white;
   width: 96%;
   margin-left: 2%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
 #pie_chart {
@@ -64,9 +70,19 @@
   margin-top: 3%;
 }
 
-#pie_legend {
-  display: inline-block;
-  border: 1px solid black;
+#legend {
+  position: relative;
+  top: 11em;
+  right: 7em;
+  width: 5em;
+  height: 8em;
+}
+
+.legend-colors {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.9em;
+  margin-top: 0.1em;
 }
 
 .arc:hover {

@@ -1,43 +1,44 @@
 const d3 = require("d3");
 
-const data = [20, 27, 43, 67, 88];
+const data = [40, 27, 13, 67, 88];
 
 const width = 350,
-  height = 380,
+  height = 390,
   radius = Math.min(width, height) / 2;
 
 const svg = d3
   .select("#pie_div")
   .append("svg")
   .attr("id", "pie_chart")
-  .attr("width", width)
+  .attr("width", "100%")
   .attr("height", height);
 
-const g = svg
+const pieChart = svg
   .append("g")
-  .attr("transform", `translate(${width / 2}, ${height / 2 + 20})`);
+  .attr("transform", `translate(${width / 2}, ${height / 2 + 30})`);
 
 const tooltip = d3.select("body").append("div").attr("class", "pie_tooltip");
 
 const title = svg.append("text");
 
 title
-  .attr("x", width / 2)
-  .attr("y", 20)
+  .attr("id", "pie_title")
+  .attr("x", "58%")
+  .attr("y", 25)
   .attr("text-anchor", "middle")
-  .style("font-size", "16px")
+  .style("font-size", "1.1em")
   .text("Title")
   .style("fill", "black");
 
 const pieScale = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888"]);
 
-const pie = d3.pie().sort(null);
+const pie = d3.pie().sort(null); // turn sort OFF
 
 const arc = d3.arc();
 
 const labelArc = d3.arc();
 
-const slice = g
+const slice = pieChart
   .selectAll(".arc")
   .data(pie(data))
   .enter()
@@ -59,15 +60,7 @@ slices
     tooltip.style("display", "none");
   });
 
-// let innerRadius = document.querySelector("#pie_inner_radius_slider");
-// let outerRadius = document.querySelector("#pie_outer_radius_slider");
-
-// let sliderValues = {
-//   innerRadius: innerRadius.value,
-//   outerRadius: outerRadius.value,
-// };
-
-export function pieRadii(innerRadius, outerRadius) {
+export function pieCalc(innerRadius, outerRadius, borderWidth) {
   pie.value(function (d) {
     return d;
   });
@@ -78,24 +71,15 @@ export function pieRadii(innerRadius, outerRadius) {
 
   slices
     .attr("d", arc)
+    .attr("class", "pie_stroke")
     .attr("stroke", "white")
-    .attr("stroke-width", "2px")
+    .attr("stroke-width", `${borderWidth}px`)
     .style("fill", function (d) {
       return pieScale(d.data);
     });
 }
-// pieRadii(sliderValues.innerRadius, sliderValues.outerRadius);
 
-// innerRadius.addEventListener("input", function () {
-//   sliderValues.innerRadius = innerRadius.value;
-//   pieRadii(sliderValues.innerRadius, sliderValues.outerRadius);
-// });
-
-// outerRadius.addEventListener("input", function () {
-//   sliderValues.outerRadius = outerRadius.value;
-//   pieRadii(sliderValues.innerRadius, sliderValues.outerRadius);
-// });
-
+// label arc
 // slices
 //   .append("text")
 //   .attr("class", "h_text")
@@ -107,3 +91,22 @@ export function pieRadii(innerRadius, outerRadius) {
 //   .text(function (d) {
 //     return d.data;
 //   });
+
+let legend = d3.select("#pie_div").append("div").attr("id", "legend");
+
+// legend
+//   .style("height", "20px")
+//   .style("width", "20px")
+//   .style("background-color", "red");
+
+let pairs = legend.selectAll(".pairs").data(data);
+
+pairs
+  .enter()
+  .append("div")
+  .attr("class", "pairs")
+  .html(function (d) {
+    return `<span class="legend-colors" style="background-color:${pieScale(
+      d
+    )}"></span><span>${d}</span>`;
+  });
