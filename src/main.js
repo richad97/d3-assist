@@ -73,7 +73,7 @@ let selected = "pie_chart";
   });
 })();
 
-function copyChartToClipboard(chart = "pie_chart") {
+function copyChartToClipboard(chart = "line_chart") {
   var range = document.createRange();
   range.selectNode(document.getElementById(`${chart}_template`));
 
@@ -86,7 +86,7 @@ function copyChartToClipboard(chart = "pie_chart") {
   window.alert("Code has been copied to your clipboard.");
 }
 
-function copyChartToValue(chart = "pie_chart") {
+function copyChartToValue(chart = "line_chart") {
   $("#overlay").fadeIn(600);
 
   var range = document.createRange();

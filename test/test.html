@@ -7,43 +7,46 @@
     <title>Document</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <style>
-      .bar_tooltip {
+      .bar_tooltip,
+      .line_tooltip,
+      .pie_tooltip {
         position: absolute;
         display: none;
         min-width: 80px;
         height: auto;
         background: none repeat scroll;
-        border: 1px solid #6f257f;
+        border: 1px solid #afafaf;
         padding: 14px;
         text-align: center;
         background-color: white;
         z-index: 1;
       }
-      .line_tooltip {
-        position: absolute;
-        display: none;
-        min-width: 80px;
-        height: auto;
-        background: none repeat scroll;
-        border: 1px solid #6f257f;
-        padding: 14px;
-        text-align: center;
-        background-color: white;
-        z-index: 1;
-      }
+
       .hovered:hover {
         opacity: 0.7;
+      }
+      #pie_div {
+        display: inline-block;
+        background-color: grey;
+      }
+      font {
+        fill: white;
+      }
+      .arc:hover {
+        opacity: 0.6;
       }
     </style>
   </head>
   <body>
     <div id="pie_div"></div>
+    <input id="innerRadius" type="range" min="0" value="80" max="100" />
+    <input id="outerRadius" type="range" min="10" value="10" max="50" />
   </body>
   <script>
     const data = [20, 27, 43, 67, 88];
 
-    const width = 400,
-      height = 400,
+    const width = 350,
+      height = 380,
       radius = Math.min(width, height) / 2;
 
     const svg = d3
@@ -55,51 +58,100 @@
 
     const g = svg
       .append("g")
-      .attr("transform", `translate(${width / 2}, ${height / 2})`);
+      .attr("transform", `translate(${width / 2}, ${height / 2 + 20})`);
+
+    const tooltip = d3
+      .select("body")
+      .append("div")
+      .attr("class", "pie_tooltip");
+
+    const title = svg.append("text");
+
+    title
+      .attr("x", width / 2)
+      .attr("y", 20)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .text("Title")
+      .style("fill", "white");
 
     const pieScale = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888"]);
 
-    const pie = d3
-      .pie()
-      .sort(null)
-      .value(function (d) {
-        return d;
-      });
+    const pie = d3.pie().sort(null);
 
-    const arc = d3
-      .arc()
-      .outerRadius(radius - 10)
-      .innerRadius(100);
+    const arc = d3.arc();
 
-    const labelArc = d3
-      .arc()
-      .outerRadius(radius - 40)
-      .innerRadius(radius - 40);
+    const labelArc = d3.arc();
 
-    const arcs = g
+    const slice = g
       .selectAll(".arc")
       .data(pie(data))
       .enter()
       .append("g")
       .attr("class", "arc");
 
-    arcs
-      .append("path")
-      .attr("d", arc)
-      .attr("stroke", "white")
-      .attr("stroke-width", "2px")
-      .style("fill", function (d) {
-        return pieScale(d.data);
+    const slices = slice.append("path");
+
+    // Tooltip
+    slices
+      .on("mousemove", function (d) {
+        tooltip
+          .style("left", d3.event.pageX + 10 + "px")
+          .style("top", d3.event.pageY + 10 + "px")
+          .style("display", "inline-block")
+          .html(d.value);
+      })
+      .on("mouseout", function (d) {
+        tooltip.style("display", "none");
       });
 
-    arcs
-      .append("text")
-      .attr("transform", function (d) {
-        return "translate(" + labelArc.centroid(d) + ")";
-      })
-      .attr("dy", ".35em")
-      .text(function (d) {
-        return d.data;
+    let innerRadius = document.querySelector("#innerRadius");
+    let outerRadius = document.querySelector("#outerRadius");
+
+    let sliderValues = {
+      innerRadius: innerRadius.value,
+      outerRadius: outerRadius.value,
+    };
+
+    function pieRadii(innerRadius, outerRadius) {
+      pie.value(function (d) {
+        return d;
       });
+
+      arc.outerRadius(radius - outerRadius).innerRadius(innerRadius);
+
+      //labelArc.outerRadius(radius - 70).innerRadius(radius - 40);
+
+      slices
+        .attr("d", arc)
+        .attr("stroke", "white")
+        .attr("stroke-width", "2px")
+        .style("fill", function (d) {
+          return pieScale(d.data);
+        });
+    }
+    pieRadii(sliderValues.innerRadius, sliderValues.outerRadius);
+
+    innerRadius.addEventListener("input", function () {
+      sliderValues.innerRadius = innerRadius.value;
+      pieRadii(sliderValues.innerRadius, sliderValues.outerRadius);
+    });
+
+    outerRadius.addEventListener("input", function () {
+      sliderValues.outerRadius = outerRadius.value;
+      pieRadii(sliderValues.innerRadius, sliderValues.outerRadius);
+    });
+
+    // slices
+    //   .append("text")
+    //   .attr("class", "h_text")
+    //   .attr("display", "none")
+    //   .attr("transform", function (d) {
+    //     return "translate(" + labelArc.centroid(d) + ")";
+    //   })
+    //   .attr("dy", ".35em")
+    //   .text(function (d) {
+    //     return d.data;
+    //   });
   </script>
 </html>

@@ -4,12 +4,12 @@ export const pieTitleSlider = document.querySelector("#pie_title_slider");
 
 export const pieBorderSlider = document.querySelector("#pie_border_slider");
 
-export const pieCenterRadiusSlider = document.querySelector(
-  "#pie_center_radius_slider"
+export const pieInnerRadiusSlider = document.querySelector(
+  "#pie_inner_radius_slider"
 );
 
-export const pieLabelArcSlider = document.querySelector(
-  "#pie_label_arc_slider"
+export const pieOuterRadiusSlider = document.querySelector(
+  "#pie_outer_radius_slider"
 );
 
 export const pieTooltipCheckbox = document.querySelector(
