@@ -73,7 +73,7 @@
 #legend {
   position: relative;
   top: 11em;
-  right: 7em;
+  right: 5em;
   width: 5em;
   height: 8em;
 }
@@ -85,18 +85,12 @@
   margin-top: 0.1em;
 }
 
-.arc:hover {
-  opacity: 0.6;
-}
-
 .hovered:hover {
   opacity: 0.7;
 }
 
 .pairs {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
 }
 
 .circle_hovered:hover {

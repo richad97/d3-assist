@@ -4,6 +4,7 @@ import {
   pieBorderSlider,
   pieInnerRadiusSlider,
   pieOuterRadiusSlider,
+  pieLabelRadiusSlider,
 } from "./pie_chart_inputs.js";
 
 export let pieValues = {
@@ -12,7 +13,9 @@ export let pieValues = {
   borderSlider: pieBorderSlider.value,
   innerRadiusSlider: pieInnerRadiusSlider.value,
   outerRadiusSlider: pieOuterRadiusSlider.value,
+  labelRadiusSlider: pieLabelRadiusSlider.value,
   tooltipCheckbox: "unchecked",
-  donutCheckbox: "unchecked",
+  legendCheckbox: "unchecked",
   hoverCheckbox: "unchecked",
+  sortedCheckbox: "unchecked",
 };

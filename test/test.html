@@ -120,7 +120,7 @@
 
       arc.outerRadius(radius - outerRadius).innerRadius(innerRadius);
 
-      //labelArc.outerRadius(radius - 70).innerRadius(radius - 40);
+      labelArc.outerRadius(radius - 100).innerRadius(radius - 10);
 
       slices
         .attr("d", arc)
@@ -142,16 +142,16 @@
       pieRadii(sliderValues.innerRadius, sliderValues.outerRadius);
     });
 
-    // slices
-    //   .append("text")
-    //   .attr("class", "h_text")
-    //   .attr("display", "none")
-    //   .attr("transform", function (d) {
-    //     return "translate(" + labelArc.centroid(d) + ")";
-    //   })
-    //   .attr("dy", ".35em")
-    //   .text(function (d) {
-    //     return d.data;
-    //   });
+    slice
+      .append("text")
+      .attr("class", "h_text")
+      .attr("display", "")
+      .attr("transform", function (d) {
+        return "translate(" + labelArc.centroid(d) + ")";
+      })
+      .attr("dy", ".35em")
+      .text(function (d) {
+        return d.data;
+      });
   </script>
 </html>

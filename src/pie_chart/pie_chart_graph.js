@@ -17,9 +17,7 @@ const pieChart = svg
   .append("g")
   .attr("transform", `translate(${width / 2}, ${height / 2 + 30})`);
 
-const tooltip = d3.select("body").append("div").attr("class", "pie_tooltip");
-
-const title = svg.append("text");
+const title = svg.append("text").attr("class", "pie-font");
 
 title
   .attr("id", "pie_title")
@@ -27,12 +25,18 @@ title
   .attr("y", 25)
   .attr("text-anchor", "middle")
   .style("font-size", "1.1em")
-  .text("Title")
-  .style("fill", "black");
+  .text("Title");
 
 const pieScale = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888"]);
 
-const pie = d3.pie().sort(null); // turn sort OFF
+function sortLegend() {
+  data.sort(function (a, b) {
+    return a - b;
+  });
+}
+sortLegend();
+
+const pie = d3.pie();
 
 const arc = d3.arc();
 
@@ -47,27 +51,47 @@ const slice = pieChart
 
 const slices = slice.append("path");
 
-// Tooltip
-slices
-  .on("mousemove", function (d) {
-    tooltip
-      .style("left", d3.event.pageX + 10 + "px")
-      .style("top", d3.event.pageY + 10 + "px")
-      .style("display", "inline-block")
-      .html(d.value);
-  })
-  .on("mouseout", function (d) {
-    tooltip.style("display", "none");
-  });
+function checkPieTooltip() {
+  if (document.querySelector(".pie_tooltip")) {
+    document.querySelector(".pie_tooltip").remove();
+  }
+}
 
-export function pieCalc(innerRadius, outerRadius, borderWidth) {
+function initPieTooltip() {
+  checkPieTooltip();
+
+  const tooltip = d3.select("body").append("div").attr("class", "pie_tooltip");
+
+  slices
+    .on("mousemove", function (d) {
+      tooltip
+        .style("left", d3.event.pageX + 10 + "px")
+        .style("top", d3.event.pageY + 10 + "px")
+        .style("display", "inline-block")
+        .html(d.value);
+    })
+    .on("mouseout", function (d) {
+      tooltip.style("display", "none");
+    });
+}
+
+export function pieCalc(
+  innerRadius,
+  outerRadius,
+  borderWidth,
+  labelRadius,
+  tooltipCheckbox
+) {
+  if (document.querySelector(".slice-labels")) {
+    d3.selectAll(".slice-labels").remove();
+  }
   pie.value(function (d) {
     return d;
   });
 
   arc.outerRadius(radius - outerRadius).innerRadius(innerRadius);
 
-  //labelArc.outerRadius(radius - 70).innerRadius(radius - 40);
+  labelArc.outerRadius(radius - 70).innerRadius(radius - labelRadius);
 
   slices
     .attr("d", arc)
@@ -77,36 +101,41 @@ export function pieCalc(innerRadius, outerRadius, borderWidth) {
     .style("fill", function (d) {
       return pieScale(d.data);
     });
+
+  // label arc
+  slice
+    .append("text")
+    .attr("class", "slice-labels")
+    .attr("transform", function (d) {
+      return "translate(" + labelArc.centroid(d) + ")";
+    })
+    .attr("dy", ".35em")
+    .text(function (d) {
+      return d.data;
+    });
+
+  if (tooltipCheckbox == "checked") {
+    initPieTooltip();
+  }
+  if (tooltipCheckbox == "unchecked") {
+    checkPieTooltip();
+  }
 }
 
-// label arc
-// slices
-//   .append("text")
-//   .attr("class", "h_text")
-//   .attr("display", "none")
-//   .attr("transform", function (d) {
-//     return "translate(" + labelArc.centroid(d) + ")";
-//   })
-//   .attr("dy", ".35em")
-//   .text(function (d) {
-//     return d.data;
-//   });
+function createLegend() {
+  let legend = d3.select("#pie_div").append("div").attr("id", "legend");
 
-let legend = d3.select("#pie_div").append("div").attr("id", "legend");
+  let pairs = legend.selectAll(".pairs").data(data);
 
-// legend
-//   .style("height", "20px")
-//   .style("width", "20px")
-//   .style("background-color", "red");
+  pairs
+    .enter()
+    .append("div")
+    .attr("class", "pairs")
+    .html(function (d) {
+      return `<span class="legend-colors" style="background-color:${pieScale(
+        d
+      )}"></span><span class="pie-font">${d}</span>`;
+    });
+}
 
-let pairs = legend.selectAll(".pairs").data(data);
-
-pairs
-  .enter()
-  .append("div")
-  .attr("class", "pairs")
-  .html(function (d) {
-    return `<span class="legend-colors" style="background-color:${pieScale(
-      d
-    )}"></span><span>${d}</span>`;
-  });
+createLegend();

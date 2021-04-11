@@ -12,10 +12,16 @@ export const pieOuterRadiusSlider = document.querySelector(
   "#pie_outer_radius_slider"
 );
 
+export const pieLabelRadiusSlider = document.querySelector(
+  "#pie_label_radius_slider"
+);
+
 export const pieTooltipCheckbox = document.querySelector(
   "#pie_tooltip_checkbox"
 );
 
-export const pieDonutCheckbox = document.querySelector("#pie_donut_checkbox");
+export const pieLegendCheckbox = document.querySelector("#pie_legend_checkbox");
 
 export const pieHoverCheckbox = document.querySelector("#pie_hover_checkbox");
+
+export const pieSortedCheckbox = document.querySelector("#pie_sorted_checkbox");

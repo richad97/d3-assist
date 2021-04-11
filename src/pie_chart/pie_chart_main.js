@@ -7,6 +7,8 @@ export function initPieChart() {
   pieCalc(
     pieValues.innerRadiusSlider,
     pieValues.outerRadiusSlider,
-    pieValues.borderSlider
+    pieValues.borderSlider,
+    pieValues.labelRadiusSlider,
+    pieValues.tooltipCheckbox
   );
 }
