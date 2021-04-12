@@ -3,6 +3,8 @@ const d3 = require("d3");
 import { initLineChart } from "./line_chart/line_chart_main.js";
 import { initBarChart } from "./bar_chart/bar_chart_main.js";
 import { initPieChart } from "./pie_chart/pie_chart_main.js";
+import { initMap } from "./map/map_main.js";
+import { selectAll } from "d3";
 
 const overlayCloseButton = document.querySelector("#overlay_close_button");
 const overlayCopyButton = document.querySelector("#overlay_button_copy");
@@ -11,6 +13,7 @@ const formHiddenLine = document.querySelector("#line_form_input");
 const navLineButton = document.querySelector("#test_line");
 const navBarButton = document.querySelector("#test_bar");
 const navPieButton = document.querySelector("#test_pie");
+const navMapButton = document.querySelector("#test_map");
 
 let selected = "pie_chart";
 
@@ -103,6 +106,8 @@ function copyChartToValue(chart = "line_chart") {
 function showLine() {
   selected = "line_chart";
 
+  $("#main_row").show();
+
   $(".line_title_col_row").show();
   $(".line_slider_col_row").show();
   $(".line_checkbox_col_row").show();
@@ -134,6 +139,8 @@ function showLine() {
 function showBar() {
   selected = "bar_chart";
 
+  $("#main_row").show();
+
   $(".bar_title_col_row").show();
   $(".bar_slider_col_row").show();
   $(".bar_checkbox_col_row").show();
@@ -163,6 +170,8 @@ function showBar() {
 function showPie() {
   selected = "pie_chart";
 
+  $("#main_row").show();
+
   $(".pie_title_col_row").show();
   $(".pie_slider_col_row").show();
   $(".pie_checkbox_col_row").show();
@@ -187,6 +196,12 @@ function showPie() {
   $("#line_chart_template").hide();
   $("#line_dimension_div").hide();
   $("#line_div").hide();
+}
+
+function showMap() {
+  selected = "map";
+
+  $("#main_row").hide();
 }
 
 formSubmitButton.addEventListener("click", function () {
@@ -236,6 +251,7 @@ $(navLineButton).click(function (e) {
   d3.select(this).classed("selected", true);
   d3.select(navBarButton).classed("selected", false);
   d3.select(navPieButton).classed("selected", false);
+  d3.select(navMapButton).classed("selected", false);
 });
 
 $(navBarButton).click(function (e) {
@@ -256,6 +272,7 @@ $(navBarButton).click(function (e) {
   d3.select(this).classed("selected", true);
   d3.select(navLineButton).classed("selected", false);
   d3.select(navPieButton).classed("selected", false);
+  d3.select(navMapButton).classed("selected", false);
 });
 
 $(navPieButton).click(function (e) {
@@ -276,11 +293,31 @@ $(navPieButton).click(function (e) {
   d3.select(this).classed("selected", true);
   d3.select(navLineButton).classed("selected", false);
   d3.select(navBarButton).classed("selected", false);
+  d3.select(navMapButton).classed("selected", false);
+});
+
+$(navMapButton).click(function (e) {
+  e.preventDefault();
+
+  if (selected != "map") {
+    $("#form_container").fadeOut(850);
+    $("#graph_container").fadeOut(850);
+
+    setTimeout(function () {
+      showMap();
+    }, 850);
+  }
+
+  d3.select(this).classed("selected", true);
+  d3.select(navLineButton).classed("selected", false);
+  d3.select(navBarButton).classed("selected", false);
+  d3.select(navPieButton).classed("selected", false);
 });
 
 initBarChart();
 initLineChart();
 initPieChart();
+initMap();
 
 showPie();
 

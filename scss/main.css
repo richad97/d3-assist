@@ -90,7 +90,9 @@
 }
 
 .pairs {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .circle_hovered:hover {
@@ -332,7 +334,7 @@ pre {
 }
 
 ::-webkit-scrollbar {
-  width: 2.5px;
+  width: 0;
 }
 
 ::-webkit-scrollbar-track {

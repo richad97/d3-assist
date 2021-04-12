@@ -12,6 +12,7 @@ import {
   pieTooltipCheckbox,
   pieLegendCheckbox,
   pieHoverCheckbox,
+  pieValuesCheckbox,
   pieSortedCheckbox,
 } from "./pie_chart_inputs.js";
 
@@ -54,6 +55,7 @@ pieOuterRadiusSlider.addEventListener("input", function () {
     pieValues.tooltipCheckbox
   );
 });
+
 pieLabelRadiusSlider.addEventListener("input", function () {
   pieValues.labelRadiusSlider = pieLabelRadiusSlider.value;
   pieCalc(
@@ -81,13 +83,9 @@ pieTooltipCheckbox.addEventListener("change", function () {
   if (this.checked == false) {
     console.log("unchecked");
     pieValues.tooltipCheckbox = "unchecked";
-    pieCalc(
-      pieValues.innerRadiusSlider,
-      pieValues.outerRadiusSlider,
-      pieValues.borderSlider,
-      pieValues.labelRadiusSlider,
-      pieValues.tooltipCheckbox
-    );
+    if (document.querySelector(".pie_tooltip")) {
+      d3.select(".pie_tooltip").remove();
+    }
   }
 });
 
@@ -105,11 +103,22 @@ pieLegendCheckbox.addEventListener("change", function () {
 pieHoverCheckbox.addEventListener("change", function () {
   if (this.checked) {
     pieValues.hoverCheckbox = "checked";
-    d3.selectAll(".arc").classed("hovered", true);
+    d3.selectAll(".arc > path").classed("hovered", true);
   }
   if (this.checked == false) {
     pieValues.hoverCheckbox = "unchecked";
-    d3.selectAll(".arc").classed("hovered", false);
+    d3.selectAll(".arc > path").classed("hovered", false);
+  }
+});
+
+pieValuesCheckbox.addEventListener("change", function () {
+  if (this.checked) {
+    pieValues.valuesCheckbox = "checked";
+    d3.selectAll(".slice-labels").attr("display", "");
+  }
+  if (this.checked == false) {
+    pieValues.valuesCheckbox = "unchecked";
+    d3.selectAll(".slice-labels").attr("display", "none");
   }
 });
 

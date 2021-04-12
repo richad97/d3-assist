@@ -5,18 +5,23 @@ bar chart
     [] - add sort
     [] - add amount changer 
 
+pie chart 
+    [x] - tooltip breaks hover
+    [x] - tooltip wont turn OFF
+    [x] - tooltip turned on value labels
+    [x] - value labels drawn trace when moving radius
+    [x] - if radius slider moved while label value is OFF, 
+          slider would turn it ON
+
 both 
     [] - add themeing
     [] - fix title scaling
     [x] - add transition
     [] - fix responsiveness 
-    [] - add responsive template
-
 
 general
     [x] - add selected nav title
     [] - make sure both are written consistantly
-    [] - make sure chart matches code given out
+    [] - make sure charts match code given out
     [x] - add new tab functionality
-    [] - refactor index.php
-    [] - refactor and test before moving to pie chart and map
+    [] - refactor

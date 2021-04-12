@@ -14,8 +14,8 @@ export let pieValues = {
   innerRadiusSlider: pieInnerRadiusSlider.value,
   outerRadiusSlider: pieOuterRadiusSlider.value,
   labelRadiusSlider: pieLabelRadiusSlider.value,
-  tooltipCheckbox: "unchecked",
-  legendCheckbox: "unchecked",
-  hoverCheckbox: "unchecked",
-  sortedCheckbox: "unchecked",
+  tooltipCheckbox: "checked",
+  legendCheckbox: "checked",
+  hoverCheckbox: "checked",
+  sortedCheckbox: "checked",
 };

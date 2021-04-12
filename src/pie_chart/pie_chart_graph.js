@@ -3,7 +3,7 @@ const d3 = require("d3");
 const data = [40, 27, 13, 67, 88];
 
 const width = 350,
-  height = 390,
+  height = 400,
   radius = Math.min(width, height) / 2;
 
 const svg = d3
@@ -25,9 +25,23 @@ title
   .attr("y", 25)
   .attr("text-anchor", "middle")
   .style("font-size", "1.1em")
-  .text("Title");
+  .text("Client Demographic");
 
 const pieScale = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888"]);
+
+let legend = d3.select("#pie_div").append("div").attr("id", "legend");
+
+let pairs = legend.selectAll(".pairs").data(data);
+
+pairs
+  .enter()
+  .append("div")
+  .attr("class", "pairs")
+  .html(function (d) {
+    return `<span class="legend-colors" style="background-color:${pieScale(
+      d
+    )}"></span><span class="pie-font">${d}</span>`;
+  });
 
 function sortLegend() {
   data.sort(function (a, b) {
@@ -49,17 +63,9 @@ const slice = pieChart
   .append("g")
   .attr("class", "arc");
 
-const slices = slice.append("path");
-
-function checkPieTooltip() {
-  if (document.querySelector(".pie_tooltip")) {
-    document.querySelector(".pie_tooltip").remove();
-  }
-}
+const slices = slice.append("path").attr("class", "pie_stroke hovered");
 
 function initPieTooltip() {
-  checkPieTooltip();
-
   const tooltip = d3.select("body").append("div").attr("class", "pie_tooltip");
 
   slices
@@ -74,6 +80,7 @@ function initPieTooltip() {
       tooltip.style("display", "none");
     });
 }
+const labelSlices = slice.append("text").attr("class", "slice-labels");
 
 export function pieCalc(
   innerRadius,
@@ -82,9 +89,6 @@ export function pieCalc(
   labelRadius,
   tooltipCheckbox
 ) {
-  if (document.querySelector(".slice-labels")) {
-    d3.selectAll(".slice-labels").remove();
-  }
   pie.value(function (d) {
     return d;
   });
@@ -95,7 +99,6 @@ export function pieCalc(
 
   slices
     .attr("d", arc)
-    .attr("class", "pie_stroke")
     .attr("stroke", "white")
     .attr("stroke-width", `${borderWidth}px`)
     .style("fill", function (d) {
@@ -103,9 +106,7 @@ export function pieCalc(
     });
 
   // label arc
-  slice
-    .append("text")
-    .attr("class", "slice-labels")
+  labelSlices
     .attr("transform", function (d) {
       return "translate(" + labelArc.centroid(d) + ")";
     })
@@ -117,25 +118,4 @@ export function pieCalc(
   if (tooltipCheckbox == "checked") {
     initPieTooltip();
   }
-  if (tooltipCheckbox == "unchecked") {
-    checkPieTooltip();
-  }
 }
-
-function createLegend() {
-  let legend = d3.select("#pie_div").append("div").attr("id", "legend");
-
-  let pairs = legend.selectAll(".pairs").data(data);
-
-  pairs
-    .enter()
-    .append("div")
-    .attr("class", "pairs")
-    .html(function (d) {
-      return `<span class="legend-colors" style="background-color:${pieScale(
-        d
-      )}"></span><span class="pie-font">${d}</span>`;
-    });
-}
-
-createLegend();
