@@ -9,7 +9,6 @@ import { selectAll } from "d3";
 const overlayCloseButton = document.querySelector("#overlay_close_button");
 const overlayCopyButton = document.querySelector("#overlay_button_copy");
 const formSubmitButton = document.querySelector("#form_submit_button");
-const formHiddenLine = document.querySelector("#line_form_input");
 const navLineButton = document.querySelector("#test_line");
 const navBarButton = document.querySelector("#test_bar");
 const navPieButton = document.querySelector("#test_pie");
@@ -99,6 +98,8 @@ function copyChartToValue(chart = "line_chart") {
   window.getSelection().removeAllRanges(); // clear current selection
   window.getSelection().addRange(range); // to select text
 
+  let formHiddenLine = document.querySelector(`#${chart}_form_input`);
+
   formHiddenLine.setAttribute("value", window.getSelection().toString());
   window.getSelection().removeAllRanges(); // clear current selection
 }
@@ -130,10 +131,10 @@ function showLine() {
   $(".pie_slider_col_row").hide();
   $(".pie_checkbox_col_row").hide();
   $(".pie_color_col_row").hide();
-  //$("#pie_chart_template").hide();
+  $("#pie_chart_template").hide();
   $("#pie_dimension_div").hide();
   $("#pie_div").hide();
-  //$("#pie_form_button").hide();
+  $("#pie_form_button").hide();
 }
 
 function showBar() {
@@ -148,6 +149,7 @@ function showBar() {
   $("#bar_chart_template").show();
   $("#bar_dimension_div").show();
   $("#bar_div").show();
+  $("#bar_form_button").show();
 
   $(".line_title_col_row").hide();
   $(".line_slider_col_row").hide();
@@ -156,15 +158,16 @@ function showBar() {
   $("#line_chart_template").hide();
   $("#line_dimension_div").hide();
   $("#line_div").hide();
+  $("#line_form_button").hide();
 
   $(".pie_title_col_row").hide();
   $(".pie_slider_col_row").hide();
   $(".pie_checkbox_col_row").hide();
   $(".pie_color_col_row").hide();
-  //$("#pie_chart_template").hide();
+  $("#pie_chart_template").hide();
   $("#pie_dimension_div").hide();
   $("#pie_div").hide();
-  //$("#pie_form_button").hide();
+  $("#pie_form_button").hide();
 }
 
 function showPie() {
@@ -176,10 +179,10 @@ function showPie() {
   $(".pie_slider_col_row").show();
   $(".pie_checkbox_col_row").show();
   $(".pie_color_col_row").show();
-  //$("#pie_chart_template").show();
+  $("#pie_chart_template").show();
   $("#pie_dimension_div").show();
   $("#pie_div").show();
-  //$("#pie_form_button").show();
+  $("#pie_form_button").show();
 
   $(".bar_title_col_row").hide();
   $(".bar_slider_col_row").hide();
@@ -188,6 +191,7 @@ function showPie() {
   $("#bar_chart_template").hide();
   $("#bar_dimension_div").hide();
   $("#bar_div").hide();
+  $("#bar_form_button").hide();
 
   $(".line_title_col_row").hide();
   $(".line_slider_col_row").hide();
@@ -196,6 +200,7 @@ function showPie() {
   $("#line_chart_template").hide();
   $("#line_dimension_div").hide();
   $("#line_div").hide();
+  $("#line_form_button").hide();
 }
 
 function showMap() {
@@ -211,6 +216,9 @@ formSubmitButton.addEventListener("click", function () {
   if (selected == "bar_chart") {
     copyChartToValue("bar_chart");
   }
+  if (selected == "pie_chart") {
+    copyChartToValue("pie_chart");
+  }
 });
 
 overlayCloseButton.addEventListener("click", function () {
@@ -223,6 +231,9 @@ overlayCopyButton.addEventListener("click", function () {
   }
   if (selected == "bar_chart") {
     copyChartToClipboard("bar_chart");
+  }
+  if (selected == "pie_chart") {
+    copyChartToClipboard("pie_chart");
   }
 });
 

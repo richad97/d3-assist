@@ -9,6 +9,7 @@ export function initPieChart() {
     pieValues.outerRadiusSlider,
     pieValues.borderSlider,
     pieValues.labelRadiusSlider,
-    pieValues.tooltipCheckbox
+    pieValues.tooltipCheckbox,
+    pieValues.colorScaleArray
   );
 }

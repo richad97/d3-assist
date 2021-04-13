@@ -41,7 +41,8 @@ pieInnerRadiusSlider.addEventListener("input", function () {
     pieValues.outerRadiusSlider,
     pieValues.borderSlider,
     pieValues.labelRadiusSlider,
-    pieValues.tooltipCheckbox
+    pieValues.tooltipCheckbox,
+    pieValues.colorScaleArray
   );
 });
 
@@ -52,7 +53,8 @@ pieOuterRadiusSlider.addEventListener("input", function () {
     pieValues.outerRadiusSlider,
     pieValues.borderSlider,
     pieValues.labelRadiusSlider,
-    pieValues.tooltipCheckbox
+    pieValues.tooltipCheckbox,
+    pieValues.colorScaleArray
   );
 });
 
@@ -63,7 +65,8 @@ pieLabelRadiusSlider.addEventListener("input", function () {
     pieValues.outerRadiusSlider,
     pieValues.borderSlider,
     pieValues.labelRadiusSlider,
-    pieValues.tooltipCheckbox
+    pieValues.tooltipCheckbox,
+    pieValues.colorScaleArray
   );
 });
 
@@ -76,7 +79,8 @@ pieTooltipCheckbox.addEventListener("change", function () {
       pieValues.outerRadiusSlider,
       pieValues.borderSlider,
       pieValues.labelRadiusSlider,
-      pieValues.tooltipCheckbox
+      pieValues.tooltipCheckbox,
+      pieValues.colorScaleArray
     );
   }
 

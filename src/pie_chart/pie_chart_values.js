@@ -17,5 +17,7 @@ export let pieValues = {
   tooltipCheckbox: "checked",
   legendCheckbox: "checked",
   hoverCheckbox: "checked",
+  valuesCheckbox: "checked",
   sortedCheckbox: "checked",
+  colorScaleArray: ["#98abc5", "#8a89a6", "#7b6888"],
 };

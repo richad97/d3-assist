@@ -52,11 +52,15 @@
 
               -->
               <form action="./preview_tab.php" method="post" target="_blank" id="line_form_button">
-                  <input type="hidden" id="line_form_input" name="finished_script">  
+                  <input type="hidden" id="line_chart_form_input" name="finished_script">  
                   <input type="submit" value="Preview On New Tab" class="overlay_buttons">
               </form>
               <form action="./preview_tab.php" method="post" target="_blank" id="bar_form_button">
-                  <input type="hidden" id="bar_form_input" name="finished_script">  
+                  <input type="hidden" id="bar_chart_form_input" name="finished_script">  
+                  <input type="submit" value="Preview On New Tab" class="overlay_buttons">
+              </form>
+              <form action="./preview_tab.php" method="post" target="_blank" id="pie_form_button">
+                  <input type="hidden" id="pie_chart_form_input" name="finished_script">  
                   <input type="submit" value="Preview On New Tab" class="overlay_buttons">
               </form>
             </div>

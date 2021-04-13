@@ -27,21 +27,16 @@ title
   .style("font-size", "1.1em")
   .text("Client Demographic");
 
-const pieScale = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888"]);
+const pieScale = d3.scaleOrdinal();
 
 let legend = d3.select("#pie_div").append("div").attr("id", "legend");
 
-let pairs = legend.selectAll(".pairs").data(data);
-
-pairs
+let pairs = legend
+  .selectAll(".pairs")
+  .data(data)
   .enter()
   .append("div")
-  .attr("class", "pairs")
-  .html(function (d) {
-    return `<span class="legend-colors" style="background-color:${pieScale(
-      d
-    )}"></span><span class="pie-font">${d}</span>`;
-  });
+  .attr("class", "pairs");
 
 function sortLegend() {
   data.sort(function (a, b) {
@@ -82,13 +77,24 @@ function initPieTooltip() {
 }
 const labelSlices = slice.append("text").attr("class", "slice-labels");
 
+// ["#98abc5", "#8a89a6", "#7b6888"] color array
+
 export function pieCalc(
   innerRadius,
   outerRadius,
   borderWidth,
   labelRadius,
-  tooltipCheckbox
+  tooltipCheckbox,
+  colorScaleArray
 ) {
+  pieScale.range(colorScaleArray);
+
+  pairs.html(function (d) {
+    return `<span class="legend-colors" style="background-color:${pieScale(
+      d
+    )}"></span><span class="pie-font">${d}</span>`;
+  });
+
   pie.value(function (d) {
     return d;
   });
