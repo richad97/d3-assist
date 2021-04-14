@@ -43,7 +43,6 @@ export function initLineChart() {
     lineValues.xAxisTitleInput;
   document.getElementById("line_y_title_span").innerHTML =
     lineValues.yAxisTitleInput;
-
   document.getElementById("line_title_slider_span").innerHTML =
     lineValues.titleSlider;
   document.getElementById("line_x_title_slider_span").innerHTML =
@@ -110,6 +109,9 @@ export function initLineChart() {
   d3.select("#line_1_select_span").classed("hide", false);
   d3.select("#line_2_select_span").classed("hide", true);
   d3.select("#line_3_select_span").classed("hide", true);
+
+  d3.select("#line_obj_num2_span").classed("hide", true);
+  d3.select("#line_obj_num3_span").classed("hide", true);
 
   d3.select("#line_area").attr("display", "none");
   d3.select("#line1").attr("display", "");

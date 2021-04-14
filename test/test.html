@@ -38,146 +38,163 @@
     <div id="pie_div"></div>
   </body>
   <script>
-    const data = [40, 27, 13, 67, 88];
+    function createData() {
+      function makeDateArray() {
+        let arr = [];
+        let startDate = new Date("2020-01-02"); //YYYY-MM-DD
+        let endDate = new Date("2020-01-22"); //YYYY-MM-DD
 
-    const width = 610,
-      height = 500,
-      radius = Math.min(width, height) / 3;
+        while (startDate <= endDate) {
+          arr.push(new Date(startDate));
+          startDate.setDate(startDate.getDate() + 1);
+        }
+        return arr;
+      }
+      let dates = makeDateArray();
+      let i = 1;
+      let data = dates.map(function (x) {
+        i += 30;
+        return {
+          date: x,
+          num1: Math.floor(Math.random() * 101 + i++),
+          num2: Math.floor(Math.random() * 101 + i++),
+          num3: Math.floor(Math.random() * 101 + i++),
+        };
+      });
+      return data;
+    }
+
+    const data = createData();
+
+    const margin = { top: 80, right: 50, bottom: 80, left: 80 },
+      width = 600 - margin.left - margin.right,
+      height = 480 - margin.top - margin.bottom;
 
     const svg = d3
       .select("body")
       .append("svg")
-      .attr("id", "pie_chart")
-      .attr("width", width)
-      .attr("height", height)
-      .style("border", "1px solid black");
+      .attr("id", "line_chart")
+      .attr("width", `${width + margin.left + margin.right}`)
+      .attr("height", `${height + margin.top + margin.bottom}`)
+      .style("background-color", "rgba(0, 0, 0, 0.55)");
 
     const g = svg
       .append("g")
-      .attr("transform", `translate(${width / 3.5}, ${height / 2})`);
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    const title = svg
+    const title = g
       .append("text")
-      .attr("class", "pie-font")
-      .attr("x", 320)
-      .attr("y", 25)
-      .attr("id", "pie_title")
+      .attr("x", 13 * 20)
+      .attr("y", 0 - margin.top / 2)
       .attr("text-anchor", "middle")
-      .style("font-size", "1.1em")
-      .text("Client Demographic");
+      .style("font-size", "16px")
+      .attr("fill", "rgb(255, 255, 255)")
+      .text("Total Reported Cases");
 
-    const pieScale = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888"]);
-
-    const pie = d3
-      .pie()
-      //.sort(null)
-      .value(function (d) {
-        return d;
-      });
-
-    const arc = d3
-      .arc()
-      .outerRadius(radius - 55)
-      .innerRadius(0);
-
-    const labelArc = d3
-      .arc()
-      .outerRadius(radius - 70)
-      .innerRadius(radius - -20);
-
-    const arcs = g
-      .selectAll(".arc")
-      .data(pie(data))
-      .enter()
-      .append("g")
-      .attr("class", "arc");
-
-    arcs
-      .append("path")
-      .attr("d", arc)
-      .attr("stroke", "white")
-      .attr("stroke-width", "3")
-      .style("fill", function (d) {
-        return pieScale(d.data);
-      })
-      .on("mouseover", function (d) {
-        d3.select(this).attr("opacity", "0.7");
-      })
-      .on("mouseout", function (d) {
-        d3.select(this).attr("opacity", "1");
-      });
-
-    arcs
+    const xTitle = g
       .append("text")
-      .attr("transform", function (d) {
-        return "translate(" + labelArc.centroid(d) + ")";
-      })
-      .attr("dy", ".35em")
-      .text(function (d) {
-        return d.data;
-      });
+      .attr("x", 13 * 20)
+      .attr("y", height + margin.top - 30)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .attr("fill", "rgb(255, 255, 255)")
+      .text("Days");
 
-    const tooltip = d3
-      .select("body")
-      .append("div")
-      .attr("class", "pie_tooltip");
+    const yTitle = g
+      .append("text")
+      .attr("y", -40)
+      .attr("x", -9 * 20)
+      .style("transform", "rotate(270deg)")
+      .attr("font-size", "0.9em")
+      .attr("text-anchor", "middle")
+      .attr("fill", "rgb(255, 255, 255)")
+      .text("Cases");
 
-    arcs
-      .on("mousemove", function (d) {
-        tooltip
-          .style("left", d3.event.pageX + 10 + "px")
-          .style("top", d3.event.pageY + 10 + "px")
-          .style("display", "inline-block")
-          .html(d.value);
-      })
-      .on("mouseout", function (d) {
-        tooltip.style("display", "none");
-      });
+    const xScale = d3
+      .scaleTime()
+      .domain(
+        d3.extent(data, function (d) {
+          return d.date;
+        })
+      )
+      .range([0, width]);
 
-    function sortsLegend() {
-      data.sort(function (a, b) {
-        return a - b;
-      });
+    const yScale = d3
+      .scaleLinear()
+      .domain([
+        0,
+        d3.max(data, function (d) {
+          return d.num1;
+        }),
+      ])
+      .range([height, 0]);
+
+    const xAxis = g
+      .append("g")
+      .attr("id", "x_axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xScale));
+
+    const yAxis = g.append("g").attr("id", "y_axis").call(d3.axisLeft(yScale));
+
+    function make_y_gridlines() {
+      return d3.axisLeft(yScale).ticks();
     }
 
-    sortsLegend();
-
-    let legend = d3
-      .select("#pie_chart")
+    const yGrid = g
       .append("g")
-      .attr("transform", `translate(${460}, ${170})`)
-      .attr("id", "legend");
+      .attr("class", "grid")
+      .attr("id", "y_grid")
+      .call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
-    let pairs = legend
-      .selectAll(".pairs")
-      .data(data)
-      .enter()
-      .append("g")
-      .attr("class", "pairs");
-
-    let icon = d3
-      .selectAll(".pairs")
-      .append("rect")
-      .attr("height", "10px")
-      .attr("width", "10px")
-      .style("fill", function (d) {
-        return pieScale(d);
+    const line1 = d3
+      .line()
+      .x(function (d) {
+        return xScale(d.date);
+      })
+      .y(function (d) {
+        return yScale(d.num1);
       });
 
-    let num = d3
-      .selectAll(".pairs")
-      .append("text")
-      .text(function (d) {
-        return d;
+    g.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", line1)
+      .attr("stroke", "rgb(250, 250, 250)")
+      .attr("stroke-width", `${1 * 0.5}px`)
+      .attr("fill", "none");
+
+    const circles1 = g.selectAll(".circles1").data(data);
+    circles1.exit().remove();
+    circles1
+      .enter()
+      .append("circle")
+      .attr("class", "circles1")
+      .attr("display", "")
+      .attr("r", 6 * 0.5)
+      .attr("cx", function (d, i) {
+        return xScale(d.date);
       })
-      .attr("x", 20)
-      .attr("y", 10);
+      .attr("cy", function (d, i) {
+        return yScale(d.num1);
+      })
+      .attr("fill", "rgba(255, 255, 255, 0)")
+      .attr("stroke", "rgba(255, 255, 255, 1)")
+      .attr("stroke-width", "1px");
 
-    let i = 0;
-    let pair = d3.selectAll(".pairs");
+    d3.select("#y_axis > path").attr("display", "none");
 
-    pair.each(function (p, j) {
-      d3.select(this).attr("transform", `translate(${0}, ${(i += 20)})`);
-    });
+    d3.selectAll("#x_axis >.tick>line").style("display", "none");
+    d3.selectAll("#y_axis >.tick>line").style("display", "none");
+    d3.select("#x_grid > path").attr("stroke", "rgba(0,0,0,0)");
+    d3.select("#y_grid > path").attr("stroke", "rgba(0,0,0,0)");
+    d3.select("#y_grid > g:nth-child(2) > line").remove();
+    d3.selectAll(".tick > text").style("fill", "rgb(238, 238, 238)");
+    d3.selectAll(".grid > g > line").attr(
+      "stroke",
+      "rgba(255, 255, 255, 0.337)"
+    );
+    d3.select("#x_axis > path").style("stroke", "rgb(255, 255, 255)");
+    d3.select("#y_axis > path").style("stroke", "rgb(211, 211, 211)");
   </script>
 </html>
