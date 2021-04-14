@@ -19,5 +19,8 @@ export let pieValues = {
   hoverCheckbox: "checked",
   valuesCheckbox: "checked",
   sortedCheckbox: "checked",
+  backgroundCP: "rgba(255,255,255,1)",
+  borderCP: "rgba(255,255,255,1)",
+  fontCP: "rgba(70,70,70,1)",
   colorScaleArray: ["#98abc5", "#8a89a6", "#7b6888"],
 };

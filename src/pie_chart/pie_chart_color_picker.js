@@ -9,7 +9,10 @@ $("#pie_background_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
+    pieValues.backgroundCP = color.toRgbString();
     d3.select("#pie_div").style("background-color", color.toRgbString());
+    document.querySelector("#pie_backgroud_cp_span").innerHTML =
+      pieValues.backgroundCP;
   },
 });
 
@@ -20,7 +23,10 @@ $("#pie_border_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
+    pieValues.borderCP = color.toRgbString();
     d3.selectAll(".pie_stroke").style("stroke", color.toRgbString());
+    document.querySelector("#pie_border_cp_span").innerHTML =
+      pieValues.borderCP;
   },
 });
 
@@ -31,8 +37,12 @@ $("#pie_font_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
+    pieValues.fontCP = color.toRgbString();
     d3.selectAll(".pie-font").style("fill", color.toRgbString());
     d3.selectAll(".pie-font").style("color", color.toRgbString());
+    document.querySelector("#pie_title_cp_span").innerHTML = pieValues.fontCP;
+    document.querySelector("#pie_legend_cp_span").innerHTML = pieValues.fontCP;
+    document.querySelector("#pie_values_cp_span").innerHTML = pieValues.fontCP;
   },
 });
 
@@ -43,7 +53,9 @@ $("#pie_color1_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    console.log(pieValues);
+    if (document.querySelector(".pie_tooltip")) {
+      document.querySelector(".pie_tooltip").remove();
+    }
     pieValues.colorScaleArray[0] = color.toString("hex");
     pieCalc(
       pieValues.innerRadiusSlider,
@@ -53,6 +65,8 @@ $("#pie_color1_cp").spectrum({
       pieValues.tooltipCheckbox,
       pieValues.colorScaleArray
     );
+    document.querySelector("#pie_color1_cp_span").innerHTML =
+      pieValues.colorScaleArray[0];
   },
 });
 
@@ -63,6 +77,9 @@ $("#pie_color2_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
+    if (document.querySelector(".pie_tooltip")) {
+      document.querySelector(".pie_tooltip").remove();
+    }
     pieValues.colorScaleArray[1] = color.toString("hex");
     pieCalc(
       pieValues.innerRadiusSlider,
@@ -72,6 +89,8 @@ $("#pie_color2_cp").spectrum({
       pieValues.tooltipCheckbox,
       pieValues.colorScaleArray
     );
+    document.querySelector("#pie_color2_cp_span").innerHTML =
+      pieValues.colorScaleArray[1];
   },
 });
 
@@ -82,6 +101,9 @@ $("#pie_color3_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
+    if (document.querySelector(".pie_tooltip")) {
+      document.querySelector(".pie_tooltip").remove();
+    }
     pieValues.colorScaleArray[2] = color.toString("hex");
     pieCalc(
       pieValues.innerRadiusSlider,
@@ -91,5 +113,7 @@ $("#pie_color3_cp").spectrum({
       pieValues.tooltipCheckbox,
       pieValues.colorScaleArray
     );
+    document.querySelector("#pie_color3_cp_span").innerHTML =
+      pieValues.colorScaleArray[2];
   },
 });

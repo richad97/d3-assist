@@ -32,72 +32,97 @@
       font {
         fill: white;
       }
-      .arc:hover {
-        opacity: 0.6;
-      }
-      html {
-        width: 100%;
-      }
-      body {
-        width: 100%;
-      }
     </style>
   </head>
   <body>
     <div id="pie_div"></div>
   </body>
   <script>
-    const data = [20, 27, 43, 67, 88];
+    const data = [40, 27, 13, 67, 88];
 
-    const width = 350,
-      height = 380,
-      radius = Math.min(width, height) / 2;
+    const width = 610,
+      height = 500,
+      radius = Math.min(width, height) / 3;
 
     const svg = d3
-      .select("#pie_div")
+      .select("body")
       .append("svg")
       .attr("id", "pie_chart")
-      .attr("width", "100%")
-      .attr("height", height);
+      .attr("width", width)
+      .attr("height", height)
+      .style("border", "1px solid black");
 
     const g = svg
       .append("g")
-      .attr("transform", `translate(${width / 2}, ${height / 2 + 20})`);
+      .attr("transform", `translate(${width / 3.5}, ${height / 2})`);
 
-    const tooltip = d3
-      .select("body")
-      .append("div")
-      .attr("class", "pie_tooltip");
-
-    const title = svg.append("text");
-
-    title
-      .attr("x", width / 2)
-      .attr("y", 20)
+    const title = svg
+      .append("text")
+      .attr("class", "pie-font")
+      .attr("x", 320)
+      .attr("y", 25)
+      .attr("id", "pie_title")
       .attr("text-anchor", "middle")
-      .style("font-size", "16px")
-      .text("Title")
-      .style("fill", "white");
+      .style("font-size", "1.1em")
+      .text("Client Demographic");
 
     const pieScale = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888"]);
 
-    const pie = d3.pie().sort(null);
+    const pie = d3
+      .pie()
+      //.sort(null)
+      .value(function (d) {
+        return d;
+      });
 
-    const arc = d3.arc();
+    const arc = d3
+      .arc()
+      .outerRadius(radius - 55)
+      .innerRadius(0);
 
-    const labelArc = d3.arc();
+    const labelArc = d3
+      .arc()
+      .outerRadius(radius - 70)
+      .innerRadius(radius - -20);
 
-    const slice = g
+    const arcs = g
       .selectAll(".arc")
       .data(pie(data))
       .enter()
       .append("g")
       .attr("class", "arc");
 
-    const slices = slice.append("path");
+    arcs
+      .append("path")
+      .attr("d", arc)
+      .attr("stroke", "white")
+      .attr("stroke-width", "3")
+      .style("fill", function (d) {
+        return pieScale(d.data);
+      })
+      .on("mouseover", function (d) {
+        d3.select(this).attr("opacity", "0.7");
+      })
+      .on("mouseout", function (d) {
+        d3.select(this).attr("opacity", "1");
+      });
 
-    // Tooltip
-    slices
+    arcs
+      .append("text")
+      .attr("transform", function (d) {
+        return "translate(" + labelArc.centroid(d) + ")";
+      })
+      .attr("dy", ".35em")
+      .text(function (d) {
+        return d.data;
+      });
+
+    const tooltip = d3
+      .select("body")
+      .append("div")
+      .attr("class", "pie_tooltip");
+
+    arcs
       .on("mousemove", function (d) {
         tooltip
           .style("left", d3.event.pageX + 10 + "px")
@@ -109,35 +134,50 @@
         tooltip.style("display", "none");
       });
 
-    function pieRadii(innerRadius, outerRadius) {
-      pie.value(function (d) {
-        return d;
+    function sortsLegend() {
+      data.sort(function (a, b) {
+        return a - b;
       });
-
-      arc.outerRadius(radius - outerRadius).innerRadius(innerRadius);
-
-      labelArc.outerRadius(radius - 100).innerRadius(radius - 10);
-
-      slices
-        .attr("d", arc)
-        .attr("stroke", "white")
-        .attr("stroke-width", "2px")
-        .style("fill", function (d) {
-          return pieScale(d.data);
-        });
     }
-    pieRadii(70, 20);
 
-    slice
-      .append("text")
-      .attr("class", "h_text")
-      .attr("display", "")
-      .attr("transform", function (d) {
-        return "translate(" + labelArc.centroid(d) + ")";
-      })
-      .attr("dy", ".35em")
-      .text(function (d) {
-        return d.data;
+    sortsLegend();
+
+    let legend = d3
+      .select("#pie_chart")
+      .append("g")
+      .attr("transform", `translate(${460}, ${170})`)
+      .attr("id", "legend");
+
+    let pairs = legend
+      .selectAll(".pairs")
+      .data(data)
+      .enter()
+      .append("g")
+      .attr("class", "pairs");
+
+    let icon = d3
+      .selectAll(".pairs")
+      .append("rect")
+      .attr("height", "10px")
+      .attr("width", "10px")
+      .style("fill", function (d) {
+        return pieScale(d);
       });
+
+    let num = d3
+      .selectAll(".pairs")
+      .append("text")
+      .text(function (d) {
+        return d;
+      })
+      .attr("x", 20)
+      .attr("y", 10);
+
+    let i = 0;
+    let pair = d3.selectAll(".pairs");
+
+    pair.each(function (p, j) {
+      d3.select(this).attr("transform", `translate(${0}, ${(i += 20)})`);
+    });
   </script>
 </html>

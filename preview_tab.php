@@ -34,6 +34,18 @@
             background-color: white;
             z-index: 1;
         }
+        .pie_tooltip {
+            position: absolute;
+            display: none;
+            min-width: 80px;
+            height: auto;
+            background: none repeat scroll;
+            border: 1px solid #000000;
+            padding: 14px;
+            text-align: center;
+            background-color: white;
+            z-index: 1;
+        }
         .hovered:hover {
         opacity: 0.7;
       }

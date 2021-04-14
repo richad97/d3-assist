@@ -17,31 +17,23 @@ const pieChart = svg
   .append("g")
   .attr("transform", `translate(${width / 2}, ${height / 2 + 30})`);
 
-const title = svg.append("text").attr("class", "pie-font");
-
-title
-  .attr("id", "pie_title")
-  .attr("x", "50%")
+const title = svg
+  .append("text")
+  .attr("class", "pie-font")
+  .attr("x", 320)
   .attr("y", 25)
+  .attr("id", "pie_title")
   .attr("text-anchor", "middle")
   .style("font-size", "1.1em")
   .text("Client Demographic");
 
 const pieScale = d3.scaleOrdinal();
 
-function sortLegend() {
-  data.sort(function (a, b) {
-    return a - b;
-  });
-}
-
-sortLegend();
-
-const pie = d3.pie();
-
 const arc = d3.arc();
 
 const labelArc = d3.arc();
+
+const pie = d3.pie();
 
 const slice = pieChart
   .selectAll(".arc")
@@ -52,24 +44,15 @@ const slice = pieChart
 
 const slices = slice.append("path").attr("class", "pie_stroke hovered");
 
-function initPieTooltip() {
-  const tooltip = d3.select("body").append("div").attr("class", "pie_tooltip");
-
-  slices
-    .on("mousemove", function (d) {
-      tooltip
-        .style("left", d3.event.pageX + 10 + "px")
-        .style("top", d3.event.pageY + 10 + "px")
-        .style("display", "inline-block")
-        .html(d.value);
-    })
-    .on("mouseout", function (d) {
-      tooltip.style("display", "none");
-    });
-}
 const labelSlices = slice.append("text").attr("class", "slice-labels");
 
-// ["#98abc5", "#8a89a6", "#7b6888"] color array
+function sortsLegend() {
+  data.sort(function (a, b) {
+    return a - b;
+  });
+}
+
+sortsLegend();
 
 let legend = d3
   .select("#pie_chart")
@@ -89,6 +72,7 @@ let icon = d3.selectAll(".pairs").append("rect");
 let num = d3
   .selectAll(".pairs")
   .append("text")
+  .attr("class", "pie-font")
   .text(function (d) {
     return d;
   })
@@ -111,12 +95,6 @@ export function pieCalc(
   colorScaleArray
 ) {
   pieScale.range(colorScaleArray);
-
-  // pairs.html(function (d) {
-  //   return `<rect class="legend-colors" style="fill:${pieScale(
-  //     d
-  //   )}"></rect><text class="pie-font">${d}</text>`;
-  // });
 
   icon
     .attr("height", "10px")
@@ -147,11 +125,27 @@ export function pieCalc(
       return "translate(" + labelArc.centroid(d) + ")";
     })
     .attr("dy", ".35em")
+    .attr("class", "pie-font")
     .text(function (d) {
       return d.data;
     });
 
   if (tooltipCheckbox == "checked") {
-    initPieTooltip();
+    const tooltip = d3
+      .select("body")
+      .append("div")
+      .attr("class", "pie_tooltip");
+
+    slices
+      .on("mousemove", function (d) {
+        tooltip
+          .style("left", d3.event.pageX + 10 + "px")
+          .style("top", d3.event.pageY + 10 + "px")
+          .style("display", "inline-block")
+          .html(d.value);
+      })
+      .on("mouseout", function (d) {
+        tooltip.style("display", "none");
+      });
   }
 }

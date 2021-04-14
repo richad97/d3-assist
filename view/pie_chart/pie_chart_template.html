@@ -1,2 +1,130 @@
-<pre><code id="pie_chart_template">
+<pre id="pie_chart_template">    <code>const data = [40, 27, 13, 67, 88];
+
+    const width = 610,
+        height = 500,
+        radius = Math.min(width, height) / 3;
+    
+    const svg = d3.select("body").append("svg")
+        .attr("id", "pie_chart")
+        .attr("width", width)
+        .attr("height", height)
+        .style("background-color", "<span class="span-c" id="pie_backgroud_cp_span"></span>")
+        .style("border","1px solid black");
+        
+    const g = svg.append("g")
+        .attr("transform",`translate(${width / 3.5}, ${height / 2 })`);
+
+    const title = svg
+        .append("text")
+        .attr("class", "pie-font")
+        .attr("x", <span class="span-c" id="pie_title_slider_span"></span>)
+        .attr("y", 25)
+        .attr("id", "pie_title")
+        .attr("text-anchor", "middle")
+        .style("font-size", "1.1em")
+        .style("fill","<span class="span-c" id="pie_title_cp_span"></span>")
+        .text("<span class="span-c" id="pie_title_span"></span>");
+
+    const pieScale = d3.scaleOrdinal().range(["<span class="span-c" id="pie_color1_cp_span"></span>", "<span class="span-c" id="pie_color2_cp_span"></span>", "<span class="span-c" id="pie_color3_cp_span"></span>"]);
+    <span class="span-c" id="pie_legend_checkbox_span">
+    function sortsLegend() {
+        data.sort(function (a, b) {
+          return a - b;
+        });
+      }
+  
+    sortsLegend();
+
+    let legend = d3
+        .select("#pie_chart")
+        .append("g")
+        .attr("transform", `translate(${460}, ${170})`)
+        .attr("id", "legend");
+
+    let pairs = legend
+        .selectAll(".pairs")
+        .data(data)
+        .enter()
+        .append("g")
+        .attr("class", "pairs");
+
+    let icon = d3
+        .selectAll(".pairs")
+        .append("rect")
+        .attr("height", "10px")
+        .attr("width", "10px")
+        .style("fill", function (d) {
+            return pieScale(d);
+        });
+
+    let num = d3
+        .selectAll(".pairs")
+        .style("fill","<span class="span-c" id="pie_legend_cp_span"></span>")
+        .append("text")
+        .text(function (d) {
+            return d;
+        })
+        .attr("x", 20)
+        .attr("y", 10);
+
+    let i = 0;
+    let pair = d3.selectAll(".pairs");
+  
+    pair.each(function (p, j) {
+        d3.select(this).attr("transform", `translate(${0}, ${(i += 20)})`);
+    });
+    </span>
+    
+    const pie = d3.pie()
+        //.sort(null)
+        .value(function(d) { return d; });
+        
+    const arc = d3.arc()
+        .outerRadius(radius - <span class="span-c" id="pie_outer_radius_span"></span>)
+        .innerRadius(<span class="span-c" id="pie_inner_radius_span"></span>);
+    
+    const labelArc = d3.arc()
+        .outerRadius(radius - 70)
+        .innerRadius(radius - <span class="span-c" id="pie_label_radius_span"></span>);
+    
+    const arcs = g.selectAll(".arc")
+        .data(pie(data))
+        .enter().append("g")
+        .attr("class", "arc");
+    
+        arcs.append("path")
+            .attr("d", arc)
+            .attr("stroke", "<span class="span-c" id="pie_border_cp_span"></span>")
+            .attr("stroke-width", "<span class="span-c" id="pie_stroke_span"></span>")
+            .style("fill", function(d) { return pieScale(d.data); })<span class="span-c" id="pie_hover_checkbox_span">
+            .on("mouseover", function (d) {
+                d3.select(this).attr("opacity", "0.7");
+            })
+            .on("mouseout", function (d) {
+                d3.select(this).attr("opacity", "1");
+            });</span>
+        <span class="span-c" id="pie_values_checkbox_span">
+        arcs.append("text")
+          .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+          .attr("dy", ".35em")
+          .style("fill","<span class="span-c" id="pie_values_cp_span"></span>")
+          .text(function(d) { return d.data; });</span>
+    <span class="span-c" id="pie_tooltip_checkbox_span">   
+    const tooltip = d3
+          .select("body")
+          .append("div")
+          .attr("class", "pie_tooltip");
+    
+        arcs
+          .on("mousemove", function (d) {
+            tooltip
+              .style("left", d3.event.pageX + 10 + "px")
+              .style("top", d3.event.pageY + 10 + "px")
+              .style("display", "inline-block")
+              .html(d.value);
+          })
+          .on("mouseout", function (d) {
+            tooltip.style("display", "none");
+          });
+    </span>
 </code></pre>
