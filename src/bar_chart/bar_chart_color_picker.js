@@ -1,5 +1,6 @@
-import { barValues } from "./bar_chart_values.js";
 const d3 = require("d3");
+
+import { barValues } from "./bar_chart_values.js";
 
 $("#bar_background_cp").spectrum({
   type: "color",
@@ -8,9 +9,9 @@ $("#bar_background_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("#bar_chart").style("background-color", color.toRgbString());
-
     barValues.backgroudCP = color.toRgbString();
+
+    d3.select("#bar_chart").style("background-color", barValues.backgroudCP);
 
     document.getElementById("bar_background_cp_span").innerHTML =
       barValues.backgroudCP;
@@ -23,9 +24,9 @@ $("#bars_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.selectAll(".bars").style("fill", color.toRgbString());
-
     barValues.barsCP = color.toRgbString();
+
+    d3.selectAll(".bars").style("fill", barValues.barsCP);
 
     document.getElementById("bar_cp_span").innerHTML = barValues.barsCP;
   },
@@ -37,12 +38,12 @@ $("#bar_tick_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
+    barValues.tickCP = color.toRgbString();
+
     d3.selectAll("#bar_chart > g > g > .tick > text").style(
       "fill",
-      color.toRgbString()
+      barValues.tickCP
     );
-
-    barValues.tickCP = color.toRgbString();
 
     document.getElementById("bar_tick_cp_span").innerHTML = barValues.tickCP;
   },
@@ -54,9 +55,9 @@ $("#bar_title_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("#bar_title").style("fill", color.toRgbString());
-
     barValues.titleCP = color.toRgbString();
+
+    d3.select("#bar_title").style("fill", barValues.titleCP);
 
     document.getElementById("bar_title_cp_span").innerHTML = barValues.titleCP;
   },
@@ -68,9 +69,9 @@ $("#bar_xaxis_title_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("#bar_xaxis_title").style("fill", color.toRgbString());
-
     barValues.xAxisTitleCP = color.toRgbString();
+
+    d3.select("#bar_xaxis_title").style("fill", barValues.xAxisTitleCP);
 
     document.getElementById("bar_x_title_cp_span").innerHTML =
       barValues.xAxisTitleCP;
@@ -83,9 +84,9 @@ $("#bar_yaxis_title_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("#bar_yaxis_title").style("fill", color.toRgbString());
-
     barValues.yAxisTitleCP = color.toRgbString();
+
+    d3.select("#bar_yaxis_title").style("fill", barValues.yAxisTitleCP);
 
     document.getElementById("bar_y_title_cp_span").innerHTML =
       barValues.yAxisTitleCP;
@@ -98,9 +99,9 @@ $("#bar_grid_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.selectAll(".bar_grid").style("color", color.toRgbString());
-
     barValues.gridCP = color.toRgbString();
+
+    d3.selectAll(".bar_grid").style("color", barValues.gridCP);
 
     document.getElementById("bar_grid_cp_span").innerHTML = barValues.gridCP;
   },
@@ -112,9 +113,9 @@ $("#bar_xaxis_line_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("#bar_x_axis > path").style("stroke", color.toRgbString());
-
     barValues.xAxisLineCP = color.toRgbString();
+
+    d3.select("#bar_x_axis > path").style("stroke", barValues.xAxisLineCP);
 
     document.getElementById("bar_x_line_cp_span").innerHTML =
       barValues.xAxisLineCP;
@@ -127,9 +128,9 @@ $("#bar_yaxis_line_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.select("#bar_y_axis > path").style("stroke", color.toRgbString());
-
     barValues.yAxisLineCP = color.toRgbString();
+
+    d3.select("#bar_y_axis > path").style("stroke", barValues.yAxisLineCP);
 
     document.getElementById("bar_y_line_cp_span").innerHTML =
       barValues.yAxisLineCP;
@@ -142,9 +143,9 @@ $("#bar_border_cp").spectrum({
   showButtons: false,
   allowEmpty: false,
   move: function (color) {
-    d3.selectAll(".bars").style("stroke", color.toRgbString());
-
     barValues.borderCP = color.toRgbString();
+
+    d3.selectAll(".bars").style("stroke", barValues.borderCP);
 
     document.getElementById("bar_border_cp_span").innerHTML =
       barValues.borderCP;

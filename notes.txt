@@ -12,6 +12,9 @@ pie chart
     [x] - value labels drawn trace when moving radius
     [x] - if radius slider moved while label value is OFF, 
           slider would turn it ON
+    [] - fix dimension box 
+        [] - sort
+        [] - slices
 
 both 
     [] - add themeing

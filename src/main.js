@@ -14,7 +14,7 @@ const navBarButton = document.querySelector("#test_bar");
 const navPieButton = document.querySelector("#test_pie");
 const navMapButton = document.querySelector("#test_map");
 
-let selected = "pie_chart";
+let selected = "bar_chart";
 
 (function rowButtons() {
   $("#title_arrow_right_icon").hide();
@@ -330,6 +330,6 @@ initLineChart();
 initPieChart();
 initMap();
 
-showPie();
+showBar();
 
-d3.select(navPieButton).classed("selected", true);
+d3.select(navBarButton).classed("selected", true);
