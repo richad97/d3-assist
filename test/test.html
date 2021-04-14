@@ -35,12 +35,16 @@
       .arc:hover {
         opacity: 0.6;
       }
+      html {
+        width: 100%;
+      }
+      body {
+        width: 100%;
+      }
     </style>
   </head>
   <body>
     <div id="pie_div"></div>
-    <input id="innerRadius" type="range" min="0" value="80" max="100" />
-    <input id="outerRadius" type="range" min="10" value="10" max="50" />
   </body>
   <script>
     const data = [20, 27, 43, 67, 88];
@@ -53,7 +57,7 @@
       .select("#pie_div")
       .append("svg")
       .attr("id", "pie_chart")
-      .attr("width", width)
+      .attr("width", "100%")
       .attr("height", height);
 
     const g = svg
@@ -105,14 +109,6 @@
         tooltip.style("display", "none");
       });
 
-    let innerRadius = document.querySelector("#innerRadius");
-    let outerRadius = document.querySelector("#outerRadius");
-
-    let sliderValues = {
-      innerRadius: innerRadius.value,
-      outerRadius: outerRadius.value,
-    };
-
     function pieRadii(innerRadius, outerRadius) {
       pie.value(function (d) {
         return d;
@@ -130,17 +126,7 @@
           return pieScale(d.data);
         });
     }
-    pieRadii(sliderValues.innerRadius, sliderValues.outerRadius);
-
-    innerRadius.addEventListener("input", function () {
-      sliderValues.innerRadius = innerRadius.value;
-      pieRadii(sliderValues.innerRadius, sliderValues.outerRadius);
-    });
-
-    outerRadius.addEventListener("input", function () {
-      sliderValues.outerRadius = outerRadius.value;
-      pieRadii(sliderValues.innerRadius, sliderValues.outerRadius);
-    });
+    pieRadii(70, 20);
 
     slice
       .append("text")

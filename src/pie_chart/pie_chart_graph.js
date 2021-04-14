@@ -21,7 +21,7 @@ const title = svg.append("text").attr("class", "pie-font");
 
 title
   .attr("id", "pie_title")
-  .attr("x", "58%")
+  .attr("x", "50%")
   .attr("y", 25)
   .attr("text-anchor", "middle")
   .style("font-size", "1.1em")
@@ -29,20 +29,12 @@ title
 
 const pieScale = d3.scaleOrdinal();
 
-let legend = d3.select("#pie_div").append("div").attr("id", "legend");
-
-let pairs = legend
-  .selectAll(".pairs")
-  .data(data)
-  .enter()
-  .append("div")
-  .attr("class", "pairs");
-
 function sortLegend() {
   data.sort(function (a, b) {
     return a - b;
   });
 }
+
 sortLegend();
 
 const pie = d3.pie();
@@ -79,6 +71,37 @@ const labelSlices = slice.append("text").attr("class", "slice-labels");
 
 // ["#98abc5", "#8a89a6", "#7b6888"] color array
 
+let legend = d3
+  .select("#pie_chart")
+  .append("g")
+  .attr("transform", `translate(${width + 100}, ${140})`)
+  .attr("id", "legend");
+
+let pairs = legend
+  .selectAll(".pairs")
+  .data(data)
+  .enter()
+  .append("g")
+  .attr("class", "pairs");
+
+let icon = d3.selectAll(".pairs").append("rect");
+
+let num = d3
+  .selectAll(".pairs")
+  .append("text")
+  .text(function (d) {
+    return d;
+  })
+  .attr("x", 20)
+  .attr("y", 10);
+
+let i = 0;
+let pair = d3.selectAll(".pairs");
+
+pair.each(function (p, j) {
+  d3.select(this).attr("transform", `translate(${0}, ${(i += 20)})`);
+});
+
 export function pieCalc(
   innerRadius,
   outerRadius,
@@ -89,11 +112,18 @@ export function pieCalc(
 ) {
   pieScale.range(colorScaleArray);
 
-  pairs.html(function (d) {
-    return `<span class="legend-colors" style="background-color:${pieScale(
-      d
-    )}"></span><span class="pie-font">${d}</span>`;
-  });
+  // pairs.html(function (d) {
+  //   return `<rect class="legend-colors" style="fill:${pieScale(
+  //     d
+  //   )}"></rect><text class="pie-font">${d}</text>`;
+  // });
+
+  icon
+    .attr("height", "10px")
+    .attr("width", "10px")
+    .style("fill", function (d) {
+      return pieScale(d);
+    });
 
   pie.value(function (d) {
     return d;
