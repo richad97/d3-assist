@@ -42,4 +42,6 @@ export function initPieChart() {
     pieValues.colorScaleArray[1];
   document.querySelector("#pie_color3_cp_span").innerHTML =
     pieValues.colorScaleArray[2];
+
+  d3.select("#pie_tran_x_span").html("175");
 }

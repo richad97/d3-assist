@@ -15,12 +15,13 @@ const svg = d3
 
 const pieChart = svg
   .append("g")
-  .attr("transform", `translate(${width / 2}, ${height / 2 + 30})`);
+  .attr("id", "pie_chart_g")
+  .attr("transform", `translate(175, 230)`);
 
 const title = svg
   .append("text")
   .attr("class", "pie-font")
-  .attr("x", 320)
+  .attr("x", 310)
   .attr("y", 25)
   .attr("id", "pie_title")
   .attr("text-anchor", "middle")

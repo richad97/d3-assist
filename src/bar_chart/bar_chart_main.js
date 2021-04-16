@@ -7,7 +7,7 @@ import "./bar_chart_color_picker.js";
 
 export function initBarChart() {
   barChart(
-    "horizontal",
+    "vertical",
     barValues.titleInput,
     barValues.xAxisTitleInput,
     barValues.yAxisTitleInput,
@@ -32,12 +32,13 @@ export function initBarChart() {
     barValues.borderCP
   );
 
-  d3.select("#bar_horizontal_scale_span").classed("hide", false);
-  d3.select("#bar_horizontal_bar_logic_span").classed("hide", false);
-  document.getElementById("bar_gnth_child_span_x").innerHTML = "2";
-  document.getElementById("bar_gnth_child_span_y").innerHTML = "1";
-  d3.select("#bar_vertical_scale_span").classed("hide", true);
-  d3.select("#bar_vertical_bar_logic_span").classed("hide", true);
+  //to set new default, set FALSE to TRUE, and "1" to "2" to work properly
+  d3.select("#bar_vertical_scale_span").classed("hide", false);
+  d3.select("#bar_vertical_bar_logic_span").classed("hide", false);
+  document.getElementById("bar_gnth_child_span_x").innerHTML = "1";
+  document.getElementById("bar_gnth_child_span_y").innerHTML = "2";
+  d3.select("#bar_horizontal_scale_span").classed("hide", true);
+  d3.select("#bar_horizontal_bar_logic_span").classed("hide", true);
 
   document.getElementById("bar_title_span").innerHTML = barValues.titleInput;
   document.getElementById("bar_x_title_span").innerHTML =
@@ -50,6 +51,14 @@ export function initBarChart() {
     barValues.xAxisTitleSlider;
   document.getElementById("bar_y_title_slider_span").innerHTML =
     barValues.yAxisTitleSlider;
+
+  d3.select("#bar_x_axis > path").attr("display", "");
+  d3.select("#bar_x_line_span").classed("hide", true);
+  d3.select("#bar_y_axis > path").attr("display", "none");
+  d3.select("#bar_y_line_span").classed("hide", false);
+  d3.select("#bar_x_grid").attr("display", "none");
+  d3.select("#bar_x_grid_span").classed("hide", true);
+
   document.getElementById("bar_background_cp_span").innerHTML =
     barValues.backgroudCP;
   document.getElementById("bar_cp_span").innerHTML = barValues.barsCP;

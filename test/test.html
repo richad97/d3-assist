@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
     <style>
       .bar_tooltip,
       .line_tooltip,
@@ -32,169 +34,144 @@
       font {
         fill: white;
       }
+      .counties {
+        fill: none;
+      }
+
+      .states {
+        fill: none;
+        stroke: #fff;
+        stroke-linejoin: round;
+      }
     </style>
   </head>
-  <body>
-    <div id="pie_div"></div>
-  </body>
+  <body></body>
   <script>
-    function createData() {
-      function makeDateArray() {
-        let arr = [];
-        let startDate = new Date("2020-01-02"); //YYYY-MM-DD
-        let endDate = new Date("2020-01-22"); //YYYY-MM-DD
+    let height = 600,
+      width = 960;
 
-        while (startDate <= endDate) {
-          arr.push(new Date(startDate));
-          startDate.setDate(startDate.getDate() + 1);
-        }
-        return arr;
-      }
-      let dates = makeDateArray();
-      let i = 1;
-      let data = dates.map(function (x) {
-        i += 30;
-        return {
-          date: x,
-          num1: Math.floor(Math.random() * 101 + i++),
-          num2: Math.floor(Math.random() * 101 + i++),
-          num3: Math.floor(Math.random() * 101 + i++),
-        };
-      });
-      return data;
-    }
-
-    const data = createData();
-
-    const margin = { top: 80, right: 50, bottom: 80, left: 80 },
-      width = 600 - margin.left - margin.right,
-      height = 480 - margin.top - margin.bottom;
-
-    const svg = d3
+    var svg = d3
       .select("body")
       .append("svg")
-      .attr("id", "line_chart")
-      .attr("width", `${width + margin.left + margin.right}`)
-      .attr("height", `${height + margin.top + margin.bottom}`)
-      .style("background-color", "rgba(0, 0, 0, 0.55)");
+      .attr("height", height)
+      .attr("width", width);
 
-    const g = svg
+    var unemployment = d3.map();
+    var stateNames = d3.map();
+
+    var path = d3.geoPath();
+
+    var x = d3.scaleLinear().domain([1, 10]).rangeRound([600, 860]);
+
+    var color = d3
+      .scaleThreshold()
+      .domain(d3.range(0, 10))
+      .range(d3.schemeBlues[9]);
+
+    var g = svg
       .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
+      .attr("class", "key")
+      .attr("transform", "translate(0,40)");
 
-    const title = g
-      .append("text")
-      .attr("x", 13 * 20)
-      .attr("y", 0 - margin.top / 2)
-      .attr("text-anchor", "middle")
-      .style("font-size", "16px")
-      .attr("fill", "rgb(255, 255, 255)")
-      .text("Total Reported Cases");
-
-    const xTitle = g
-      .append("text")
-      .attr("x", 13 * 20)
-      .attr("y", height + margin.top - 30)
-      .attr("text-anchor", "middle")
-      .style("font-size", "16px")
-      .attr("fill", "rgb(255, 255, 255)")
-      .text("Days");
-
-    const yTitle = g
-      .append("text")
-      .attr("y", -40)
-      .attr("x", -9 * 20)
-      .style("transform", "rotate(270deg)")
-      .attr("font-size", "0.9em")
-      .attr("text-anchor", "middle")
-      .attr("fill", "rgb(255, 255, 255)")
-      .text("Cases");
-
-    const xScale = d3
-      .scaleTime()
-      .domain(
-        d3.extent(data, function (d) {
-          return d.date;
+    g.selectAll("rect")
+      .data(
+        color.range().map(function (d) {
+          d = color.invertExtent(d);
+          if (d[0] == null) d[0] = x.domain()[0];
+          if (d[1] == null) d[1] = x.domain()[1];
+          return d;
         })
       )
-      .range([0, width]);
-
-    const yScale = d3
-      .scaleLinear()
-      .domain([
-        0,
-        d3.max(data, function (d) {
-          return d.num1;
-        }),
-      ])
-      .range([height, 0]);
-
-    const xAxis = g
-      .append("g")
-      .attr("id", "x_axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(xScale));
-
-    const yAxis = g.append("g").attr("id", "y_axis").call(d3.axisLeft(yScale));
-
-    function make_y_gridlines() {
-      return d3.axisLeft(yScale).ticks();
-    }
-
-    const yGrid = g
-      .append("g")
-      .attr("class", "grid")
-      .attr("id", "y_grid")
-      .call(make_y_gridlines().tickSize(-width).tickFormat(""));
-
-    const line1 = d3
-      .line()
-      .x(function (d) {
-        return xScale(d.date);
+      .enter()
+      .append("rect")
+      .attr("height", 8)
+      .attr("x", function (d) {
+        return x(d[0]);
       })
-      .y(function (d) {
-        return yScale(d.num1);
+      .attr("width", function (d) {
+        return x(d[1]) - x(d[0]);
+      })
+      .attr("fill", function (d) {
+        return color(d[0]);
       });
 
-    g.append("path")
-      .data([data])
-      .attr("class", "line")
-      .attr("d", line1)
-      .attr("stroke", "rgb(250, 250, 250)")
-      .attr("stroke-width", `${1 * 0.5}px`)
-      .attr("fill", "none");
+    g.append("text")
+      .attr("class", "caption")
+      .attr("x", x.range()[0])
+      .attr("y", -6)
+      .attr("fill", "#000")
+      .attr("text-anchor", "start")
+      .attr("font-weight", "bold")
+      .text("Unemployment rate");
 
-    const circles1 = g.selectAll(".circles1").data(data);
-    circles1.exit().remove();
-    circles1
-      .enter()
-      .append("circle")
-      .attr("class", "circles1")
-      .attr("display", "")
-      .attr("r", 6 * 0.5)
-      .attr("cx", function (d, i) {
-        return xScale(d.date);
-      })
-      .attr("cy", function (d, i) {
-        return yScale(d.num1);
-      })
-      .attr("fill", "rgba(255, 255, 255, 0)")
-      .attr("stroke", "rgba(255, 255, 255, 1)")
-      .attr("stroke-width", "1px");
+    g.call(
+      d3
+        .axisBottom(x)
+        .tickSize(13)
+        .tickFormat(function (x, i) {
+          return i ? x : x + "%";
+        })
+        .tickValues(color.domain())
+    )
+      .select(".domain")
+      .remove();
 
-    d3.select("#y_axis > path").attr("display", "none");
+    var promises = [
+      d3.json("https://d3js.org/us-10m.v1.json"),
+      d3.tsv("us-state-names.tsv", function (d) {
+        stateNames.set(d.id, d.name);
+      }),
+      d3.tsv("map.tsv", function (d) {
+        console.log("d in map", d);
+        unemployment.set(d.name, +d.value);
+      }),
+    ];
+    console.log("before promises");
+    Promise.all(promises).then(ready);
 
-    d3.selectAll("#x_axis >.tick>line").style("display", "none");
-    d3.selectAll("#y_axis >.tick>line").style("display", "none");
-    d3.select("#x_grid > path").attr("stroke", "rgba(0,0,0,0)");
-    d3.select("#y_grid > path").attr("stroke", "rgba(0,0,0,0)");
-    d3.select("#y_grid > g:nth-child(2) > line").remove();
-    d3.selectAll(".tick > text").style("fill", "rgb(238, 238, 238)");
-    d3.selectAll(".grid > g > line").attr(
-      "stroke",
-      "rgba(255, 255, 255, 0.337)"
-    );
-    d3.select("#x_axis > path").style("stroke", "rgb(255, 255, 255)");
-    d3.select("#y_axis > path").style("stroke", "rgb(211, 211, 211)");
+    function ready([us]) {
+      console.log("in ready", topojson.feature(us, us.objects.states).features);
+      console.log("statenames", stateNames);
+      console.log("employment", unemployment);
+      svg
+        .append("g")
+        .attr("class", "counties")
+        .selectAll("path")
+        .data(topojson.feature(us, us.objects.states).features)
+        .enter()
+        .append("path")
+        .attr("fill", function (d) {
+          console.log("d", d);
+          console.log("unemployment", unemployment);
+          var sn = stateNames.get(d.id);
+          console.log("sn", sn);
+          d.rate = unemployment.get(stateNames.get(d.id)) || 0;
+          console.log("rate", d.rate);
+          var col = color(d.rate);
+          console.log("col", col);
+          if (col) {
+            console.log("found col", col, "for d", d);
+            return col;
+          } else {
+            return "#ffffff";
+          }
+        })
+        .attr("d", path)
+        .append("title")
+        .text(function (d) {
+          console.log("title", d);
+          return d.rate + "%";
+        });
+
+      svg
+        .append("path")
+        .datum(
+          topojson.mesh(us, us.objects.states, function (a, b) {
+            return a !== b;
+          })
+        )
+        .attr("class", "states")
+        .attr("d", path);
+    }
   </script>
 </html>

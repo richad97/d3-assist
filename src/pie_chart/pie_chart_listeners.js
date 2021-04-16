@@ -108,11 +108,17 @@ pieLegendCheckbox.addEventListener("change", function () {
     pieValues.legendCheckbox = "checked";
     d3.selectAll(".pairs").style("display", "flex");
     d3.select("#pie_legend_checkbox_span").classed("hide", false);
+    d3.select("#pie_tran_x_span").html("175");
+
+    d3.select("#pie_chart_g").attr("transform", `translate(175, 230)`);
   }
   if (this.checked == false) {
     pieValues.legendCheckbox = "unchecked";
     d3.selectAll(".pairs").style("display", "none");
     d3.select("#pie_legend_checkbox_span").classed("hide", true);
+    d3.select("#pie_tran_x_span").html("310");
+
+    d3.select("#pie_chart_g").attr("transform", `translate(300, 230)`);
   }
 });
 
