@@ -321,6 +321,10 @@ pre {
   display: none;
 }
 
+.comments {
+  color: #287e28;
+}
+
 ::-webkit-scrollbar {
   width: 0;
 }
@@ -356,7 +360,7 @@ pre {
   z-index: 1;
   position: relative;
   top: 1em;
-  left: 0.5em;
+  left: 1.7em;
   color: gray;
   width: 70%;
   text-align: initial;

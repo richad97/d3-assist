@@ -42,7 +42,7 @@ export let lineValues = {
   yAxisLineCP: "rgb(153, 153, 153)",
   datapointCP: "rgba(255, 255, 255, 0)",
   datapointBorderCP: "rgba(0, 0, 0, 0.3)",
-  areaCP: "rgba(245, 245, 245, 0.2)",
+  areaCP: "rgba(105, 105, 105, 0.25)",
 
   areaCheckbox: "unchecked",
   amountInput: lineAmountInput.value,

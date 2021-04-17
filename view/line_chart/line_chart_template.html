@@ -190,7 +190,7 @@
               circles1
                 .enter()
                 .append("circle")
-                .attr("class", "circles1")
+                .attr("class", "circles1 <span id="line_template_hover_span1">hovered</span>")
                 .attr("display", "")
                 .attr("r", <span class="span-c" id="line_point_radius_slider_span"></span> * 0.5 )
                 .attr("cx", function (d, i) {
@@ -208,7 +208,7 @@
               circles2
                 .enter()
                 .append("circle")
-                .attr("class", "circles2")
+                .attr("class", "circles2 <span id="line_template_hover_span2">hovered</span>")
                 .attr("display", "")
                 .attr("r", <span class="span-c" id="line_point2_radius_slider_span"></span> * 0.5 )
                 .attr("cx", function (d, i) {
@@ -226,7 +226,7 @@
               circles3
                 .enter()
                 .append("circle")
-                .attr("class", "circles3")
+                .attr("class", "circles3 <span id="line_template_hover_span3">hovered</span>")
                 .attr("display", "")
                 .attr("r", <span class="span-c" id="line_point3_radius_slider_span"></span> * 0.5 )
                 .attr("cx", function (d, i) {
@@ -282,6 +282,20 @@
                   tooltip.style("display", "none");
                 });
                 </span>
+                /*  
+                  .line_tooltip {
+                    position: absolute;
+                    display: none;
+                    min-width: 80px;
+                    height: auto;
+                    background: none repeat scroll;
+                    border: 1px solid #000000;
+                    padding: 14px;
+                    text-align: center;
+                    background-color: white;
+                    z-index: 1;
+                  }
+                */
               </span><span class="span-c" id="line_x_line_checkbox_span">
               d3.select("#x_axis > path").attr("display", "none");
               </span><span class="span-c" id="line_y_line_checkbox_span">
@@ -300,5 +314,11 @@
               d3.selectAll(".circles1").classed("hovered", true);
               d3.selectAll(".circles2").classed("hovered", true);
               d3.selectAll(".circles3").classed("hovered", true);
+
+              /*
+              .hovered:hover {
+                opacity: 0.7;
+              }
+              */
               </span>
             </code></pre>

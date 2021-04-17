@@ -146,12 +146,18 @@ lineHoverCheckbox.addEventListener("change", function () {
     d3.selectAll(".circles_line2").classed("circle_hovered", true);
     d3.selectAll(".circles_line3").classed("circle_hovered", true);
     d3.select("#line_hover_checkbox_span").classed("hide", false);
+    d3.select("#line_template_hover_span1").classed("hide", false);
+    d3.select("#line_template_hover_span2").classed("hide", false);
+    d3.select("#line_template_hover_span2").classed("hide", false);
   } else if (this.checked === false) {
     lineValues.hoverCheckbox = "unchecked";
     d3.selectAll(".circles_line").classed("circle_hovered", false);
     d3.selectAll(".circles_line2").classed("circle_hovered", false);
     d3.selectAll(".circles_line3").classed("circle_hovered", false);
     d3.select("#line_hover_checkbox_span").classed("hide", true);
+    d3.select("#line_template_hover_span1").classed("hide", true);
+    d3.select("#line_template_hover_span2").classed("hide", true);
+    d3.select("#line_template_hover_span3").classed("hide", true);
   }
 });
 

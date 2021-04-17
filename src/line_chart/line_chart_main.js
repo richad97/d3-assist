@@ -74,6 +74,9 @@ export function initLineChart() {
   d3.select("#line_x_line_checkbox_span").classed("hide", true);
   d3.select("#line_y_line_checkbox_span").classed("hide", false);
   d3.select("#line_hover_checkbox_span").classed("hide", true);
+  d3.select("#line_template_hover_span1").classed("hide", true);
+  d3.select("#line_template_hover_span2").classed("hide", true);
+  d3.select("#line_template_hover_span3").classed("hide", true);
 
   document.getElementById("line_background_cp_span").innerHTML =
     lineValues.backgroundCP;

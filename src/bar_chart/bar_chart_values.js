@@ -24,7 +24,7 @@ export let barValues = {
   yAxisLineCheckbox: "unchecked",
 
   backgroudCP: "rgba(255,255,255,1)",
-  barsCP: "rgba(41, 112, 204, 0.3)",
+  barsCP: "rgba(226, 161, 28, 0.3)",
   tickCP: "rgb(153, 153, 153)",
   titleCP: "rgb(103, 103, 103)",
   xAxisTitleCP: "rgb(103, 103, 103)",
