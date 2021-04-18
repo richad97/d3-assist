@@ -25,5 +25,3 @@ export const pieLegendCheckbox = document.querySelector("#pie_legend_checkbox");
 export const pieHoverCheckbox = document.querySelector("#pie_hover_checkbox");
 
 export const pieValuesCheckbox = document.querySelector("#pie_values_checkbox");
-
-export const pieSortedCheckbox = document.querySelector("#pie_sorted_checkbox");

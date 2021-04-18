@@ -147,12 +147,3 @@ pieValuesCheckbox.addEventListener("change", function () {
     d3.select("#pie_values_checkbox_span").classed("hide", true);
   }
 });
-
-pieSortedCheckbox.addEventListener("change", function () {
-  if (this.checked) {
-    //
-  }
-  if (this.checked == false) {
-    //
-  }
-});

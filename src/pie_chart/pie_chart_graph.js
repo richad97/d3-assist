@@ -28,25 +28,6 @@ const title = svg
   .style("font-size", "1.1em")
   .text("Client Demographic");
 
-const pieScale = d3.scaleOrdinal();
-
-const arc = d3.arc();
-
-const labelArc = d3.arc();
-
-const pie = d3.pie();
-
-const slice = pieChart
-  .selectAll(".arc")
-  .data(pie(data))
-  .enter()
-  .append("g")
-  .attr("class", "arc");
-
-const slices = slice.append("path").attr("class", "pie_stroke hovered");
-
-const labelSlices = slice.append("text").attr("class", "slice-labels");
-
 function sortsLegend() {
   data.sort(function (a, b) {
     return a - b;
@@ -86,6 +67,25 @@ let pair = d3.selectAll(".pairs");
 pair.each(function (p, j) {
   d3.select(this).attr("transform", `translate(${0}, ${(i += 20)})`);
 });
+
+const pieScale = d3.scaleOrdinal();
+
+const arc = d3.arc();
+
+const labelArc = d3.arc();
+
+const pie = d3.pie();
+
+const slice = pieChart
+  .selectAll(".arc")
+  .data(pie(data))
+  .enter()
+  .append("g")
+  .attr("class", "arc");
+
+const slices = slice.append("path").attr("class", "pie_stroke hovered");
+
+const labelSlices = slice.append("text").attr("class", "slice-labels");
 
 export function pieCalc(
   innerRadius,
