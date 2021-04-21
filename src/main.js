@@ -14,7 +14,7 @@ const navBarButton = document.querySelector("#test_bar");
 const navPieButton = document.querySelector("#test_pie");
 const navMapButton = document.querySelector("#test_map");
 
-let selected = "pie_chart";
+let selected = "bar_chart";
 
 (function rowButtons() {
   $("#title_arrow_right_icon").hide();
@@ -75,7 +75,7 @@ let selected = "pie_chart";
   });
 })();
 
-function copyChartToClipboard(chart = "line_chart") {
+function copyChartToClipboard(chart) {
   var range = document.createRange();
   range.selectNode(document.getElementById(`${chart}_template`));
 
@@ -88,7 +88,7 @@ function copyChartToClipboard(chart = "line_chart") {
   window.alert("Code has been copied to your clipboard.");
 }
 
-function copyChartToValue(chart = "line_chart") {
+function copyChartToValue(chart) {
   $("#overlay").fadeIn(600);
 
   var range = document.createRange();
@@ -330,8 +330,8 @@ initLineChart();
 initPieChart();
 initMap();
 
-//showBar();
+showBar();
 //showLine();
-showPie();
+//showPie();
 
-d3.select(navPieButton).classed("selected", true);
+d3.select(navBarButton).classed("selected", true);

@@ -54,6 +54,6 @@
 <body>
 </body>
 <script>
-      <?php  echo $_POST["finished_script"];  ?>
+      <?php  echo $_POST["finished_script"]; ?>
 </script>
 </html>

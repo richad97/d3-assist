@@ -43,7 +43,7 @@ barYAxisTitleInput.addEventListener("input", () => {
 
 barTitleSlider.addEventListener("input", function () {
   barValues.titleSlider = barTitleSlider.value;
-  d3.select("#bar_title").attr("x", barValues.titleSlider * 20);
+  d3.select("#bar_title").attr("x", barValues.titleSlider);
   document.getElementById("bar_title_slider_span").innerHTML =
     barValues.titleSlider;
 });
@@ -65,9 +65,6 @@ barYAxisTitleSlider.addEventListener("input", function () {
 barTooltipCheckbox.addEventListener("change", function () {
   if (this.checked) {
     let tooltip = d3.select("body").append("div").attr("class", "bar_tooltip");
-
-    d3.select(".bar_tooltip").style("background-color", "white");
-    d3.select(".bar_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
 
     let bars = d3.selectAll(".bars");
 

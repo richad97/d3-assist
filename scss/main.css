@@ -1,5 +1,5 @@
 #main_container {
-  margin-top: 4em;
+  margin-top: 3em;
   height: 35em;
 }
 
@@ -35,7 +35,7 @@
   width: 100%;
   padding-top: 0.5em;
   padding-left: 1em;
-  margin: 0;
+  margin-top: 0.4em;
 }
 
 #title_row_group,
@@ -343,6 +343,7 @@ pre {
 
 .pretty {
   line-height: 0.84 !important;
+  margin-right: 0 !important;
 }
 
 .p-dim-checkbox {
@@ -351,17 +352,16 @@ pre {
 }
 
 .p-form-checkbox {
-  margin-top: 1em;
-  margin-left: 8em;
-  text-indent: -17.2em;
+  position: relative;
+  top: 0.7em;
+  right: 0.4em;
 }
 
 .color_labels {
   z-index: 1;
   position: relative;
   top: 1em;
-  left: 1.7em;
-  color: gray;
+  left: 0.5em;
   width: 70%;
   text-align: initial;
 }
@@ -429,22 +429,18 @@ i {
 .text_inputs {
   height: 2em;
   border-radius: 2px;
-  border: 1px solid rgba(150, 150, 150, 0.1);
+  border: 1px solid rgba(150, 150, 150, 0.2);
   width: 90%;
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: #323232;
   outline: none;
   text-align: center;
 }
 
-#line_theme_input,
-#line_amount_input,
-#pie_slice_input {
-  height: 2em;
+#line_amount_input {
   border-radius: 2px;
-  margin-bottom: 5px;
   border: 1px solid rgba(150, 150, 150, 0.3);
-  width: 90%;
+  width: 100%;
   font-size: 0.8em;
   color: #323232;
   outline: none;
@@ -1447,9 +1443,49 @@ h6 {
 }
 
 label {
-  font-size: 0.82em;
-  font-weight: lighter !important;
-  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.75em;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.4);
   width: 100%;
+}
+
+label::after,
+label::before {
+  top: 0px !important;
+}
+
+#phone_warning {
+  background-color: white;
+  border: 3px solid red;
+  color: red;
+  font-weight: 600;
+  width: 90%;
+  display: none;
+}
+
+#mwv5_span {
+  font-size: 1.7em;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+@media only screen and (max-width: 992px) {
+  #phone_warning {
+    display: block !important;
+  }
+  #main_container {
+    margin-top: 1em;
+  }
+}
+
+.checkbox_row_wrap {
+  height: 100%;
+}
+
+.checkbox-labels {
+  position: relative;
+  top: 0.7em;
+  left: 0.5em;
+  text-align: initial;
 }
 /*# sourceMappingURL=main.css.map */

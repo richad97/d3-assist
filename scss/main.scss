@@ -6,10 +6,10 @@ $main_background: rgba(0, 0, 0, 0.1);
 $main_color: rgb(236, 236, 236);
 $sec_color: rgb(255, 255, 255);
 
-$section_label: rgba(0, 0, 0, 0.5);
+$section_label: rgba(0, 0, 0, 0.4);
 $section_label_font_size: 0.9em;
 $input_labels: rgba(0, 0, 0, 0.5);
-$input_labels_font_size: 0.82em;
+$input_labels_font_size: 0.75em;
 
 //@import "../node_modules/bootstrap/scss/bootstrap";
 @import "partials/containers", "partials/graph", "partials/sliders",
@@ -36,7 +36,47 @@ h6 {
 
 label {
   font-size: $input_labels_font_size;
-  font-weight: lighter !important;
+  font-weight: normal;
   color: $section_label;
   width: 100%;
+}
+
+label::after,
+label::before {
+  top: 0px !important;
+}
+
+#phone_warning {
+  background-color: white;
+  border: 3px solid red;
+  color: red;
+  font-weight: 600;
+  width: 90%;
+  display: none;
+}
+
+#mwv5_span {
+  font-size: 1.7em;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+@media only screen and (max-width: 992px) {
+  #phone_warning {
+    display: block !important;
+  }
+  #main_container {
+    margin-top: 1em;
+  }
+}
+
+.checkbox_row_wrap {
+  height: 100%;
+}
+
+.checkbox-labels {
+  position: relative;
+  top: 0.7em;
+  left: 0.5em;
+  text-align: initial;
 }

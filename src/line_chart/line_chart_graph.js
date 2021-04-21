@@ -379,8 +379,7 @@ export function lineChart(
         .select("body")
         .append("div")
         .attr("class", "line_tooltip");
-      d3.select(".line_tooltip").style("background-color", "white");
-      d3.select(".line_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
+
       let circles = d3.selectAll(".circles_line");
       let circles2 = d3.selectAll(".circles_line2");
       let circles3 = d3.selectAll(".circles_line3");

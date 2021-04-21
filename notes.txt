@@ -1,30 +1,10 @@
-line chart 
-    [x] - fix datapoints with multiple lines 
+NOTES/BUGS
+    line chart
+        []  -  if tooltip is ON when the user changes line amount, then turns tooltip OFF, functionality breaks
 
-bar chart 
-    [] - add sort
-    [] - add amount changer 
-
-pie chart 
-    [x] - tooltip breaks hover
-    [x] - tooltip wont turn OFF
-    [x] - tooltip turned on value labels
-    [x] - value labels drawn trace when moving radius
-    [x] - if radius slider moved while label value is OFF, 
-          slider would turn it ON
-    [] - fix dimension box 
-        [] - sort
-        [] - slices
-
-both 
-    [] - add themeing
-    [] - fix title scaling
-    [x] - add transition
-    [] - fix responsiveness 
-
-general
-    [x] - add selected nav title
-    [] - make sure both are written consistantly
-    [] - make sure charts match code given out
-    [x] - add new tab functionality
-    [] - refactor
+    general
+        []  -   use bootstrap from node_modules instead of cdn
+            []  -   make sure to only use the necessary modules 
+        []  -   look at fonts
+        []  -   fix responsiveness  
+        []  -   minimize size

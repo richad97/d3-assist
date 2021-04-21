@@ -73,9 +73,12 @@
 
     <body>
       <div class="container" id="main_container">
+        <div class="row d-flex justify-content-center text-center">
+          <p id="phone_warning">Please use app on a desktop or laptop for a better user expierience!</p>
+        </div>
         <div class="row" id="main_row">
           <div class="col-lg-6">
-            <div class="col-lg-12 col-md-12 col-12 mb-5" id="form_container">
+            <div class="col-lg-12 col-md-12 col-12 mb-4" id="form_container">
 
                 <form action="#" id="form" autocomplete="off">
                   <h6>
@@ -157,7 +160,7 @@
           </div>
 
           <div class="col-lg-6">
-            <div class="col-lg-12 col-md-12 col-12 mb-5" id="graph_container">
+            <div class="col-lg-12 col-md-12 col-12 mb-4" id="graph_container">
 
               <div class="row">
                 <div id="bar_div"></div>
@@ -176,6 +179,9 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="row text-center">
+          <p id="mwv5_span">Made with v5!</p>
         </div>
       </div>
  

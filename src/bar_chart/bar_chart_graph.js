@@ -59,6 +59,9 @@ export function barChart(
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+  const usableBounds = svg.node().getBoundingClientRect(),
+    usableBoundWidth = usableBounds.width - margin.left - margin.right;
+
   const title = g.append("text").attr("id", "bar_title").text("Weather");
 
   const xAxisTitle = g
@@ -200,10 +203,14 @@ export function barChart(
       return d3.axisLeft(yScale).ticks();
     }
 
+    let test = document.getElementById("bar_title_slider");
+
     function draw() {
       const bounds = svg.node().getBoundingClientRect(),
         width = bounds.width - margin.left - margin.right,
         height = bounds.height - margin.top - margin.bottom;
+
+      test.max = width;
 
       xScale.rangeRound([0, width]);
       yScale.rangeRound([height, 0]);
@@ -317,11 +324,13 @@ export function barChart(
   }
 
   if (barTitleSliderValue != undefined) {
-    d3.select("#bar_title").attr("x", barTitleSliderValue * 20);
+    d3.select("#bar_title").attr("x", barTitleSliderValue);
   }
 
   if (barXAxisTitleSliderValue != undefined) {
-    d3.select("#bar_xaxis_title").attr("x", barXAxisTitleSliderValue * 20);
+    d3.select("#bar_xaxis_title").attr("x", usableBoundWidth / 2);
+    console.log(usableBoundWidth);
+    console.log(d3.range(0, usableBoundWidth));
   }
 
   if (barYAxisTitleSliderValue != undefined) {
@@ -369,8 +378,7 @@ export function barChart(
         .select("body")
         .append("div")
         .attr("class", "bar_tooltip");
-      d3.select(".bar_tooltip").style("background-color", "white");
-      d3.select(".bar_tooltip").style("border", "1px solid rgba(0,0,0,0.2)");
+
       let bars = d3.selectAll(".bars");
       bars
         .on("mousemove", function (d) {
