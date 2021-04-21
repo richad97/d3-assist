@@ -183,6 +183,10 @@
         <div class="row text-center">
           <p id="mwv5_span">Made with v5!</p>
         </div>
+        <div class="row d-flex justify-content-center">
+          <a href="https://github.com/richad97" class="fab fa-github-square fa-lg bottom-buttons"></a>
+          <i class="fas fa-question-circle fa-lg bottom-buttons"></i>
+        </div>
       </div>
  
     </body>
