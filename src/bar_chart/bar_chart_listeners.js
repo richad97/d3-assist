@@ -50,7 +50,7 @@ barTitleSlider.addEventListener("input", function () {
 
 barXAxisTitleSlider.addEventListener("input", function () {
   barValues.xAxisTitleSlider = barXAxisTitleSlider.value;
-  d3.select("#bar_xaxis_title").attr("x", barValues.xAxisTitleSlider * 20);
+  d3.select("#bar_xaxis_title").attr("x", barValues.xAxisTitleSlider);
   document.getElementById("bar_x_title_slider_span").innerHTML =
     barValues.xAxisTitleSlider;
 });

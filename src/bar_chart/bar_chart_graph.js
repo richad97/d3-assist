@@ -1,4 +1,8 @@
 const d3 = require("d3");
+import { barValues } from "./bar_chart_values.js";
+
+let h = false;
+let v = true;
 
 export function barChart(
   direction,
@@ -101,10 +105,29 @@ export function barChart(
       return d3.axisLeft(yScale).ticks();
     }
 
+    let barTitleSlider = document.getElementById("bar_title_slider");
+    let barXAxisTitleSlider = document.getElementById("bar_xaxis_title_slider");
+    let barWidthSpan = document.getElementById("bar_width_span");
+
     function draw() {
       const bounds = svg.node().getBoundingClientRect(),
         width = bounds.width - margin.left - margin.right,
+        width2 = bounds.width,
         height = bounds.height - margin.top - margin.bottom;
+
+      barTitleSlider.max = width;
+      barXAxisTitleSlider.max = width;
+
+      barTitleSlider.value = width / 2;
+      barXAxisTitleSlider.value = width / 2;
+
+      barWidthSpan.innerHTML = width2 - 20;
+
+      document.getElementById("bar_title_slider_span").innerHTML = width / 2;
+      document.getElementById("bar_x_title_slider_span").innerHTML = width / 2;
+
+      barValues.titleSlider = width / 2;
+      barValues.xAxisTitleSlider = width / 2;
 
       xScale.rangeRound([0, width]);
       yScale.rangeRound([height, 0]);
@@ -140,7 +163,7 @@ export function barChart(
         .attr("text-anchor", "middle");
 
       yAxisTitle
-        .attr("x", 5 * -28)
+        //.attr("x", 5 * -28)
         .attr("y", -40)
         .attr("font-size", "0.9em")
         .attr("text-anchor", "middle")
@@ -191,6 +214,18 @@ export function barChart(
     loadData();
 
     document.querySelector("#bar_x_grid > g:nth-child(2) > line").remove();
+
+    let barHorizontalCheckbox = document.querySelector(
+      "#bar_horizontal_checkbox"
+    );
+    let barVerticalCheckbox = document.querySelector("#bar_vertical_checkbox");
+
+    barVerticalCheckbox.addEventListener("change", function () {
+      window.removeEventListener("resize", draw);
+    });
+    barHorizontalCheckbox.addEventListener("change", function () {
+      window.removeEventListener("resize", draw);
+    });
   } else if (direction == "vertical") {
     const xScale = d3.scaleBand().padding(0.3);
 
@@ -203,14 +238,29 @@ export function barChart(
       return d3.axisLeft(yScale).ticks();
     }
 
-    let test = document.getElementById("bar_title_slider");
+    let barTitleSlider = document.getElementById("bar_title_slider");
+    let barXAxisTitleSlider = document.getElementById("bar_xaxis_title_slider");
+    let barWidthSpan = document.getElementById("bar_width_span");
 
     function draw() {
       const bounds = svg.node().getBoundingClientRect(),
         width = bounds.width - margin.left - margin.right,
+        width2 = bounds.width,
         height = bounds.height - margin.top - margin.bottom;
 
-      test.max = width;
+      barTitleSlider.max = width;
+      barXAxisTitleSlider.max = width;
+
+      barTitleSlider.value = width / 2;
+      barXAxisTitleSlider.value = width / 2;
+
+      barWidthSpan.innerHTML = width2 - 20;
+
+      document.getElementById("bar_title_slider_span").innerHTML = width / 2;
+      document.getElementById("bar_x_title_slider_span").innerHTML = width / 2;
+
+      barValues.titleSlider = width / 2;
+      barValues.xAxisTitleSlider = width / 2;
 
       xScale.rangeRound([0, width]);
       yScale.rangeRound([height, 0]);
@@ -246,7 +296,7 @@ export function barChart(
         .attr("text-anchor", "middle");
 
       yAxisTitle
-        .attr("x", 5 * -28)
+        //.attr("x", 5 * -28)
         .attr("y", -40)
         .attr("font-size", "0.9em")
         .attr("text-anchor", "middle")
@@ -301,8 +351,19 @@ export function barChart(
     window.addEventListener("resize", draw);
     loadData();
 
-    //document.querySelector("#x_grid > g:nth-child(2) > line").remove();
     document.querySelector("#bar_y_grid > g:nth-child(2) > line").remove();
+
+    let barHorizontalCheckbox = document.querySelector(
+      "#bar_horizontal_checkbox"
+    );
+    let barVerticalCheckbox = document.querySelector("#bar_vertical_checkbox");
+
+    barVerticalCheckbox.addEventListener("change", function () {
+      window.removeEventListener("resize", draw);
+    });
+    barHorizontalCheckbox.addEventListener("change", function () {
+      window.removeEventListener("resize", draw);
+    });
   }
 
   if (barTitleInputValue != undefined) {
@@ -324,13 +385,11 @@ export function barChart(
   }
 
   if (barTitleSliderValue != undefined) {
-    d3.select("#bar_title").attr("x", barTitleSliderValue);
+    d3.select("#bar_title").attr("x", usableBoundWidth / 2);
   }
 
   if (barXAxisTitleSliderValue != undefined) {
     d3.select("#bar_xaxis_title").attr("x", usableBoundWidth / 2);
-    console.log(usableBoundWidth);
-    console.log(d3.range(0, usableBoundWidth));
   }
 
   if (barYAxisTitleSliderValue != undefined) {

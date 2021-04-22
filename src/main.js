@@ -3,7 +3,6 @@ const d3 = require("d3");
 import { initLineChart } from "./line_chart/line_chart_main.js";
 import { initBarChart } from "./bar_chart/bar_chart_main.js";
 import { initPieChart } from "./pie_chart/pie_chart_main.js";
-import { initMap } from "./map/map_main.js";
 import { selectAll } from "d3";
 
 const overlayCloseButton = document.querySelector("#overlay_close_button");
@@ -328,7 +327,6 @@ $(navMapButton).click(function (e) {
 initBarChart();
 initLineChart();
 initPieChart();
-initMap();
 
 showBar();
 //showLine();

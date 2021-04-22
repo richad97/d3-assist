@@ -241,6 +241,24 @@ a:hover {
   border-radius: 2px;
 }
 
+@media only screen and (max-width: 576px) {
+  #overlay_main_container {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #overlay_main_container {
+    margin-top: 2em;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  pre {
+    padding-left: 0 !important;
+  }
+}
+
 #overlay_code_container {
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: whitesmoke;
@@ -1476,6 +1494,9 @@ label::before {
   #main_container {
     margin-top: 1em;
   }
+  #bottom-button-row {
+    height: 2em !important;
+  }
 }
 
 .checkbox_row_wrap {
@@ -1504,5 +1525,9 @@ label::before {
 
 .bottom-buttons:hover {
   color: rgba(0, 0, 0, 0.8);
+}
+
+#bottom-button-row {
+  height: 1em;
 }
 /*# sourceMappingURL=main.css.map */

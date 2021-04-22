@@ -68,6 +68,9 @@ label::before {
   #main_container {
     margin-top: 1em;
   }
+  #bottom-button-row {
+    height: 2em !important;
+  }
 }
 
 .checkbox_row_wrap {
@@ -94,4 +97,7 @@ label::before {
 }
 .bottom-buttons:hover {
   color: rgba(0, 0, 0, 0.8);
+}
+#bottom-button-row {
+  height: 1em;
 }

@@ -19,13 +19,13 @@
       <div class="container" id="overlay_main_container">
         <div class="row" id="overlay_title_container">
           <span id="overlay_close_button">X</span>
-            <div class="col-12 text-center">
+            <div class="col-sm-12 col-12 text-center">
               <p id="overlay_header">Enjoy!</p>
               <p id="overlay_subheader">Please review your code before copying.</p>
             </div>
         </div>
         <div class="row">
-          <div class="col-12">
+          <div class="col-lg-12 col-md-12 col-12">
             <div id="overlay_code_container">
               <?php require "./view/line_chart/line_chart_template.html";?>
               <?php require "./view/bar_chart/bar_chart_template.html";?>
@@ -35,7 +35,7 @@
         </div>
         <div class="row" id="overlay_button_container">
           <div class="col-6">
-            <div class="col-12">
+            <div class="col-lg-12 col-md-12 col-12">
               <button id="overlay_button_copy" class="overlay_buttons">
                 Copy To Clipboard
               </button>
@@ -43,7 +43,7 @@
           </div>
 
           <div class="col-6">
-            <div class="col-12">
+            <div class="col-lg-12 col-md-12 col-12">
               <!-- 
 
               <button id="overlay_button_tab" class="overlay_buttons">
@@ -183,7 +183,7 @@
         <div class="row text-center">
           <p id="mwv5_span">Made with v5!</p>
         </div>
-        <div class="row d-flex justify-content-center">
+        <div id="bottom-button-row" class="row d-flex justify-content-center">
           <a href="https://github.com/richad97" class="fab fa-github-square fa-lg bottom-buttons"></a>
           <i class="fas fa-question-circle fa-lg bottom-buttons"></i>
         </div>

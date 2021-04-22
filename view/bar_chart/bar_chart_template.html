@@ -14,7 +14,7 @@
             const data = makeData("x", 10);
 
             const margin = { top: 80, right: 30, bottom: 100, left: 70 },
-                width = 630 - margin.left - margin.right,
+                width = <span class="span-c" id="bar_width_span">615</span> - margin.left - margin.right,
                 height = 528 - margin.top - margin.bottom;
 
             const svg = d3.select("body")
@@ -70,7 +70,7 @@
         
             const xTitle = g
               .append("text")
-              .attr("x", <span class="span-c" id="bar_x_title_slider_span"></span> * 20)
+              .attr("x", <span class="span-c" id="bar_x_title_slider_span"></span>)
               .attr("y", height + margin.top - 30)
               .attr("text-anchor", "middle")
               .style("font-size", "16px")
