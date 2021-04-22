@@ -44,14 +44,14 @@ lineYAxisTitleInput.addEventListener("input", function () {
 
 lineTitleSlider.addEventListener("input", function () {
   lineValues.titleSlider = lineTitleSlider.value;
-  d3.select("#line_title").attr("x", lineValues.titleSlider * 20);
+  d3.select("#line_title").attr("x", lineValues.titleSlider);
   document.getElementById("line_title_slider_span").innerHTML =
     lineValues.titleSlider;
 });
 
 lineXAxisTitleSlider.addEventListener("input", function () {
   lineValues.xAxisTitleSlider = lineXAxisTitleSlider.value;
-  d3.select("#line_xaxis_title").attr("x", lineValues.xAxisTitleSlider * 20);
+  d3.select("#line_xaxis_title").attr("x", lineValues.xAxisTitleSlider);
   document.getElementById("line_x_title_slider_span").innerHTML =
     lineValues.xAxisTitleSlider;
 });

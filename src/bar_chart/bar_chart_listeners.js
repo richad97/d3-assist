@@ -95,9 +95,11 @@ barHorizontalCheckbox.addEventListener("change", function () {
     barTooltipCheckbox.checked = false;
     d3.select("#bar_tooltip_logic_span").classed("hide", true);
 
+    barValues.direction = "horizontal";
+
     //  calls function to horizontal / turns on necessary divs
     barChart(
-      "horizontal",
+      barValues.direction,
       barValues.titleInput,
       barValues.xAxisTitleInput,
       barValues.yAxisTitleInput,
@@ -135,8 +137,10 @@ barHorizontalCheckbox.addEventListener("change", function () {
     barTooltipCheckbox.checked = false;
     d3.select("#bar_tooltip_logic_span").classed("hide", true);
 
+    barValues.direction = "vertical";
+
     barChart(
-      "vertical",
+      barValues.direction,
       barValues.titleInput,
       barValues.xAxisTitleInput,
       barValues.yAxisTitleInput,
@@ -178,8 +182,10 @@ barVerticalCheckbox.addEventListener("change", function () {
     barTooltipCheckbox.checked = false;
     d3.select("#bar_tooltip_logic_span").classed("hide", true);
 
+    barValues.direction = "vertical";
+
     barChart(
-      "vertical",
+      barValues.direction,
       barValues.titleInput,
       barValues.xAxisTitleInput,
       barValues.yAxisTitleInput,
@@ -217,8 +223,10 @@ barVerticalCheckbox.addEventListener("change", function () {
     barTooltipCheckbox.checked = false;
     d3.select("#bar_tooltip_logic_span").classed("hide", true);
 
+    barValues.direction = "horizontal";
+
     barChart(
-      "horizontal",
+      barValues.direction,
       barValues.titleInput,
       barValues.xAxisTitleInput,
       barValues.yAxisTitleInput,

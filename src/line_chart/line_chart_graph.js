@@ -1,4 +1,5 @@
 const d3 = require("d3");
+import { lineValues } from "./line_chart_values.js";
 
 export function lineChart(
   lineTitleInputValue,
@@ -73,6 +74,9 @@ export function lineChart(
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
+  const usableBounds = svg.node().getBoundingClientRect(),
+    usableBoundWidth = usableBounds.width - margin.left - margin.right;
+
   const title = g.append("text").attr("id", "line_title").text("Weather");
 
   const xAxisTitle = g
@@ -144,10 +148,29 @@ export function lineChart(
 
   const area = d3.area();
 
+  let lineTitleSlider = document.getElementById("line_title_slider");
+  let lineXAxisTitleSlider = document.getElementById("line_xaxis_title_slider");
+  let lineWidthSpan = document.getElementById("line_width_span");
+
   function draw() {
     const bounds = svg.node().getBoundingClientRect(),
       width = bounds.width - margin.left - margin.right,
+      width2 = bounds.width,
       height = bounds.height - margin.top - margin.bottom;
+
+    lineTitleSlider.max = width;
+    lineXAxisTitleSlider.max = width;
+
+    lineTitleSlider.value = width / 2;
+    lineXAxisTitleSlider.value = width / 2;
+
+    lineWidthSpan.innerHTML = width2 - 20;
+
+    document.getElementById("line_title_slider_span").innerHTML = width / 2;
+    document.getElementById("line_x_title_slider_span").innerHTML = width / 2;
+
+    lineValues.titleSlider = width / 2;
+    lineValues.xAxisTitleSlider = width / 2;
 
     xScale.range([0, width]);
     yScale.range([height, 0]);
@@ -178,7 +201,7 @@ export function lineChart(
       .attr("text-anchor", "middle");
 
     yAxisTitle
-      .attr("x", 5 * -28)
+      //.attr("x", 5 * -28)
       .attr("y", -50)
       .attr("font-size", "0.9em")
       .attr("text-anchor", "middle")
@@ -350,11 +373,11 @@ export function lineChart(
   }
 
   if (lineTitleSliderValue != undefined) {
-    d3.select("#line_title").attr("x", lineTitleSliderValue * 20);
+    d3.select("#line_title").attr("x", usableBoundWidth / 2);
   }
 
   if (lineXAxisTitleSliderValue != undefined) {
-    d3.select("#line_xaxis_title").attr("x", lineXAxisTitleSliderValue * 20);
+    d3.select("#line_xaxis_title").attr("x", usableBoundWidth / 2);
   }
 
   if (lineYAxisTitleSliderValue != undefined) {

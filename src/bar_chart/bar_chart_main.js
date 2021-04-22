@@ -7,7 +7,7 @@ import "./bar_chart_color_picker.js";
 
 export function initBarChart() {
   barChart(
-    "vertical",
+    barValues.direction,
     barValues.titleInput,
     barValues.xAxisTitleInput,
     barValues.yAxisTitleInput,

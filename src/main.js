@@ -4,14 +4,15 @@ import { initLineChart } from "./line_chart/line_chart_main.js";
 import { initBarChart } from "./bar_chart/bar_chart_main.js";
 import { initPieChart } from "./pie_chart/pie_chart_main.js";
 import { selectAll } from "d3";
+import { barChart } from "./bar_chart/bar_chart_graph.js";
+import { barValues } from "./bar_chart/bar_chart_values.js";
 
 const overlayCloseButton = document.querySelector("#overlay_close_button");
 const overlayCopyButton = document.querySelector("#overlay_button_copy");
 const formSubmitButton = document.querySelector("#form_submit_button");
-const navLineButton = document.querySelector("#test_line");
-const navBarButton = document.querySelector("#test_bar");
-const navPieButton = document.querySelector("#test_pie");
-const navMapButton = document.querySelector("#test_map");
+const navLineButton = document.querySelector("#nav_line_button");
+const navBarButton = document.querySelector("#nav_bar_button");
+const navPieButton = document.querySelector("#nav_pie_button");
 
 let selected = "bar_chart";
 
@@ -202,12 +203,6 @@ function showPie() {
   $("#line_form_button").hide();
 }
 
-function showMap() {
-  selected = "map";
-
-  $("#main_row").hide();
-}
-
 formSubmitButton.addEventListener("click", function () {
   if (selected == "line_chart") {
     copyChartToValue("line_chart");
@@ -261,7 +256,6 @@ $(navLineButton).click(function (e) {
   d3.select(this).classed("selected", true);
   d3.select(navBarButton).classed("selected", false);
   d3.select(navPieButton).classed("selected", false);
-  d3.select(navMapButton).classed("selected", false);
 });
 
 $(navBarButton).click(function (e) {
@@ -282,7 +276,6 @@ $(navBarButton).click(function (e) {
   d3.select(this).classed("selected", true);
   d3.select(navLineButton).classed("selected", false);
   d3.select(navPieButton).classed("selected", false);
-  d3.select(navMapButton).classed("selected", false);
 });
 
 $(navPieButton).click(function (e) {
@@ -303,25 +296,6 @@ $(navPieButton).click(function (e) {
   d3.select(this).classed("selected", true);
   d3.select(navLineButton).classed("selected", false);
   d3.select(navBarButton).classed("selected", false);
-  d3.select(navMapButton).classed("selected", false);
-});
-
-$(navMapButton).click(function (e) {
-  e.preventDefault();
-
-  if (selected != "map") {
-    $("#form_container").fadeOut(850);
-    $("#graph_container").fadeOut(850);
-
-    setTimeout(function () {
-      showMap();
-    }, 850);
-  }
-
-  d3.select(this).classed("selected", true);
-  d3.select(navLineButton).classed("selected", false);
-  d3.select(navBarButton).classed("selected", false);
-  d3.select(navPieButton).classed("selected", false);
 });
 
 initBarChart();

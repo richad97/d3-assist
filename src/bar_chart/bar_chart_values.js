@@ -33,4 +33,6 @@ export let barValues = {
   xAxisLineCP: "rgb(153, 153, 153)",
   yAxisLineCP: "rgb(211, 211, 211)",
   borderCP: "rgba(0, 0, 0, 0.1)",
+
+  direction: "vertical",
 };

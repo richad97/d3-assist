@@ -1,9 +1,6 @@
 const d3 = require("d3");
 import { barValues } from "./bar_chart_values.js";
 
-let h = false;
-let v = true;
-
 export function barChart(
   direction,
   barTitleInputValue,
@@ -226,6 +223,21 @@ export function barChart(
     barHorizontalCheckbox.addEventListener("change", function () {
       window.removeEventListener("resize", draw);
     });
+
+    const navBarButton = document.querySelector("#nav_bar_button");
+    const navLineButton = document.querySelector("#nav_line_button");
+    const navPieButton = document.querySelector("#nav_pie_button");
+
+    navBarButton.addEventListener("click", function () {
+      window.addEventListener("resize", draw);
+    });
+
+    navLineButton.addEventListener("click", function () {
+      window.removeEventListener("resize", draw);
+    });
+    navPieButton.addEventListener("click", function () {
+      window.removeEventListener("resize", draw);
+    });
   } else if (direction == "vertical") {
     const xScale = d3.scaleBand().padding(0.3);
 
@@ -361,7 +373,24 @@ export function barChart(
     barVerticalCheckbox.addEventListener("change", function () {
       window.removeEventListener("resize", draw);
     });
+
     barHorizontalCheckbox.addEventListener("change", function () {
+      window.removeEventListener("resize", draw);
+    });
+
+    const navBarButton = document.querySelector("#nav_bar_button");
+    const navLineButton = document.querySelector("#nav_line_button");
+    const navPieButton = document.querySelector("#nav_pie_button");
+
+    navBarButton.addEventListener("click", function () {
+      window.addEventListener("resize", draw);
+    });
+
+    navLineButton.addEventListener("click", function () {
+      window.removeEventListener("resize", draw);
+    });
+
+    navPieButton.addEventListener("click", function () {
       window.removeEventListener("resize", draw);
     });
   }

@@ -27,7 +27,7 @@
               const data = createData();
                         
               const margin = { top: 80, right: 50, bottom: 80, left: 80 },
-                width = 600 - margin.left - margin.right,
+                width = <span class="span-c" id="line_width_span">615</span> - margin.left - margin.right,
                 height = 480 - margin.top - margin.bottom;
             
               const svg = d3
@@ -44,7 +44,7 @@
 
               const title = g
                 .append("text")
-                .attr("x", <span class="span-c" id="line_title_slider_span"></span> * 20)
+                .attr("x", <span class="span-c" id="line_title_slider_span"></span>)
                 .attr("y", 0 - margin.top / 2)
                 .attr("text-anchor", "middle")
                 .style("font-size", "16px")
@@ -53,7 +53,7 @@
           
               const xTitle = g
                 .append("text")
-                .attr("x", <span class="span-c" id="line_x_title_slider_span"></span> * 20)
+                .attr("x", <span class="span-c" id="line_x_title_slider_span"></span>)
                 .attr("y", height + margin.top - 30)
                 .attr("text-anchor", "middle")
                 .style("font-size", "16px")
