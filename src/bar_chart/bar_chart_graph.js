@@ -228,10 +228,6 @@ export function barChart(
     const navLineButton = document.querySelector("#nav_line_button");
     const navPieButton = document.querySelector("#nav_pie_button");
 
-    navBarButton.addEventListener("click", function () {
-      window.addEventListener("resize", draw);
-    });
-
     navLineButton.addEventListener("click", function () {
       window.removeEventListener("resize", draw);
     });
@@ -381,10 +377,6 @@ export function barChart(
     const navBarButton = document.querySelector("#nav_bar_button");
     const navLineButton = document.querySelector("#nav_line_button");
     const navPieButton = document.querySelector("#nav_pie_button");
-
-    navBarButton.addEventListener("click", function () {
-      window.addEventListener("resize", draw);
-    });
 
     navLineButton.addEventListener("click", function () {
       window.removeEventListener("resize", draw);
