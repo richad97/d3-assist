@@ -1,6 +1,7 @@
-const d3 = require("d3");
-
 import { lineValues } from "./line_chart_values.js";
+import { select, selectAll } from "d3-selection";
+
+const d3 = { select, selectAll };
 
 $("#line_background_cp").spectrum({
   type: "color",

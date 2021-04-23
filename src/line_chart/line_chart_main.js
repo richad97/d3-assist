@@ -1,9 +1,10 @@
-const d3 = require("d3");
-
 import { lineChart } from "./line_chart_graph.js";
 import { lineValues } from "./line_chart_values.js";
 import "./line_chart_listeners.js";
 import "./line_chart_color_picker.js";
+import { select, selectAll } from "d3-selection";
+
+const d3 = { select, selectAll };
 
 export function initLineChart() {
   lineChart(

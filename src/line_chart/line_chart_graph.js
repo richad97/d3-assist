@@ -1,5 +1,26 @@
-const d3 = require("d3");
 import { lineValues } from "./line_chart_values.js";
+import { select, selectAll } from "d3-selection";
+import { scaleTime, scaleLinear } from "d3-scale";
+import { axisBottom, axisLeft } from "d3-axis";
+import { range, max, extent } from "d3-array";
+import { line, area } from "d3-shape";
+import { timeFormat } from "d3-time-format";
+import { event as currentEvent } from "d3-selection";
+
+const d3 = {
+  select,
+  selectAll,
+  scaleTime,
+  scaleLinear,
+  axisBottom,
+  axisLeft,
+  range,
+  max,
+  extent,
+  line,
+  area,
+  timeFormat,
+};
 
 export function lineChart(
   lineTitleInputValue,
@@ -409,8 +430,8 @@ export function lineChart(
       circles
         .on("mousemove", function (d) {
           tooltip
-            .style("left", d3.event.pageX + 10 + "px")
-            .style("top", d3.event.pageY + 10 + "px")
+            .style("left", currentEvent.pageX + 10 + "px")
+            .style("top", currentEvent.pageY + 10 + "px")
             .style("display", "inline-block");
         })
         .on("mouseout", function (d) {
@@ -420,8 +441,8 @@ export function lineChart(
       circles2
         .on("mousemove", function (d) {
           tooltip
-            .style("left", d3.event.pageX + 10 + "px")
-            .style("top", d3.event.pageY + 10 + "px")
+            .style("left", currentEvent.pageX + 10 + "px")
+            .style("top", currentEvent.pageY + 10 + "px")
             .style("display", "inline-block");
         })
         .on("mouseout", function (d) {
@@ -431,8 +452,8 @@ export function lineChart(
       circles3
         .on("mousemove", function (d) {
           tooltip
-            .style("left", d3.event.pageX + 10 + "px")
-            .style("top", d3.event.pageY + 10 + "px")
+            .style("left", currentEvent.pageX + 10 + "px")
+            .style("top", currentEvent.pageY + 10 + "px")
             .style("display", "inline-block");
         })
         .on("mouseout", function (d) {

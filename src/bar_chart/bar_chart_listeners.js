@@ -18,10 +18,10 @@ import {
 } from "./bar_chart_inputs.js";
 
 import { barValues } from "./bar_chart_values.js";
-import { select, selectAll, event } from "d3-selection";
+import { select, selectAll } from "d3-selection";
 import { event as currentEvent } from "d3-selection";
 
-const d3 = { select, selectAll, event };
+const d3 = { select, selectAll };
 
 barTitleInput.addEventListener("input", () => {
   barValues.titleInput = barTitleInput.value;
