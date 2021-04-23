@@ -1,11 +1,9 @@
-const d3 = require("d3");
-
 import { initLineChart } from "./line_chart/line_chart_main.js";
 import { initBarChart } from "./bar_chart/bar_chart_main.js";
 import { initPieChart } from "./pie_chart/pie_chart_main.js";
-import { selectAll } from "d3";
-import { barChart } from "./bar_chart/bar_chart_graph.js";
-import { barValues } from "./bar_chart/bar_chart_values.js";
+import { select } from "d3-selection";
+
+const d3 = { select };
 
 const overlayCloseButton = document.querySelector("#overlay_close_button");
 const overlayCopyButton = document.querySelector("#overlay_button_copy");

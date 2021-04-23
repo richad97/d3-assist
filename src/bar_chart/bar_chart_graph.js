@@ -1,5 +1,21 @@
-const d3 = require("d3");
 import { barValues } from "./bar_chart_values.js";
+
+import { select, selectAll } from "d3-selection";
+import { scaleBand, scaleLinear } from "d3-scale";
+import { axisBottom, axisLeft } from "d3-axis";
+import { range, max } from "d3-array";
+import { event as currentEvent } from "d3-selection";
+
+const d3 = {
+  select,
+  selectAll,
+  scaleBand,
+  scaleLinear,
+  axisBottom,
+  axisLeft,
+  range,
+  max,
+};
 
 export function barChart(
   direction,
@@ -463,8 +479,8 @@ export function barChart(
       bars
         .on("mousemove", function (d) {
           tooltip
-            .style("left", d3.event.pageX + 10 + "px")
-            .style("top", d3.event.pageY + 10 + "px")
+            .style("left", currentEvent.pageX + 10 + "px")
+            .style("top", currentEvent.pageY + 10 + "px")
             .style("display", "inline-block");
         })
         .on("mouseout", function (d) {

@@ -1,5 +1,3 @@
-const d3 = require("d3");
-
 import { barChart } from "./bar_chart_graph.js";
 
 import {
@@ -20,6 +18,10 @@ import {
 } from "./bar_chart_inputs.js";
 
 import { barValues } from "./bar_chart_values.js";
+import { select, selectAll, event } from "d3-selection";
+import { event as currentEvent } from "d3-selection";
+
+const d3 = { select, selectAll, event };
 
 barTitleInput.addEventListener("input", () => {
   barValues.titleInput = barTitleInput.value;
@@ -71,8 +73,8 @@ barTooltipCheckbox.addEventListener("change", function () {
     bars
       .on("mousemove", function (d) {
         tooltip
-          .style("left", d3.event.pageX + 10 + "px")
-          .style("top", d3.event.pageY + 10 + "px")
+          .style("left", currentEvent.pageX + 10 + "px")
+          .style("top", currentEvent.pageY + 10 + "px")
           .style("display", "inline-block");
       })
       .on("mouseout", function (d) {

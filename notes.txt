@@ -1,10 +1,1 @@
 NOTES/BUGS
-    line chart
-        []  -  if tooltip is ON when the user changes line amount, then turns tooltip OFF, functionality breaks
-
-    general
-        []  -   use bootstrap from node_modules instead of cdn
-            []  -   make sure to only use the necessary modules 
-        []  -   look at fonts
-        []  -   fix responsiveness  
-        []  -   minimize size
