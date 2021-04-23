@@ -303,9 +303,21 @@ a:hover {
   width: 1em;
   display: inline-block;
   color: gray;
-  font-size: 1.8em;
+  font-size: 1.5em;
   font-weight: lighter;
   cursor: pointer;
+}
+
+#overlay_close_button2 {
+  position: absolute;
+  width: 1em;
+  display: inline-block;
+  color: gray;
+  font-size: 1.5em;
+  font-weight: lighter;
+  cursor: pointer;
+  top: -5px;
+  left: 6px;
 }
 
 #overlay_header {
@@ -492,6 +504,9 @@ i {
   font-size: 0.8em;
   color: #323232;
   outline: none;
+  position: relative;
+  right: 2em;
+  bottom: 0.2em;
 }
 
 ::-webkit-input-placeholder {

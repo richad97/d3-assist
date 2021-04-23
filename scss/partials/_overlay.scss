@@ -77,11 +77,22 @@
   width: 1em;
   display: inline-block;
   color: gray;
-  font-size: 1.8em;
+  font-size: 1.5em;
   font-weight: lighter;
   cursor: pointer;
 }
 
+#overlay_close_button2 {
+  position: absolute;
+  width: 1em;
+  display: inline-block;
+  color: gray;
+  font-size: 1.5em;
+  font-weight: lighter;
+  cursor: pointer;
+  top: -5px;
+  left: 6px;
+}
 #overlay_header {
   font-weight: lighter;
   font-size: 1.9em;

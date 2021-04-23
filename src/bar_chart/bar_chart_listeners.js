@@ -293,10 +293,12 @@ barHoverCheckbox.addEventListener("change", function () {
     barValues.hoverCheckbox = "checked";
     d3.selectAll("rect").classed("hovered", true);
     d3.select("#bar_hover_span").classed("hide", false);
+    d3.select("#bar_hover_span2").classed("hide", false);
   } else if (this.checked === false) {
     barValues.hoverCheckbox = "unchecked";
     d3.selectAll("rect").classed("hovered", false);
     d3.select("#bar_hover_span").classed("hide", true);
+    d3.select("#bar_hover_span2").classed("hide", true);
   }
 });
 

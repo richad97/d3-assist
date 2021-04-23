@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>D3 Assist</title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">  
+
     <link rel="stylesheet" type="text/css" href="./node_modules/spectrum-colorpicker2/dist/spectrum.css">
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./scss/main.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script> -->
     <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="./node_modules/spectrum-colorpicker2/dist/spectrum.min.js"></script>
     <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -72,6 +72,7 @@
 
     <div id="overlay2">
       <div class="container" id="overlay_main_container2">
+      <span id="overlay_close_button2">X</span>
         <span id="help_content_wrapper">
         <p id="help_title" class="text-center">D3 Assist (Made for v5)</p>
         <p class="text-center text-break">Ricardo Castillo</p>
@@ -198,7 +199,7 @@
           <p id="mwv5_span">Made with v5!</p>
         </div>
         <div id="bottom-button-row" class="row d-flex justify-content-center">
-          <a href="https://github.com/richad97" class="fab fa-github-square fa-lg bottom-buttons"></a>
+          <a href="https://github.com/richad97/d3-assist" class="fab fa-github-square fa-lg bottom-buttons"></a>
           <i id="question_mark_button" class="fas fa-question-circle fa-lg bottom-buttons"></i>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { select } from "d3-selection";
 const d3 = { select };
 
 const overlayCloseButton = document.querySelector("#overlay_close_button");
+const overlayCloseButton2 = document.querySelector("#overlay_close_button2");
 const overlayCopyButton = document.querySelector("#overlay_button_copy");
 const formSubmitButton = document.querySelector("#form_submit_button");
 const navLineButton = document.querySelector("#nav_line_button");
@@ -220,6 +221,9 @@ formSubmitButton.addEventListener("click", function () {
 
 overlayCloseButton.addEventListener("click", function () {
   $("#overlay").fadeOut();
+});
+overlayCloseButton2.addEventListener("click", function () {
+  $("#overlay2").fadeOut();
 });
 
 overlayCopyButton.addEventListener("click", function () {

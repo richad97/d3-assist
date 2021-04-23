@@ -60,6 +60,8 @@ export function initBarChart() {
   d3.select("#bar_y_line_span").classed("hide", false);
   d3.select("#bar_x_grid").attr("display", "none");
   d3.select("#bar_x_grid_span").classed("hide", true);
+  d3.select("#bar_hover_span").classed("hide", true);
+  d3.select("#bar_hover_span2").classed("hide", true);
 
   document.getElementById("bar_background_cp_span").innerHTML =
     barValues.backgroudCP;
