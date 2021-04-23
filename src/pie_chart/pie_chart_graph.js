@@ -90,7 +90,7 @@ const slice = pieChart
 
 const slices = slice.append("path").attr("class", "pie_stroke hovered");
 
-const labelSlices = slice.append("text").attr("class", "slice-labels");
+const labelSlices = slice.append("text");
 
 export function pieCalc(
   innerRadius,
@@ -131,7 +131,8 @@ export function pieCalc(
       return "translate(" + labelArc.centroid(d) + ")";
     })
     .attr("dy", ".35em")
-    .attr("class", "pie-font")
+
+    .attr("class", "pie-font slice-labels")
     .text(function (d) {
       return d.data;
     });
