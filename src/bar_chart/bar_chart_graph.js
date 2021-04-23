@@ -118,7 +118,7 @@ export function barChart(
       barTitleSlider.value = width / 2;
       barXAxisTitleSlider.value = width / 2;
 
-      barWidthSpan.innerHTML = width2 - 20;
+      barWidthSpan.innerHTML = Math.round(width2) - 20;
 
       document.getElementById("bar_title_slider_span").innerHTML = width / 2;
       document.getElementById("bar_x_title_slider_span").innerHTML = width / 2;
@@ -262,7 +262,7 @@ export function barChart(
       barTitleSlider.value = width / 2;
       barXAxisTitleSlider.value = width / 2;
 
-      barWidthSpan.innerHTML = width2 - 20;
+      barWidthSpan.innerHTML = Math.round(width2) - 20;
 
       document.getElementById("bar_title_slider_span").innerHTML = width / 2;
       document.getElementById("bar_x_title_slider_span").innerHTML = width / 2;

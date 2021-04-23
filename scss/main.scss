@@ -11,7 +11,6 @@ $section_label_font_size: 0.9em;
 $input_labels: rgba(0, 0, 0, 0.5);
 $input_labels_font_size: 0.75em;
 
-//@import "../node_modules/bootstrap/scss/bootstrap";
 @import "partials/containers", "partials/graph", "partials/sliders",
   "partials/nav", "partials/overlay", "partials/scroller", "partials/checkboxes",
   "partials/colors", "partials/form", "partials/icons", "partials/titles";

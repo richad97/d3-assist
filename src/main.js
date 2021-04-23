@@ -13,6 +13,7 @@ const formSubmitButton = document.querySelector("#form_submit_button");
 const navLineButton = document.querySelector("#nav_line_button");
 const navBarButton = document.querySelector("#nav_bar_button");
 const navPieButton = document.querySelector("#nav_pie_button");
+const questionMarkButton = document.querySelector("#question_mark_button");
 
 let selected = "bar_chart";
 
@@ -203,6 +204,10 @@ function showPie() {
   $("#line_form_button").hide();
 }
 
+questionMarkButton.addEventListener("click", function () {
+  $("#overlay2").fadeIn(600);
+});
+
 formSubmitButton.addEventListener("click", function () {
   if (selected == "line_chart") {
     copyChartToValue("line_chart");
@@ -235,6 +240,7 @@ $(document).keyup(function (e) {
   if (e.key === "Escape") {
     // escape key maps to keycode `27`
     $("#overlay").fadeOut();
+    $("#overlay2").fadeOut();
   }
 });
 
@@ -242,14 +248,17 @@ $(navLineButton).click(function (e) {
   e.preventDefault();
 
   if (selected != "line_chart") {
-    $("#form_container").fadeOut(850);
-    $("#graph_container").fadeOut(850);
+    $("#form_container").fadeOut(900);
+    $("#graph_container").fadeOut(900);
 
     setTimeout(function () {
       showLine();
 
       $("#form_container").fadeIn(850);
       $("#graph_container").fadeIn(850);
+
+      var resizeEvent = new Event("resize");
+      window.dispatchEvent(resizeEvent);
     }, 850);
   }
 
@@ -262,14 +271,17 @@ $(navBarButton).click(function (e) {
   e.preventDefault();
 
   if (selected != "bar_chart") {
-    $("#form_container").fadeOut(850);
-    $("#graph_container").fadeOut(850);
+    $("#form_container").fadeOut(900);
+    $("#graph_container").fadeOut(900);
 
     setTimeout(function () {
       showBar();
 
       $("#form_container").fadeIn(850);
       $("#graph_container").fadeIn(850);
+
+      var resizeEvent = new Event("resize");
+      window.dispatchEvent(resizeEvent);
     }, 850);
   }
 
@@ -282,14 +294,17 @@ $(navPieButton).click(function (e) {
   e.preventDefault();
 
   if (selected != "pie_chart") {
-    $("#form_container").fadeOut(850);
-    $("#graph_container").fadeOut(850);
+    $("#form_container").fadeOut(900);
+    $("#graph_container").fadeOut(900);
 
     setTimeout(function () {
       showPie();
 
       $("#form_container").fadeIn(850);
       $("#graph_container").fadeIn(850);
+
+      var resizeEvent = new Event("resize");
+      window.dispatchEvent(resizeEvent);
     }, 850);
   }
 

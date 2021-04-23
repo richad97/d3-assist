@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>D3 Assist</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> -->
     <link rel="stylesheet" type="text/css" href="./node_modules/spectrum-colorpicker2/dist/spectrum.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./scss/main.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script> -->
     <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="./node_modules/spectrum-colorpicker2/dist/spectrum.min.js"></script>
-    <!--<script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   </head>
 
     <div id="overlay">
@@ -66,6 +67,19 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div id="overlay2">
+      <div class="container" id="overlay_main_container2">
+        <span id="help_content_wrapper">
+        <p id="help_title" class="text-center">D3 Assist (Made for v5)</p>
+        <p class="text-center text-break">Ricardo Castillo</p>
+        <p id="explanation" class="text-center">This project was made to help people understand D3.js quicker by offering the code of the customized graph. 
+          The code offered by these three graphs could probably be done using more practical conventions, but should still be very useful
+          to anyone unfamiliar with D3.js.
+        </p>
+        </span>
       </div>
     </div>
 
@@ -185,7 +199,7 @@
         </div>
         <div id="bottom-button-row" class="row d-flex justify-content-center">
           <a href="https://github.com/richad97" class="fab fa-github-square fa-lg bottom-buttons"></a>
-          <i class="fas fa-question-circle fa-lg bottom-buttons"></i>
+          <i id="question_mark_button" class="fas fa-question-circle fa-lg bottom-buttons"></i>
         </div>
       </div>
  

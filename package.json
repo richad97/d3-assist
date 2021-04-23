@@ -8,7 +8,6 @@
   "main": "./src/main.js",
   "scripts": {
     "test": "jest",
-    "start": "browserify ./src/line_chart/line_chart_main.js > ./bundle.js -t babelify -d",
     "watch": "watchify ./src/main.js -o ./dist/bundle.js -t babelify -d -v"
   },
   "repository": {
