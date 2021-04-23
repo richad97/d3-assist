@@ -1,4 +1,9 @@
-const d3 = require("d3");
+import { select, selectAll } from "d3-selection";
+import { scaleOrdinal } from "d3-scale";
+import { arc, pie } from "d3-shape";
+import { event as currentEvent } from "d3-selection";
+
+const d3 = { select, selectAll, scaleOrdinal, arc, pie };
 
 const data = [40, 27, 13, 67, 88];
 
@@ -70,15 +75,15 @@ pair.each(function (p, j) {
 
 const pieScale = d3.scaleOrdinal();
 
-const arc = d3.arc();
+const arc1 = d3.arc();
 
 const labelArc = d3.arc();
 
-const pie = d3.pie();
+const pie1 = d3.pie();
 
 const slice = pieChart
   .selectAll(".arc")
-  .data(pie(data))
+  .data(pie1(data))
   .enter()
   .append("g")
   .attr("class", "arc");
@@ -104,16 +109,16 @@ export function pieCalc(
       return pieScale(d);
     });
 
-  pie.value(function (d) {
+  pie1.value(function (d) {
     return d;
   });
 
-  arc.outerRadius(radius - outerRadius).innerRadius(innerRadius);
+  arc1.outerRadius(radius - outerRadius).innerRadius(innerRadius);
 
   labelArc.outerRadius(radius - 70).innerRadius(radius - labelRadius);
 
   slices
-    .attr("d", arc)
+    .attr("d", arc1)
     .attr("stroke", "white")
     .attr("stroke-width", `${borderWidth}px`)
     .style("fill", function (d) {
@@ -140,8 +145,8 @@ export function pieCalc(
     slices
       .on("mousemove", function (d) {
         tooltip
-          .style("left", d3.event.pageX + 10 + "px")
-          .style("top", d3.event.pageY + 10 + "px")
+          .style("left", currentEvent.pageX + 10 + "px")
+          .style("top", currentEvent.pageY + 10 + "px")
           .style("display", "inline-block")
           .html(d.value);
       })

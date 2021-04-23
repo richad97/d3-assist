@@ -1,5 +1,3 @@
-const d3 = require("d3");
-
 import { pieCalc } from "./pie_chart_graph.js";
 import {
   pieTitleInput,
@@ -15,6 +13,9 @@ import {
   pieSortedCheckbox,
 } from "./pie_chart_inputs.js";
 import { pieValues } from "./pie_chart_values.js";
+import { select, selectAll } from "d3-selection";
+
+const d3 = { select, selectAll };
 
 pieTitleInput.addEventListener("keyup", function () {
   pieValues.titleInput = pieTitleInput.value;

@@ -1,9 +1,9 @@
-const d3 = require("d3");
-
 import { pieCalc } from "./pie_chart_graph.js";
 import { pieValues } from "./pie_chart_values.js";
 import "./pie_chart_listeners";
 import "./pie_chart_color_picker.js";
+import { select, selectAll } from "d3-selection";
+const d3 = { select, selectAll };
 
 export function initPieChart() {
   pieCalc(
