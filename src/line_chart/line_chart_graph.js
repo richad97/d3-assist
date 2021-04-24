@@ -245,7 +245,7 @@ export function lineChart(
       .attr("id", "line1")
       .attr("d", line1)
       .attr("stroke", "red")
-      .attr("stroke-width", "0.5px")
+      //.attr("stroke-width", "0.5px")
       .attr("fill", "none");
 
     linePath2
